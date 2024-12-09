@@ -7,3 +7,4 @@ parts:
   - caption: Disruptions
     chapters:
     - file: Theory/1. disruptions.ipynb
+    - file: Theory/2. parameters.ipynb
