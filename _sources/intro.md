@@ -1,6 +1,6 @@
 # Knowledge Base
 
-TThis is a knowledge base.
+This is a knowledge base.
 
 ```{tableofcontents}
 ```
