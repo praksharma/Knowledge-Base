@@ -366,8 +366,14 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plasma-parameters">Plasma Parameters</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#magnetic-equilibrium-and-stability">Magnetic Equilibrium and Stability</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plasma-parameters">Plasma parameters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#magnetic-equilibrium-and-stability">Magnetic equilibrium and stability</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#operational-parameters">Operational parameters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#diagnostic-signals">Diagnostic signals</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#disruption-indicators">Disruption indicators</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#machine-specific-parameters">Machine-specific parameters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#temporal-and-historical-data">Temporal and historical data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#next-steps">Next steps</a></li>
 </ul>
             </nav>
         </div>
@@ -383,7 +389,7 @@
 <h1>Parameters of interest<a class="headerlink" href="#parameters-of-interest" title="Link to this heading">#</a></h1>
 <p>There are a number of parameters that are needed to characterise the plasma’s behavior, operational conditions, and evolving instabilities. These also change across various machines and detectors. Here are some of the parameters that are of interest:</p>
 <section id="plasma-parameters">
-<h2>Plasma Parameters<a class="headerlink" href="#plasma-parameters" title="Link to this heading">#</a></h2>
+<h2>Plasma parameters<a class="headerlink" href="#plasma-parameters" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p><strong>Plasma Current</strong> <span class="math notranslate nohighlight">\(I_p\)</span> : Total current flowing in the plasma.</p></li>
 <li><p><strong>Loop Voltage</strong> <span class="math notranslate nohighlight">\(V_{loop}\)</span>: Voltage driving the plasma current.</p></li>
@@ -398,10 +404,91 @@
 </ul>
 </section>
 <section id="magnetic-equilibrium-and-stability">
-<h2>Magnetic Equilibrium and Stability<a class="headerlink" href="#magnetic-equilibrium-and-stability" title="Link to this heading">#</a></h2>
+<h2>Magnetic equilibrium and stability<a class="headerlink" href="#magnetic-equilibrium-and-stability" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p><strong>Magnetic Flux Surfaces</strong> : Data from equilibrium reconstruction (EFIT)</p></li>
 <li><p><strong>Plasma Vertical Position</strong> <span class="math notranslate nohighlight">\(Z_p\)</span> : Used to detect vertical displacement events (VDEs).</p></li>
+<li><p><strong>Plasma Shape</strong> : Elongation <span class="math notranslate nohighlight">\(\kappa\)</span> and triangularity <span class="math notranslate nohighlight">\(\delta\)</span> of the plasma.</p></li>
+<li><p><strong>Radial Position</strong> <span class="math notranslate nohighlight">\(R_p\)</span> : Location of the plasma centroid.</p></li>
+<li><p><strong>Edge-Localized Modes (ELMs)</strong> : Instabilities that can cause large bursts of energy and particles to be lost from the plasma.</p></li>
+<li><p><strong>Tearing Modes</strong> : Instabilities that can cause magnetic islands to form in the plasma. Mode numbers (e.g., m/n) and amplitudes.</p></li>
+</ul>
+</section>
+<section id="operational-parameters">
+<h2>Operational parameters<a class="headerlink" href="#operational-parameters" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Heating Power</strong> <span class="math notranslate nohighlight">\(P_{heat}\)</span> : Total power input from neutral beams to heat the plasma, radiofrequency heating, or ohmic heating.</p></li>
+<li><p><strong>Toroidal Magnetic Field</strong> <span class="math notranslate nohighlight">\(B_T\)</span> : The magnetic field that wraps around the torus.</p></li>
+<li><p><strong>Poloidal Magnetic Field</strong> <span class="math notranslate nohighlight">\(B_P\)</span> : Key for plasma shaping and stability.</p></li>
+<li><p><strong>Gas Puffing Rate</strong> : Rate at which gas is injected into the plasma.</p></li>
+<li><p><strong>Divertor Conditions</strong>: Heat flux, strike point position, and divertor detachment status.</p></li>
+</ul>
+</section>
+<section id="diagnostic-signals">
+<h2>Diagnostic signals<a class="headerlink" href="#diagnostic-signals" title="Link to this heading">#</a></h2>
+<p>These signals provide real-time feedback on the plasma’s behavior and are used to control the plasma and diagnose instabilities.</p>
+<ul class="simple">
+<li><p>Magnetics:</p>
+<ul>
+<li><p>Mirnov coil signals (detects magnetic fluctuations).</p></li>
+<li><p>Magnetic fluctuation spectrograms.</p></li>
+</ul>
+</li>
+<li><p>Radiation:</p>
+<ul>
+<li><p>Total radiated power <span class="math notranslate nohighlight">\(P_{rad}\)</span>.</p></li>
+<li><p>Edge radiation (from impurities or disruptions).</p></li>
+</ul>
+</li>
+<li><p>Density Fluctuations:</p>
+<ul>
+<li><p>Reflectometry signals</p></li>
+<li><p>Interferometry signals</p></li>
+</ul>
+</li>
+<li><p>Soft X-ray Emission: Localized hot spots or disruptions.</p></li>
+<li><p>Electron Cyclotron Emission (ECE): Measures electron temperature profiles and instabilities.</p></li>
+</ul>
+</section>
+<section id="disruption-indicators">
+<h2>Disruption indicators<a class="headerlink" href="#disruption-indicators" title="Link to this heading">#</a></h2>
+<p>These parameters directly measure signs of instability or plasma degradation:</p>
+<ul class="simple">
+<li><p><strong>Growth of Magnetic Islands</strong>: Associated with tearing modes.</p></li>
+<li><p><strong>Vertical Displacement Velocity (VDE)</strong>: Speed of vertical motion of the plasma. <span class="math notranslate nohighlight">\(VDE = \frac{dZ_p}{dt}\)</span>.</p></li>
+<li><p><strong>Normalized Disruption Indicator (NDI)</strong>: Ratio such as <span class="math notranslate nohighlight">\(\beta_N/\beta_{limit}\)</span> or <span class="math notranslate nohighlight">\(q_{95}/q_{limit}\)</span>.</p></li>
+<li><p><strong>Runaway electron signals</strong>: Indicate the presence of runaway electrons in the plasma during disruptions.</p></li>
+<li><p><strong>Edge Safety Factor Decrease</strong>: Associated with MHD instabilities. <span class="math notranslate nohighlight">\(q_{edge}\)</span>. Need more info on this.</p></li>
+</ul>
+</section>
+<section id="machine-specific-parameters">
+<h2>Machine-specific parameters<a class="headerlink" href="#machine-specific-parameters" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Wall Conditions</strong>: Temperature, impurity levels, and interaction with plasma.</p></li>
+<li><p>Divertor and Scrape-Off Layer (SOL):</p>
+<ul>
+<li><p>Heat fluxes.</p></li>
+<li><p>Impurity levels.</p></li>
+<li><p>Detachment status.</p></li>
+<li><p>SOL density and temperature profiles.</p></li>
+</ul>
+</li>
+<li><p><strong>Neutral Beam Injection (NBI)</strong>: Power, energy, and beam geometry.</p></li>
+</ul>
+</section>
+<section id="temporal-and-historical-data">
+<h2>Temporal and historical data<a class="headerlink" href="#temporal-and-historical-data" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Temporal evolution</strong>: How the plasma parameters change over time.  Derivatives or rolling averages of key parameters example, <span class="math notranslate nohighlight">\(\dot{I}_p\)</span>, <span class="math notranslate nohighlight">\(\dot{n}_e\)</span>.</p></li>
+<li><p><strong>Past Disruption Data</strong>: Information from previous disruptions can be used to train models to identify patterns.</p></li>
+</ul>
+</section>
+<section id="next-steps">
+<h2>Next steps<a class="headerlink" href="#next-steps" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Feature Engineering: Include both raw values and derived features. Not sure about this.</p></li>
+<li><p>Data Sources: Use a combination of diagnostic signals, equilibrium reconstructions, and time-series data. There are some paper. Refer to OneNote annotations.</p></li>
+<li><p>Real-Time Processing: hopefully.</p></li>
 </ul>
 </section>
 </section>
@@ -471,8 +558,14 @@
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plasma-parameters">Plasma Parameters</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#magnetic-equilibrium-and-stability">Magnetic Equilibrium and Stability</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plasma-parameters">Plasma parameters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#magnetic-equilibrium-and-stability">Magnetic equilibrium and stability</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#operational-parameters">Operational parameters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#diagnostic-signals">Diagnostic signals</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#disruption-indicators">Disruption indicators</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#machine-specific-parameters">Machine-specific parameters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#temporal-and-historical-data">Temporal and historical data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#next-steps">Next steps</a></li>
 </ul>
   </nav></div>
 
