@@ -6,5 +6,8 @@ root: intro
 parts:
   - caption: Disruptions
     chapters:
-    - file: Theory/1. disruptions.ipynb
-    - file: Theory/2. parameters.ipynb
+    - file: Theory/1. Disruption/1. disruptions.ipynb
+    - file: Theory/1. Disruption/2. parameters.ipynb
+  - caption: Edge-localized mode
+    chapters:
+    - file: Theory/2. ELMs/1. ELMs.ipynb
