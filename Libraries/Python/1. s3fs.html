@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Edge-localized mode (ELM) &#8212; Knowledge Base</title>
+    <title>S3 file system &#8212; Knowledge Base</title>
   
   
   
@@ -60,11 +60,11 @@
     <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'Theory/2. ELMs/1. ELMs';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Libraries/Python/1. s3fs';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="S3 file system" href="../../Libraries/Python/1.%20s3fs.html" />
-    <link rel="prev" title="Parameters of interest" href="../1.%20Disruption/2.%20parameters.html" />
+    <link rel="next" title="Zarr" href="2.%20zarr.html" />
+    <link rel="prev" title="Edge-localized mode (ELM)" href="../../Theory/2.%20ELMs/1.%20ELMs.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -170,19 +170,19 @@
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Disruptions</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../1.%20Disruption/1.%20disruptions.html">Basic concepts</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../1.%20Disruption/2.%20parameters.html">Parameters of interest</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Theory/1.%20Disruption/1.%20disruptions.html">Basic concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Theory/1.%20Disruption/2.%20parameters.html">Parameters of interest</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Edge-localized mode</span></p>
-<ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Edge-localized mode (ELM)</a></li>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Theory/2.%20ELMs/1.%20ELMs.html">Edge-localized mode (ELM)</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Python Libraries</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../Libraries/Python/1.%20s3fs.html">S3 file system</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../Libraries/Python/2.%20zarr.html">Zarr</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../Libraries/Python/3.%20fsspec.html">Filesystem spec (Fsspec)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../Libraries/Python/4.%20Intake.html">Intake</a></li>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">S3 file system</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2.%20zarr.html">Zarr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3.%20fsspec.html">Filesystem spec (Fsspec)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="4.%20Intake.html">Intake</a></li>
 </ul>
 
     </div>
@@ -254,7 +254,7 @@
       
       
       
-      <li><a href="https://github.com/praksharma/Knowledge-Base/issues/new?title=Issue%20on%20page%20%2FTheory/2. ELMs/1. ELMs.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/praksharma/Knowledge-Base/issues/new?title=Issue%20on%20page%20%2FLibraries/Python/1. s3fs.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -284,7 +284,7 @@
       
       
       
-      <li><a href="../../_sources/Theory/2. ELMs/1. ELMs.ipynb" target="_blank"
+      <li><a href="../../_sources/Libraries/Python/1. s3fs.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -358,7 +358,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Edge-localized mode (ELM)</h1>
+    <h1>S3 file system</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -372,9 +372,14 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="edge-localized-mode-elm">
-<h1>Edge-localized mode (ELM)<a class="headerlink" href="#edge-localized-mode-elm" title="Link to this heading">#</a></h1>
-<p>To be written.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="s3-file-system">
+<h1>S3 file system<a class="headerlink" href="#s3-file-system" title="Link to this heading">#</a></h1>
+<p>S3 is a file storage service offered by Amazon AWS. Just like normal internet where URL is mapped to IP addresses via registers, S3 has its own address protocol.</p>
+<p>Here is an example of a S3 file hosted on AWS server.</p>
+<p>s3://mast/level1/shots/11695.zarr</p>
+<p>The s3fs python package sends a request to Amazon server and if the request is valid example, permissions, the file gets downloaded.</p>
+<p>A guide on basic usage of S3 using S3fs: <a class="reference external" href="https://medium.com/&#64;akifmalik200/setting-up-s3fs-on-ubuntu-a-beginners-guide-to-mounting-s3-buckets-f84513cd6be4">Link</a></p>
+<p>Need to add more as I learn.</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -390,7 +395,7 @@
         },
         kernelOptions: {
             name: "python3",
-            path: "./Theory/2. ELMs"
+            path: "./Libraries/Python"
         },
         predefinedOutput: true
     }
@@ -408,20 +413,20 @@
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../1.%20Disruption/2.%20parameters.html"
+       href="../../Theory/2.%20ELMs/1.%20ELMs.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Parameters of interest</p>
+        <p class="prev-next-title">Edge-localized mode (ELM)</p>
       </div>
     </a>
     <a class="right-next"
-       href="../../Libraries/Python/1.%20s3fs.html"
+       href="2.%20zarr.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">S3 file system</p>
+        <p class="prev-next-title">Zarr</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

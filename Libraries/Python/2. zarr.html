@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Edge-localized mode (ELM) &#8212; Knowledge Base</title>
+    <title>Zarr &#8212; Knowledge Base</title>
   
   
   
@@ -60,11 +60,11 @@
     <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'Theory/2. ELMs/1. ELMs';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Libraries/Python/2. zarr';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="S3 file system" href="../../Libraries/Python/1.%20s3fs.html" />
-    <link rel="prev" title="Parameters of interest" href="../1.%20Disruption/2.%20parameters.html" />
+    <link rel="next" title="Filesystem spec (Fsspec)" href="3.%20fsspec.html" />
+    <link rel="prev" title="S3 file system" href="1.%20s3fs.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -170,19 +170,19 @@
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Disruptions</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../1.%20Disruption/1.%20disruptions.html">Basic concepts</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../1.%20Disruption/2.%20parameters.html">Parameters of interest</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Theory/1.%20Disruption/1.%20disruptions.html">Basic concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Theory/1.%20Disruption/2.%20parameters.html">Parameters of interest</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Edge-localized mode</span></p>
-<ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Edge-localized mode (ELM)</a></li>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Theory/2.%20ELMs/1.%20ELMs.html">Edge-localized mode (ELM)</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Python Libraries</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../Libraries/Python/1.%20s3fs.html">S3 file system</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../Libraries/Python/2.%20zarr.html">Zarr</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../Libraries/Python/3.%20fsspec.html">Filesystem spec (Fsspec)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../Libraries/Python/4.%20Intake.html">Intake</a></li>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="1.%20s3fs.html">S3 file system</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Zarr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3.%20fsspec.html">Filesystem spec (Fsspec)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="4.%20Intake.html">Intake</a></li>
 </ul>
 
     </div>
@@ -254,7 +254,7 @@
       
       
       
-      <li><a href="https://github.com/praksharma/Knowledge-Base/issues/new?title=Issue%20on%20page%20%2FTheory/2. ELMs/1. ELMs.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/praksharma/Knowledge-Base/issues/new?title=Issue%20on%20page%20%2FLibraries/Python/2. zarr.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -284,7 +284,7 @@
       
       
       
-      <li><a href="../../_sources/Theory/2. ELMs/1. ELMs.ipynb" target="_blank"
+      <li><a href="../../_sources/Libraries/Python/2. zarr.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -347,7 +347,9 @@
 <button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
 </button>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -358,11 +360,20 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Edge-localized mode (ELM)</h1>
+    <h1>Zarr</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-use-zarr">Why use Zarr?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#save-numpy-arrays-with-zarr">Save NumPy Arrays with Zarr</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -372,9 +383,23 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="edge-localized-mode-elm">
-<h1>Edge-localized mode (ELM)<a class="headerlink" href="#edge-localized-mode-elm" title="Link to this heading">#</a></h1>
-<p>To be written.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="zarr">
+<h1>Zarr<a class="headerlink" href="#zarr" title="Link to this heading">#</a></h1>
+<p>Zarr is open standard, for storing large multidimensional arrays. It is designed cloud ready and random access by dividing the data into chunks. Influenced by HDF5, it can be contain metadata and grouped into named hierarchies, annotated with key value metadata alongside the array.</p>
+<ul class="simple">
+<li><p>Has multiple compression options and levels built-in</p></li>
+<li><p>Supports multiple backend data stores (zip, S3, etc.)</p></li>
+<li><p>Can read and write data in parallel* in n-dimensional compressed chunks</p></li>
+</ul>
+<section id="why-use-zarr">
+<h2>Why use Zarr?<a class="headerlink" href="#why-use-zarr" title="Link to this heading">#</a></h2>
+<p>csv, txt doesn’t store array with more than 3-dimensional arrays. .npy does but can’t be scaled to larger-than-memory datasets or other situations in which you want to read and/or write in parallel.</p>
+</section>
+<section id="save-numpy-arrays-with-zarr">
+<h2>Save NumPy Arrays with Zarr<a class="headerlink" href="#save-numpy-arrays-with-zarr" title="Link to this heading">#</a></h2>
+<p>Instead save the numpy arrays with zarr.</p>
+<p>A very good tutorial: <a class="reference external" href="https://freedium.cfd/https:/towardsdatascience.com/why-you-should-save-numpy-arrays-with-zarr-dabff4ae6c0c">link</a></p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -390,7 +415,7 @@
         },
         kernelOptions: {
             name: "python3",
-            path: "./Theory/2. ELMs"
+            path: "./Libraries/Python"
         },
         predefinedOutput: true
     }
@@ -408,20 +433,20 @@
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../1.%20Disruption/2.%20parameters.html"
+       href="1.%20s3fs.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Parameters of interest</p>
+        <p class="prev-next-title">S3 file system</p>
       </div>
     </a>
     <a class="right-next"
-       href="../../Libraries/Python/1.%20s3fs.html"
+       href="3.%20fsspec.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">S3 file system</p>
+        <p class="prev-next-title">Filesystem spec (Fsspec)</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -431,6 +456,23 @@
             </div>
             
             
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-use-zarr">Why use Zarr?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#save-numpy-arrays-with-zarr">Save NumPy Arrays with Zarr</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
