@@ -11,3 +11,9 @@ parts:
   - caption: Edge-localized mode
     chapters:
     - file: Theory/2. ELMs/1. ELMs.ipynb
+  - caption: Python Libraries
+    chapters:
+    - file: Libraries/Python/1. s3fs.ipynb
+    - file: Libraries/Python/2. zarr.ipynb
+    - file: Libraries/Python/3. fsspec.ipynb
+    - file: Libraries/Python/4. Intake.ipynb

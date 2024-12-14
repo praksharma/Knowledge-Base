@@ -10,6 +10,11 @@ Not sure
 ## Build the docs
 
 ```sh
+source .venv/bin/activate
+```
+
+
+```sh
 jupyter-book build docs/
 ```
 
