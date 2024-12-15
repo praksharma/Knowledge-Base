@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -371,6 +371,11 @@
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#intake-xarray">Intake-xarray</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#intake-parquet">Intake-parquet</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#use-intake-with-minio">Use intake with MinIO</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#create-an-intake-catalog-catalog-yml">Create an Intake Catalog (<code class="docutils literal notranslate"><span class="pre">catalog.yml</span></code>)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#load-data-using-intake">Load Data Using Intake</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -384,7 +389,8 @@
                   
   <section class="tex2jax_ignore mathjax_ignore" id="intake">
 <h1>Intake<a class="headerlink" href="#intake" title="Link to this heading">#</a></h1>
-<p>Intake, as the name says, can intake or load a number of data types in python. So, you can open a bunch of things, such as npy, txt, jpg, csv, dat, yml etc. with a single library.</p>
+<p>Intake is a data cataloging system that allows you to access data from a variety of sources, such as CSV, Parquet, and SQL databases. Intake, provides a consistent API to access data from diverse sources (e.g., local files, S3 buckets, databases). It integrates with popular data science tools like Pandas, Dask, s3fs and Xarray.</p>
+<p>Use: Work with multiple datasets stored across different locations</p>
 <p>Here is their website: <a class="reference external" href="https://intake.readthedocs.io/en/latest/quickstart.html">link</a></p>
 <p>A full list of file types it can open is here: <a class="reference external" href="https://intake.readthedocs.io/en/latest/api2.html#data-classes">link</a></p>
 <section id="intake-xarray">
@@ -398,6 +404,85 @@
 <p>Apache Parquet is a columnar storage file format designed for efficient data processing and storage. I need to learn more about them.</p>
 <p>Intake-parquet is a intake plugin to efficiently load and manage Parquet files within the Intake framework.</p>
 <p>Github repo: <a class="reference external" href="https://github.com/intake/intake-parquet">link</a></p>
+</section>
+<section id="use-intake-with-minio">
+<h2>Use intake with MinIO<a class="headerlink" href="#use-intake-with-minio" title="Link to this heading">#</a></h2>
+<section id="create-an-intake-catalog-catalog-yml">
+<h3>Create an Intake Catalog (<code class="docutils literal notranslate"><span class="pre">catalog.yml</span></code>)<a class="headerlink" href="#create-an-intake-catalog-catalog-yml" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>cat<span class="w"> </span>data/catalog.yaml
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>sources:
+  dummy_data:
+    description: &quot;Dummy data for testing&quot;
+    driver: csv
+    args:
+      urlpath: &quot;s3://my-bucket-2/data/data.csv&quot;
+      storage_options:
+        key: &quot;minioadmin&quot;
+        secret: &quot;minioadmin&quot;
+        client_kwargs:
+          endpoint_url: &quot;http://localhost:9000&quot;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="load-data-using-intake">
+<h3>Load Data Using Intake<a class="headerlink" href="#load-data-using-intake" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">intake</span>
+
+<span class="c1"># Load the catalog</span>
+
+<span class="n">catalog</span> <span class="o">=</span> <span class="n">intake</span><span class="o">.</span><span class="n">open_catalog</span><span class="p">(</span><span class="s1">&#39;data/catalog.yaml&#39;</span><span class="p">)</span>
+
+<span class="c1"># List available datasets </span>
+<span class="nb">print</span><span class="p">(</span><span class="n">catalog</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">intake</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="c1"># Load the catalog</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">catalog</span> <span class="o">=</span> <span class="n">intake</span><span class="o">.</span><span class="n">open_catalog</span><span class="p">(</span><span class="s1">&#39;data/catalog.yaml&#39;</span><span class="p">)</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;intake&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Access the dummy data</span>
+<span class="n">dummy_data</span> <span class="o">=</span> <span class="n">catalog</span><span class="o">.</span><span class="n">dummy_data</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">dummy_data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/hell/anaconda3/lib/python3.9/site-packages/pandas/core/arrays/masked.py:60: UserWarning: Pandas requires version &#39;1.3.6&#39; or newer of &#39;bottleneck&#39; (version &#39;1.3.5&#39; currently installed).
+  from pandas.core import (
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>      Name  Age      City
+0    Alice   25  New York
+1      Bob   30    London
+2  Charlie   35     Paris
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 </section>
 </section>
 
@@ -459,6 +544,11 @@
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#intake-xarray">Intake-xarray</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#intake-parquet">Intake-parquet</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#use-intake-with-minio">Use intake with MinIO</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#create-an-intake-catalog-catalog-yml">Create an Intake Catalog (<code class="docutils literal notranslate"><span class="pre">catalog.yml</span></code>)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#load-data-using-intake">Load Data Using Intake</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 
