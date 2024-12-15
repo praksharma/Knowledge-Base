@@ -1,0 +1,11 @@
+sources:
+  dummy_data:
+    description: "Dummy data for testing"
+    driver: csv
+    args:
+      urlpath: "s3://my-bucket-2/data/data.csv"
+      storage_options:
+        key: "minioadmin"
+        secret: "minioadmin"
+        client_kwargs:
+          endpoint_url: "http://localhost:9000"
