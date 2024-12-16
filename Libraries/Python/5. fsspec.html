@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Filesystem spec (Fsspec) &#8212; Knowledge Base</title>
+    <title>Filesystem spec (FSSpec) &#8212; Knowledge Base</title>
   
   
   
@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -183,7 +183,7 @@
 <li class="toctree-l1"><a class="reference internal" href="3.%20zarr.html">Zarr</a></li>
 
 <li class="toctree-l1"><a class="reference internal" href="4.%20xarray_examples.html">Xarray examples</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Filesystem spec (Fsspec)</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Filesystem spec (FSSpec)</a></li>
 </ul>
 
     </div>
@@ -348,7 +348,9 @@
 <button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
 </button>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -359,11 +361,25 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Filesystem spec (Fsspec)</h1>
+    <h1>Filesystem spec (FSSpec)</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-examples">Basic examples</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#local-file-system-without-database">Local file system without database</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#remote-filesystem">Remote filesystem</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#easily-switch-between-local-and-remote-filesystem">Easily switch between local and remote filesystem</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#open-zarr-file-with-xarray-using-fsspec">Open zarr file with xarray using fsspec</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -374,10 +390,255 @@
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="filesystem-spec-fsspec">
-<h1>Filesystem spec (Fsspec)<a class="headerlink" href="#filesystem-spec-fsspec" title="Link to this heading">#</a></h1>
+<h1>Filesystem spec (FSSpec)<a class="headerlink" href="#filesystem-spec-fsspec" title="Link to this heading">#</a></h1>
+<p>FSSpec is the standard package for reading bytes from various stores in the Python/data ecosystem. Intake uses FSSpec as part of their backend.</p>
 <p>You can store data at so many places. Local, google drive, Amazon AWS etc. Filesystem Spec (fsspec) is a project to provide a unified pythonic interface to local, remote and embedded file systems and bytes storage. So, all we need is to provide credentials for each service.</p>
 <p>For usage purpose, their documentation is more than enough.</p>
 <p>Documentation: <a class="reference external" href="https://filesystem-spec.readthedocs.io/en/latest/?badge=latest">link</a></p>
+<section id="basic-examples">
+<h2>Basic examples<a class="headerlink" href="#basic-examples" title="Link to this heading">#</a></h2>
+<section id="local-file-system-without-database">
+<h3>Local file system without database<a class="headerlink" href="#local-file-system-without-database" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">fsspec</span>
+
+<span class="c1"># Write a file</span>
+<span class="k">with</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;file://data/fsspec_sample.txt&quot;</span><span class="p">,</span> <span class="n">mode</span> <span class="o">=</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;Hello, World!</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Read the file</span>
+<span class="k">with</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;file://data/fsspec_sample.txt&quot;</span><span class="p">,</span> <span class="n">mode</span> <span class="o">=</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hello, World!
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="remote-filesystem">
+<h2>Remote filesystem<a class="headerlink" href="#remote-filesystem" title="Link to this heading">#</a></h2>
+<p>We will use the S3 filesystem which is operated by MinIO on our local PC.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Connect to S3 using fsspec</span>
+
+<span class="n">fs</span> <span class="o">=</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">filesystem</span><span class="p">(</span><span class="s2">&quot;s3&quot;</span><span class="p">,</span>
+                       <span class="n">key</span> <span class="o">=</span> <span class="s1">&#39;minioadmin&#39;</span><span class="p">,</span>
+                       <span class="n">secret</span> <span class="o">=</span> <span class="s1">&#39;minioadmin&#39;</span><span class="p">,</span>
+                       <span class="n">client_kwargs</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;endpoint_url&#39;</span><span class="p">:</span> <span class="s1">&#39;http://localhost:9000&#39;</span><span class="p">}</span>
+                       <span class="p">)</span>
+
+<span class="n">fs</span><span class="o">.</span><span class="n">ls</span><span class="p">(</span><span class="s1">&#39;my-bucket-2&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;my-bucket-2/data&#39;, &#39;my-bucket-2/images&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Write a file to S3</span>
+<span class="c1"># Notice the method changed from fsspec.open() to fs.open() when fs is an object that connects to the S3 filesystem.</span>
+<span class="k">with</span> <span class="n">fs</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;my-bucket-2/data/fsspec_sample.txt&quot;</span><span class="p">,</span> <span class="n">mode</span> <span class="o">=</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;Hello, World!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Read a file from S3</span>
+<span class="k">with</span> <span class="n">fs</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;my-bucket-2/data/data.csv&quot;</span><span class="p">,</span> <span class="n">mode</span> <span class="o">=</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+
+
+<span class="k">with</span> <span class="n">fs</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;my-bucket-2/data/fsspec_sample.txt&quot;</span><span class="p">,</span> <span class="n">mode</span> <span class="o">=</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="o">+</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Name,Age,City
+Alice,25,New York
+Bob,30,London
+Charlie,35,Paris
+
+
+
+Hello, World!
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="easily-switch-between-local-and-remote-filesystem">
+<h2>Easily switch between local and remote filesystem<a class="headerlink" href="#easily-switch-between-local-and-remote-filesystem" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Read the file</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Read local file&quot;</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;file://data/fsspec_sample.txt&quot;</span><span class="p">,</span> <span class="n">mode</span> <span class="o">=</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Read remote file&quot;</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;s3://my-bucket-2/data/fsspec_sample.txt&quot;</span><span class="p">,</span> <span class="n">mode</span> <span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span>
+                 <span class="n">key</span> <span class="o">=</span> <span class="s1">&#39;minioadmin&#39;</span><span class="p">,</span>
+                       <span class="n">secret</span> <span class="o">=</span> <span class="s1">&#39;minioadmin&#39;</span><span class="p">,</span>
+                       <span class="n">client_kwargs</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;endpoint_url&#39;</span><span class="p">:</span> <span class="s1">&#39;http://localhost:9000&#39;</span><span class="p">})</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Read local file
+Hello, World!
+
+Read remote file
+Hello, World!
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="open-zarr-file-with-xarray-using-fsspec">
+<h2>Open zarr file with xarray using fsspec<a class="headerlink" href="#open-zarr-file-with-xarray-using-fsspec" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
+
+<span class="n">store</span> <span class="o">=</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">get_mapper</span><span class="p">(</span><span class="s2">&quot;s3://my-bucket-2/data/zarr_data&quot;</span><span class="p">,</span>
+                    <span class="n">key</span> <span class="o">=</span> <span class="s1">&#39;minioadmin&#39;</span><span class="p">,</span>
+                    <span class="n">secret</span> <span class="o">=</span> <span class="s1">&#39;minioadmin&#39;</span><span class="p">,</span>
+                    <span class="n">client_kwargs</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;endpoint_url&#39;</span><span class="p">:</span> <span class="s1">&#39;http://localhost:9000&#39;</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dataset</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_zarr</span><span class="p">(</span><span class="n">store</span><span class="p">)</span>
+<span class="n">dataset</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">KeyError</span><span class="g g-Whitespace">                                  </span>Traceback (most recent call last)
+<span class="nn">~/anaconda3/lib/python3.9/site-packages/xarray/backends/zarr.py</span> in <span class="ni">_get_zarr_dims_and_attrs</span><span class="nt">(zarr_obj, dimension_key, try_nczarr)</span>
+<span class="g g-Whitespace">    </span><span class="mi">214</span>         <span class="c1"># Xarray-Zarr</span>
+<span class="ne">--&gt; </span><span class="mi">215</span>         <span class="n">dimensions</span> <span class="o">=</span> <span class="n">zarr_obj</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="n">dimension_key</span><span class="p">]</span>
+<span class="g g-Whitespace">    </span><span class="mi">216</span>     <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+
+<span class="nn">~/anaconda3/lib/python3.9/site-packages/zarr/attrs.py</span> in <span class="ni">__getitem__</span><span class="nt">(self, item)</span>
+<span class="g g-Whitespace">     </span><span class="mi">73</span>     <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+<span class="ne">---&gt; </span><span class="mi">74</span>         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">asdict</span><span class="p">()[</span><span class="n">item</span><span class="p">]</span>
+<span class="g g-Whitespace">     </span><span class="mi">75</span> 
+
+<span class="ne">KeyError</span>: &#39;_ARRAY_DIMENSIONS&#39;
+
+<span class="n">During</span> <span class="n">handling</span> <span class="n">of</span> <span class="n">the</span> <span class="n">above</span> <span class="n">exception</span><span class="p">,</span> <span class="n">another</span> <span class="n">exception</span> <span class="n">occurred</span><span class="p">:</span>
+
+<span class="ne">KeyError</span><span class="g g-Whitespace">                                  </span>Traceback (most recent call last)
+<span class="nn">~/anaconda3/lib/python3.9/site-packages/xarray/backends/zarr.py</span> in <span class="ni">_get_zarr_dims_and_attrs</span><span class="nt">(zarr_obj, dimension_key, try_nczarr)</span>
+<span class="g g-Whitespace">    </span><span class="mi">228</span>             <span class="n">dimensions</span> <span class="o">=</span> <span class="p">[</span>
+<span class="ne">--&gt; </span><span class="mi">229</span>                 <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">dim</span><span class="p">)</span> <span class="k">for</span> <span class="n">dim</span> <span class="ow">in</span> <span class="n">zarray</span><span class="p">[</span><span class="s2">&quot;_NCZARR_ARRAY&quot;</span><span class="p">][</span><span class="s2">&quot;dimrefs&quot;</span><span class="p">]</span>
+<span class="g g-Whitespace">    </span><span class="mi">230</span>             <span class="p">]</span>
+
+<span class="ne">KeyError</span>: &#39;_NCZARR_ARRAY&#39;
+
+<span class="n">The</span> <span class="n">above</span> <span class="n">exception</span> <span class="n">was</span> <span class="n">the</span> <span class="n">direct</span> <span class="n">cause</span> <span class="n">of</span> <span class="n">the</span> <span class="n">following</span> <span class="n">exception</span><span class="p">:</span>
+
+<span class="ne">KeyError</span><span class="g g-Whitespace">                                  </span>Traceback (most recent call last)
+<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_1945216</span><span class="o">/</span><span class="mf">2753404152.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">dataset</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_zarr</span><span class="p">(</span><span class="n">store</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">dataset</span>
+
+<span class="nn">~/anaconda3/lib/python3.9/site-packages/xarray/backends/zarr.py</span> in <span class="ni">open_zarr</span><span class="nt">(store, group, synchronizer, chunks, decode_cf, mask_and_scale, decode_times, concat_characters, decode_coords, drop_variables, consolidated, overwrite_encoded_chunks, chunk_store, storage_options, decode_timedelta, use_cftime, zarr_version, chunked_array_type, from_array_kwargs, **kwargs)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1101</span>     <span class="p">}</span>
+<span class="g g-Whitespace">   </span><span class="mi">1102</span> 
+<span class="ne">-&gt; </span><span class="mi">1103</span>     <span class="n">ds</span> <span class="o">=</span> <span class="n">open_dataset</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1104</span>         <span class="n">filename_or_obj</span><span class="o">=</span><span class="n">store</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1105</span>         <span class="n">group</span><span class="o">=</span><span class="n">group</span><span class="p">,</span>
+
+<span class="nn">~/anaconda3/lib/python3.9/site-packages/xarray/backends/api.py</span> in <span class="ni">open_dataset</span><span class="nt">(filename_or_obj, engine, chunks, cache, decode_cf, mask_and_scale, decode_times, decode_timedelta, use_cftime, concat_characters, decode_coords, drop_variables, inline_array, chunked_array_type, from_array_kwargs, backend_kwargs, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">586</span> 
+<span class="g g-Whitespace">    </span><span class="mi">587</span>     <span class="n">overwrite_encoded_chunks</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;overwrite_encoded_chunks&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">588</span>     <span class="n">backend_ds</span> <span class="o">=</span> <span class="n">backend</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">589</span>         <span class="n">filename_or_obj</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">590</span>         <span class="n">drop_variables</span><span class="o">=</span><span class="n">drop_variables</span><span class="p">,</span>
+
+<span class="nn">~/anaconda3/lib/python3.9/site-packages/xarray/backends/zarr.py</span> in <span class="ni">open_dataset</span><span class="nt">(self, filename_or_obj, mask_and_scale, decode_times, concat_characters, decode_coords, drop_variables, use_cftime, decode_timedelta, group, mode, synchronizer, consolidated, chunk_store, storage_options, stacklevel, zarr_version, store, engine)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1186</span>         <span class="n">store_entrypoint</span> <span class="o">=</span> <span class="n">StoreBackendEntrypoint</span><span class="p">()</span>
+<span class="g g-Whitespace">   </span><span class="mi">1187</span>         <span class="k">with</span> <span class="n">close_on_error</span><span class="p">(</span><span class="n">store</span><span class="p">):</span>
+<span class="ne">-&gt; </span><span class="mi">1188</span>             <span class="n">ds</span> <span class="o">=</span> <span class="n">store_entrypoint</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1189</span>                 <span class="n">store</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1190</span>                 <span class="n">mask_and_scale</span><span class="o">=</span><span class="n">mask_and_scale</span><span class="p">,</span>
+
+<span class="nn">~/anaconda3/lib/python3.9/site-packages/xarray/backends/store.py</span> in <span class="ni">open_dataset</span><span class="nt">(self, filename_or_obj, mask_and_scale, decode_times, concat_characters, decode_coords, drop_variables, use_cftime, decode_timedelta)</span>
+<span class="g g-Whitespace">     </span><span class="mi">41</span>         <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">filename_or_obj</span><span class="p">,</span> <span class="n">AbstractDataStore</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">42</span> 
+<span class="ne">---&gt; </span><span class="mi">43</span>         <span class="nb">vars</span><span class="p">,</span> <span class="n">attrs</span> <span class="o">=</span> <span class="n">filename_or_obj</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">44</span>         <span class="n">encoding</span> <span class="o">=</span> <span class="n">filename_or_obj</span><span class="o">.</span><span class="n">get_encoding</span><span class="p">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">45</span> 
+
+<span class="nn">~/anaconda3/lib/python3.9/site-packages/xarray/backends/common.py</span> in <span class="ni">load</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">219</span>         <span class="s2">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">220</span><span class="s2">         variables = FrozenDict(</span>
+<span class="nn">--&gt; 221             (_decode_variable_name(k), v) for k, v</span> in <span class="ni">self.get_variables().items</span><span class="nt">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">222</span><span class="s2">         )</span>
+<span class="g g-Whitespace">    </span><span class="mi">223</span><span class="s2">         attributes = FrozenDict(self.get_attrs())</span>
+
+<span class="nn">~/anaconda3/lib/python3.9/site-packages/xarray/backends/zarr.py</span> in <span class="ni">get_variables</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">561</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">562</span><span class="s2">     def get_variables(self):</span>
+<span class="ne">--&gt; </span><span class="mi">563</span><span class="s2">         return FrozenDict(</span>
+<span class="nn">    564             (k, self.open_store_variable(k, v)) for k, v</span> in <span class="ni">self.zarr_group.arrays</span><span class="nt">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">565</span><span class="s2">         )</span>
+
+<span class="nn">~/anaconda3/lib/python3.9/site-packages/xarray/core/utils.py</span> in <span class="ni">FrozenDict</span><span class="nt">(*args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">434</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">435</span><span class="s2"> def FrozenDict(*args, **kwargs) -&gt; Frozen:</span>
+<span class="ne">--&gt; </span><span class="mi">436</span><span class="s2">     return Frozen(dict(*args, **kwargs))</span>
+<span class="g g-Whitespace">    </span><span class="mi">437</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">438</span><span class="s2"> </span>
+
+<span class="nn">~/anaconda3/lib/python3.9/site-packages/xarray/backends/zarr.py</span> in <span class="ni">&lt;genexpr&gt;</span><span class="nt">(.0)</span>
+<span class="g g-Whitespace">    </span><span class="mi">562</span><span class="s2">     def get_variables(self):</span>
+<span class="g g-Whitespace">    </span><span class="mi">563</span><span class="s2">         return FrozenDict(</span>
+<span class="nn">--&gt; 564             (k, self.open_store_variable(k, v)) for k, v</span> in <span class="ni">self.zarr_group.arrays</span><span class="nt">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">565</span><span class="s2">         )</span>
+<span class="g g-Whitespace">    </span><span class="mi">566</span><span class="s2"> </span>
+
+<span class="nn">~/anaconda3/lib/python3.9/site-packages/xarray/backends/zarr.py</span> in <span class="ni">open_store_variable</span><span class="nt">(self, name, zarr_array)</span>
+<span class="g g-Whitespace">    </span><span class="mi">538</span><span class="s2">         data = indexing.LazilyIndexedArray(ZarrArrayWrapper(zarr_array))</span>
+<span class="g g-Whitespace">    </span><span class="mi">539</span><span class="s2">         try_nczarr = self._mode == &quot;r&quot;</span>
+<span class="ne">--&gt; </span><span class="mi">540</span><span class="s2">         dimensions, attributes = _get_zarr_dims_and_attrs(</span>
+<span class="g g-Whitespace">    </span><span class="mi">541</span><span class="s2">             zarr_array, DIMENSION_KEY, try_nczarr</span>
+<span class="g g-Whitespace">    </span><span class="mi">542</span><span class="s2">         )</span>
+
+<span class="nn">~/anaconda3/lib/python3.9/site-packages/xarray/backends/zarr.py</span> in <span class="ni">_get_zarr_dims_and_attrs</span><span class="nt">(zarr_obj, dimension_key, try_nczarr)</span>
+<span class="g g-Whitespace">    </span><span class="mi">230</span><span class="s2">             ]</span>
+<span class="g g-Whitespace">    </span><span class="mi">231</span><span class="s2">         except KeyError as e:</span>
+<span class="ne">--&gt; </span><span class="mi">232</span><span class="s2">             raise KeyError(</span>
+<span class="g g-Whitespace">    </span><span class="mi">233</span><span class="s2">                 f&quot;Zarr object is missing the attribute `</span><span class="si">{dimension_key}</span><span class="s2">` and the NCZarr metadata, &quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">234</span><span class="s2">                 &quot;which are required for xarray to determine variable dimensions.&quot;</span>
+
+<span class="ne">KeyError</span>: &#39;Zarr object is missing the attribute `_ARRAY_DIMENSIONS` and the NCZarr metadata, which are required for xarray to determine variable dimensions.&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>I just realised the zarr_data was created using zarr library so xarray can’t open it as the metadata is not compatible. Anyways, this the code to open zarr file saved as xarray using fsspec.</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -425,6 +686,28 @@
             </div>
             
             
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-examples">Basic examples</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#local-file-system-without-database">Local file system without database</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#remote-filesystem">Remote filesystem</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#easily-switch-between-local-and-remote-filesystem">Easily switch between local and remote filesystem</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#open-zarr-file-with-xarray-using-fsspec">Open zarr file with xarray using fsspec</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
