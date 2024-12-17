@@ -11,6 +11,9 @@ parts:
     chapters:
     - file: Theory/1. Disruption/1. disruptions.ipynb
     - file: Theory/1. Disruption/2. parameters.ipynb
+    - file: Theory/1. Disruption/3. access_parquet_files.ipynb
+    - file: Theory/1. Disruption/4. collecting_location_of_parameters.ipynb
+    - file: Theory/1. Disruption/5. detect.ipynb
   - caption: Edge-localized mode
     chapters:
     - file: Theory/2. ELMs/1. ELMs.ipynb
