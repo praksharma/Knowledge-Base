@@ -60,6 +60,8 @@
     <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'Theory/1. Disruption/1. disruptions';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -390,6 +392,7 @@
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#the-ml-problem">The ML problem</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#alarm-time">Alarm time</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parameters">Parameters</a></li>
 </ul>
 </li>
 </ul>
@@ -521,6 +524,17 @@
 <h2>Alarm time<a class="headerlink" href="#alarm-time" title="Link to this heading">#</a></h2>
 <p>One of the important things that we need to consider is that the NN must perform faster than the actual experiment to provide a sufficient alarm time. Meaning, the inference time, i.e., the time it takes for the NN to process a time window of diagnostic data and make a prediction (e.g., “stable” or “unstable”), is faster than the actual time window. This ensures that the NN can provide an early warning before a disruption occurs. Alarm time can be defined as the moment when the NN first predicts an “unstable” condition, ideally before the actual disruption occurs.</p>
 </section>
+<section id="parameters">
+<h2>Parameters<a class="headerlink" href="#parameters" title="Link to this heading">#</a></h2>
+<p>For now let us stick to the basic parameters that are used in the papers. The parameters are:</p>
+<ul class="simple">
+<li><p><strong>Electron density</strong> <span class="math notranslate nohighlight">\(n_e\)</span>: The number of electrons per unit volume in the plasma.</p></li>
+<li><p><strong>Electorn temperature</strong> <span class="math notranslate nohighlight">\(T_e\)</span>: The temperature of the electrons in the plasma.</p></li>
+<li><p><strong>Radiated power (bolometers)</strong> <span class="math notranslate nohighlight">\(P_{rad}\)</span>: The power radiated by the plasma.</p></li>
+<li><p><strong>Internal inductance</strong> <span class="math notranslate nohighlight">\(l_i\)</span>: A measure of the plasma’s inductance.</p></li>
+<li><p><strong>plasma current</strong> <span class="math notranslate nohighlight">\(I_p\)</span>: The flow of charged particles in the plasma.</p></li>
+</ul>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -601,6 +615,7 @@
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#the-ml-problem">The ML problem</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#alarm-time">Alarm time</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parameters">Parameters</a></li>
 </ul>
 </li>
 </ul>
