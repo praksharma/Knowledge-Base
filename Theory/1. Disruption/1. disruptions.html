@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -63,8 +63,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'Theory/1. Disruption/1. disruptions';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Parameters of interest" href="2.%20parameters.html" />
-    <link rel="prev" title="Knowledge Base" href="../../intro.html" />
+    <link rel="next" title="MAST diagnostic data" href="2.%20parameters.html" />
+    <link rel="prev" title="Parameters of interest" href="../0.%20Common/1.%20parameters.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -168,10 +168,15 @@
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Disruptions</span></p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Common</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../0.%20Common/1.%20parameters.html">Parameters of interest</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Disruptions</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Basic concepts</a></li>
-<li class="toctree-l1"><a class="reference internal" href="2.%20parameters.html">Parameters of interest</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="2.%20parameters.html">MAST diagnostic data</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Edge-localized mode</span></p>
 <ul class="nav bd-sidenav">
@@ -184,7 +189,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../Libraries/Python/3.%20zarr.html">Zarr</a></li>
 
 <li class="toctree-l1"><a class="reference internal" href="../../Libraries/Python/4.%20xarray_examples.html">Xarray examples</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../Libraries/Python/5.%20fsspec.html">Filesystem spec (Fsspec)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Libraries/Python/5.%20fsspec.html">Filesystem spec (FSSpec)</a></li>
 </ul>
 
     </div>
@@ -372,13 +377,23 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Basic concepts</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#disruption">Disruption</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#typical-disruption">Typical Disruption</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#magnetic-activity">Magnetic activity</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#movement-towards-the-wall">Movement towards the wall</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#density-and-plasma-current-loss">Density and plasma current loss</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#timeline-of-disruption">Timeline of disruption</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-goals-of-disruption-prediction">Key goals of disruption prediction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#challenges-in-disruption-prediction">Challenges in disruption prediction</a></li>
 </ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#the-ml-problem">The ML problem</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#alarm-time">Alarm time</a></li>
+</ul>
+</li>
+</ul>
+
             </nav>
         </div>
     </div>
@@ -458,6 +473,54 @@
 <li><p><a class="reference external" href="https://fusionep-talks.egyplasma.com/events/?e=8">https://fusionep-talks.egyplasma.com/events/?e=8</a></p></li>
 </ul>
 </section>
+<section id="key-goals-of-disruption-prediction">
+<h2>Key goals of disruption prediction<a class="headerlink" href="#key-goals-of-disruption-prediction" title="Link to this heading">#</a></h2>
+<p>The aim is to prevent and mitigate disruptions in fusion plasmas, which pose a major threat to the stability, performance, and integrity of magnetic confinement fusion devices like tokamaks. Here are some important goals which can be achieved by early and reliable prediction of plasma disruptions.</p>
+<ul class="simple">
+<li><p><strong>Avoidance</strong>: Take control actions, such as real time adjustment of plasma parameters to reduced the risk of disruptions. This might involve a digital twin.</p></li>
+<li><p><strong>Mitigation</strong>: Implement strategies to reduce the impact of disruptions, such as injecting impurities into the plasma to cool it down. Massive gas injection (MGI) is a plasma disruption mitigation technique that involves injecting large amounts of noble gases into the plasma before a disruption occurs. This helps to cool the plasma and reduce the energy released during the disruption.</p></li>
+<li><p><strong>Understanding Underlying Physics</strong>: : Analyse diagnostic signals to identify the physical mechanisms that lead to plasma instabilities and disruptions.</p></li>
+</ul>
+</section>
+<section id="challenges-in-disruption-prediction">
+<h2>Challenges in disruption prediction<a class="headerlink" href="#challenges-in-disruption-prediction" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Complexity of plasma dynamics</p>
+<ul>
+<li><p>Plasma instabilities (e.g., MHD modes, impurity accumulation, edge cooling) evolve over space and time in a nonlinear manner.</p></li>
+</ul>
+</li>
+<li><p>Lack of generalised predictors</p>
+<ul>
+<li><p>As discussed earlier, disruption mechanisms vary between devices and operational conditions.</p></li>
+<li><p>Predictors trained on one tokamak (e.g., JET, EAST) doesn’t necessarily work on others (e.g., ITER). The diagnostic signals, plasma parameters, and disruption characteristics can be different.</p></li>
+</ul>
+</li>
+<li><p>Short Warning Times</p>
+<ul>
+<li><p>Disruptions can happen within milliseconds. The mitigation system should be able to respond quickly to prevent damage to the device.</p></li>
+</ul>
+</li>
+<li><p>Data Imbalance</p>
+<ul>
+<li><p>Disruptions are rare events, and the dataset is often imbalanced, with few disruptions compared to normal operation. This poses challenges for machine learning algorithms that are sensitive to class imbalance.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="the-ml-problem">
+<h1>The ML problem<a class="headerlink" href="#the-ml-problem" title="Link to this heading">#</a></h1>
+<p>The disruption prediction task is a time-series classification problem. The time series nature arises because plasma dynamics evolve over time, and disruptions occur due to a chain of physical events. The goal is to classify the time slices of plasma signals as:</p>
+<ul class="simple">
+<li><p><strong>Stable (0)</strong>: Plasma behavior is normal.</p></li>
+<li><p><strong>Unstable (1)</strong>: Plasma is in the pre-disruptive phase leading up to a disruption.</p></li>
+</ul>
+<p>In almost all the papers, each time window (e.g., 200 ms, as in Aymerich et al.) is treated as an input to the NN. For real-time application or inference, these time slices are fed to the NN sequentially as new plasma measurements arrive.</p>
+<section id="alarm-time">
+<h2>Alarm time<a class="headerlink" href="#alarm-time" title="Link to this heading">#</a></h2>
+<p>One of the important things that we need to consider is that the NN must perform faster than the actual experiment to provide a sufficient alarm time. Meaning, the inference time, i.e., the time it takes for the NN to process a time window of diagnostic data and make a prediction (e.g., “stable” or “unstable”), is faster than the actual time window. This ensures that the NN can provide an early warning before a disruption occurs. Alarm time can be defined as the moment when the NN first predicts an “unstable” condition, ideally before the actual disruption occurs.</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -491,12 +554,12 @@
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../../intro.html"
+       href="../0.%20Common/1.%20parameters.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Knowledge Base</p>
+        <p class="prev-next-title">Parameters of interest</p>
       </div>
     </a>
     <a class="right-next"
@@ -504,7 +567,7 @@
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Parameters of interest</p>
+        <p class="prev-next-title">MAST diagnostic data</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -525,13 +588,23 @@
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Basic concepts</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#disruption">Disruption</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#typical-disruption">Typical Disruption</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#magnetic-activity">Magnetic activity</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#movement-towards-the-wall">Movement towards the wall</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#density-and-plasma-current-loss">Density and plasma current loss</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#timeline-of-disruption">Timeline of disruption</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-goals-of-disruption-prediction">Key goals of disruption prediction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#challenges-in-disruption-prediction">Challenges in disruption prediction</a></li>
 </ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#the-ml-problem">The ML problem</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#alarm-time">Alarm time</a></li>
+</ul>
+</li>
+</ul>
+
   </nav></div>
 
 </div></div>
