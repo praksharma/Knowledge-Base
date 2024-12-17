@@ -4,6 +4,9 @@
 format: jb-book
 root: intro
 parts:
+  - caption: Common
+    chapters:
+    - file: Theory/0. Common/1. parameters.ipynb
   - caption: Disruptions
     chapters:
     - file: Theory/1. Disruption/1. disruptions.ipynb
