@@ -5,9 +5,11 @@ format: jb-book
 root: intro
 parts:
   - caption: Common
+    maxdepth: 1
     chapters:
     - file: Theory/0. Common/1. parameters.ipynb
   - caption: Disruptions
+    maxdepth: 1
     chapters:
     - file: Theory/1. Disruption/1. disruptions.ipynb
     - file: Theory/1. Disruption/2. parameters.ipynb
@@ -15,14 +17,23 @@ parts:
     - file: Theory/1. Disruption/4. collecting_location_of_parameters.ipynb
     - file: Theory/1. Disruption/5. detect.ipynb
   - caption: Edge-localized mode
+    maxdepth: 1
     chapters:
     - file: Theory/2. ELMs/1. ELMs.ipynb
+  - caption: MHD Modes
+    maxdepth: 1
+    chapters:
+    - file: Theory/3. MHD modes/1. MHD.ipynb
   - caption: Python Libraries
+    maxdepth: 1
     chapters:
     - file: Libraries/Python/1. s3fs.ipynb
     - file: Libraries/Python/2. Intake.ipynb
     - file: Libraries/Python/3. zarr.ipynb
     - file: Libraries/Python/4. xarray_examples.ipynb
     - file: Libraries/Python/5. fsspec.ipynb
-
+  - caption: ML models
+    maxdepth: 1
+    chapters:
+    - file: ML_models/1. LSTM.ipynb
     

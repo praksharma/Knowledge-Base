@@ -1,6 +1,5 @@
 # Knowledge-Base
-Not sure
-
+Notes on various topics.
 
 ## Packages to install
 
