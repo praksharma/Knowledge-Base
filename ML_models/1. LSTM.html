@@ -30,7 +30,7 @@
   <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 <link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
@@ -178,16 +178,17 @@
 <li class="toctree-l1"><a class="reference internal" href="../Theory/1.%20Disruption/1.%20disruptions.html">Basic concepts</a></li>
 
 <li class="toctree-l1"><a class="reference internal" href="../Theory/1.%20Disruption/2.%20parameters.html">MAST diagnostic data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Theory/1.%20Disruption/3.%20access_parquet_files.html">Shot database</a></li>
-
-
-
+<li class="toctree-l1"><a class="reference internal" href="../Theory/1.%20Disruption/3.%20access_parquet_files.html">Access Parquet files</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Theory/1.%20Disruption/4.%20collecting_location_of_parameters.html">Location of parameters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Theory/1.%20Disruption/5.%20detect.html">Detect disruptions in plasma current plot</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Edge-localized mode</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../Theory/2.%20ELMs/1.%20ELMs.html">Edge-localized mode (ELM)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">MHD Modes</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Theory/3.%20MHD%20modes/1.%20MHD.html">Magnetohydrodynamic (MHD) modes</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Python Libraries</span></p>
 <ul class="nav bd-sidenav">
@@ -395,11 +396,14 @@
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Recurrent Neural Networks (RNNs)</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sequence-to-sequence-seq2seq-models">1. Sequence to Sequence (Seq2Seq) Models</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sequence-to-vector-models">2. Sequence to vector models</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vector-to-sequence-models">3. Vector to sequence models</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#encoder-decoder-models">4. Encoder-Decoder models</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#further-reading">Further Reading</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#input-output-types">Input output types</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sequence-to-sequence-seq2seq-models">1. Sequence to Sequence (Seq2Seq) Models</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sequence-to-vector-models">2. Sequence to vector models</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vector-to-sequence-models">3. Vector to sequence models</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#encoder-decoder-models">4. Encoder-Decoder models</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#further-reading">Further Reading</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modification-to-rnns">Modification to RNNs</a></li>
@@ -434,32 +438,35 @@
 <p>Precisely,</p>
 <p><span class="math notranslate nohighlight">\(h_t = \phi(W_x x_t + W_h h_{t-1} + b)\)</span></p>
 <p>A nice paper on RNN: <a class="reference external" href="https://proceedings.neurips.cc/paper_files/paper/2014/file/a14ac55a4f27472c5d894ec1c3c743d2-Paper.pdf">https://proceedings.neurips.cc/paper_files/paper/2014/file/a14ac55a4f27472c5d894ec1c3c743d2-Paper.pdf</a></p>
+<section id="input-output-types">
+<h2>Input output types<a class="headerlink" href="#input-output-types" title="Link to this heading">#</a></h2>
 <p>The output and inputs of an RNN can be of different lengths, facilitating different tasks.</p>
 <section id="sequence-to-sequence-seq2seq-models">
-<h2>1. Sequence to Sequence (Seq2Seq) Models<a class="headerlink" href="#sequence-to-sequence-seq2seq-models" title="Link to this heading">#</a></h2>
+<h3>1. Sequence to Sequence (Seq2Seq) Models<a class="headerlink" href="#sequence-to-sequence-seq2seq-models" title="Link to this heading">#</a></h3>
 <p>These are mainly used for time series data and machine translation.</p>
 <p><img alt="image.png" src="../_images/seq2seq.png" /></p>
 </section>
 <section id="sequence-to-vector-models">
-<h2>2. Sequence to vector models<a class="headerlink" href="#sequence-to-vector-models" title="Link to this heading">#</a></h2>
+<h3>2. Sequence to vector models<a class="headerlink" href="#sequence-to-vector-models" title="Link to this heading">#</a></h3>
 <p>When output is of a fixed length. Such as sentiment analysis or text classification.</p>
 <p><img alt="image.png" src="../_images/seq2vec.png" /></p>
 </section>
 <section id="vector-to-sequence-models">
-<h2>3. Vector to sequence models<a class="headerlink" href="#vector-to-sequence-models" title="Link to this heading">#</a></h2>
+<h3>3. Vector to sequence models<a class="headerlink" href="#vector-to-sequence-models" title="Link to this heading">#</a></h3>
 <p>When input is of fixed length and output is of variable length. Such as image captioning.</p>
 <p><img alt="image.png" src="../_images/vec2seq.png" /></p>
 </section>
 <section id="encoder-decoder-models">
-<h2>4. Encoder-Decoder models<a class="headerlink" href="#encoder-decoder-models" title="Link to this heading">#</a></h2>
+<h3>4. Encoder-Decoder models<a class="headerlink" href="#encoder-decoder-models" title="Link to this heading">#</a></h3>
 <p>These are used for tasks where input and output are of different lengths. The encoder encodes the input and the decoder decodes it.</p>
 <p><img alt="image.png" src="../_images/enc_dec.png" /></p>
 <section id="further-reading">
-<h3>Further Reading<a class="headerlink" href="#further-reading" title="Link to this heading">#</a></h3>
+<h4>Further Reading<a class="headerlink" href="#further-reading" title="Link to this heading">#</a></h4>
 <ul class="simple">
 <li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Recurrent_neural_network#Configurations">Different configurations of RNN</a></p></li>
 <li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Recurrent_neural_network#Architectures">Different architectures of RNN</a></p></li>
 </ul>
+</section>
 </section>
 </section>
 <section id="modification-to-rnns">
@@ -473,6 +480,7 @@
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="long-short-term-memory">
 <h1>Long short term memory<a class="headerlink" href="#long-short-term-memory" title="Link to this heading">#</a></h1>
+<p>later</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -532,11 +540,14 @@
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Recurrent Neural Networks (RNNs)</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sequence-to-sequence-seq2seq-models">1. Sequence to Sequence (Seq2Seq) Models</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sequence-to-vector-models">2. Sequence to vector models</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vector-to-sequence-models">3. Vector to sequence models</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#encoder-decoder-models">4. Encoder-Decoder models</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#further-reading">Further Reading</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#input-output-types">Input output types</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sequence-to-sequence-seq2seq-models">1. Sequence to Sequence (Seq2Seq) Models</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sequence-to-vector-models">2. Sequence to vector models</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vector-to-sequence-models">3. Vector to sequence models</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#encoder-decoder-models">4. Encoder-Decoder models</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#further-reading">Further Reading</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modification-to-rnns">Modification to RNNs</a></li>

@@ -30,7 +30,7 @@
   <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 <link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
@@ -177,16 +177,17 @@
 <li class="toctree-l1"><a class="reference internal" href="1.%20disruptions.html">Basic concepts</a></li>
 
 <li class="toctree-l1"><a class="reference internal" href="2.%20parameters.html">MAST diagnostic data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="3.%20access_parquet_files.html">Shot database</a></li>
-
-
-
+<li class="toctree-l1"><a class="reference internal" href="3.%20access_parquet_files.html">Access Parquet files</a></li>
 <li class="toctree-l1"><a class="reference internal" href="4.%20collecting_location_of_parameters.html">Location of parameters</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Detect disruptions in plasma current plot</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Edge-localized mode</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../2.%20ELMs/1.%20ELMs.html">Edge-localized mode (ELM)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">MHD Modes</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../3.%20MHD%20modes/1.%20MHD.html">Magnetohydrodynamic (MHD) modes</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Python Libraries</span></p>
 <ul class="nav bd-sidenav">
@@ -395,25 +396,25 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <div class="cell docutils container">
+  <section class="tex2jax_ignore mathjax_ignore" id="detect-disruptions-in-plasma-current-plot">
+<h1>Detect disruptions in plasma current plot<a class="headerlink" href="#detect-disruptions-in-plasma-current-plot" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 
-<span class="kn">import</span> <span class="nn">s3fs</span>
-<span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
-<span class="kn">import</span> <span class="nn">dask</span>
-<span class="kn">import</span> <span class="nn">zarr</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">s3fs</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">xarray</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xr</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">dask</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">zarr</span>
 </pre></div>
 </div>
 </div>
 </div>
-<section id="detect-disruptions-in-plasma-current-plot">
-<h1>Detect disruptions in plasma current plot<a class="headerlink" href="#detect-disruptions-in-plasma-current-plot" title="Link to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Function to detect change points using a basic moving average method</span>
-<span class="k">def</span> <span class="nf">detect_change_points</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">intensity</span><span class="p">,</span> <span class="n">window_size</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">2.0</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">detect_change_points</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">intensity</span><span class="p">,</span> <span class="n">window_size</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">2.0</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Detects change points based on the difference in moving average intensity.</span>
 

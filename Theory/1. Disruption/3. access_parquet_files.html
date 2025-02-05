@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Shot database &#8212; Knowledge Base</title>
+    <title>Access Parquet files &#8212; Knowledge Base</title>
   
   
   
@@ -30,7 +30,7 @@
   <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 <link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
@@ -177,16 +177,17 @@
 <li class="toctree-l1"><a class="reference internal" href="1.%20disruptions.html">Basic concepts</a></li>
 
 <li class="toctree-l1"><a class="reference internal" href="2.%20parameters.html">MAST diagnostic data</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Shot database</a></li>
-
-
-
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Access Parquet files</a></li>
 <li class="toctree-l1"><a class="reference internal" href="4.%20collecting_location_of_parameters.html">Location of parameters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="5.%20detect.html">Detect disruptions in plasma current plot</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Edge-localized mode</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../2.%20ELMs/1.%20ELMs.html">Edge-localized mode (ELM)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">MHD Modes</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../3.%20MHD%20modes/1.%20MHD.html">Magnetohydrodynamic (MHD) modes</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Python Libraries</span></p>
 <ul class="nav bd-sidenav">
@@ -383,7 +384,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Shot database</h1>
+    <h1>Access Parquet files</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -393,12 +394,11 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Shot database</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#source-database">Source database</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#signal-database">Signal database</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#exploring-one-shot">Exploring one shot</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#shot-database">Shot database</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#source-database">Source database</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#signal-database">Signal database</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exploring-one-shot">Exploring one shot</a></li>
 </ul>
-
             </nav>
         </div>
     </div>
@@ -409,9 +409,11 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <div class="cell docutils container">
+  <section class="tex2jax_ignore mathjax_ignore" id="access-parquet-files">
+<h1>Access Parquet files<a class="headerlink" href="#access-parquet-files" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 </pre></div>
 </div>
 </div>
@@ -426,7 +428,7 @@
 </div>
 </div>
 <section id="shot-database">
-<h1>Shot database<a class="headerlink" href="#shot-database" title="Link to this heading">#</a></h1>
+<h2>Shot database<a class="headerlink" href="#shot-database" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">shots_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="n">parquet_path</span><span class="p">)</span>
@@ -600,7 +602,7 @@
 </div>
 </section>
 <section id="source-database">
-<h1>Source database<a class="headerlink" href="#source-database" title="Link to this heading">#</a></h1>
+<h2>Source database<a class="headerlink" href="#source-database" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sources_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="n">source_path</span><span class="p">)</span>
@@ -767,7 +769,7 @@
 </div>
 </section>
 <section id="signal-database">
-<h1>Signal database<a class="headerlink" href="#signal-database" title="Link to this heading">#</a></h1>
+<h2>Signal database<a class="headerlink" href="#signal-database" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">signals_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="n">signal_path</span><span class="p">)</span>
@@ -934,15 +936,15 @@
 </div>
 </section>
 <section id="exploring-one-shot">
-<h1>Exploring one shot<a class="headerlink" href="#exploring-one-shot" title="Link to this heading">#</a></h1>
+<h2>Exploring one shot<a class="headerlink" href="#exploring-one-shot" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">zarr</span>
-<span class="kn">import</span> <span class="nn">s3fs</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
-<span class="kn">import</span> <span class="nn">dask</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">zarr</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">s3fs</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">xarray</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xr</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">dask</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 </pre></div>
 </div>
 </div>
@@ -3810,7 +3812,7 @@ Attributes:
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Sam&#39;s function</span>
 <span class="c1"># Function to detect change points using a basic moving average method</span>
-<span class="k">def</span> <span class="nf">detect_change_points</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">intensity</span><span class="p">,</span> <span class="n">window_size</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">2.0</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">detect_change_points</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">intensity</span><span class="p">,</span> <span class="n">window_size</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">2.0</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Detects change points based on the difference in moving average intensity.</span>
 
@@ -4244,6 +4246,7 @@ Attributes:
 </div>
 </div>
 </section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -4310,12 +4313,11 @@ Attributes:
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Shot database</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#source-database">Source database</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#signal-database">Signal database</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#exploring-one-shot">Exploring one shot</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#shot-database">Shot database</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#source-database">Source database</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#signal-database">Signal database</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exploring-one-shot">Exploring one shot</a></li>
 </ul>
-
   </nav></div>
 
 </div></div>

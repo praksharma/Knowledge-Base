@@ -30,7 +30,7 @@
   <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 <link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
@@ -177,16 +177,17 @@
 <li class="toctree-l1"><a class="reference internal" href="../../Theory/1.%20Disruption/1.%20disruptions.html">Basic concepts</a></li>
 
 <li class="toctree-l1"><a class="reference internal" href="../../Theory/1.%20Disruption/2.%20parameters.html">MAST diagnostic data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../Theory/1.%20Disruption/3.%20access_parquet_files.html">Shot database</a></li>
-
-
-
+<li class="toctree-l1"><a class="reference internal" href="../../Theory/1.%20Disruption/3.%20access_parquet_files.html">Access Parquet files</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../Theory/1.%20Disruption/4.%20collecting_location_of_parameters.html">Location of parameters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../Theory/1.%20Disruption/5.%20detect.html">Detect disruptions in plasma current plot</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Edge-localized mode</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../Theory/2.%20ELMs/1.%20ELMs.html">Edge-localized mode (ELM)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">MHD Modes</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Theory/3.%20MHD%20modes/1.%20MHD.html">Magnetohydrodynamic (MHD) modes</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Python Libraries</span></p>
 <ul class="current nav bd-sidenav">
@@ -423,7 +424,7 @@
 <h3>Local file system without database<a class="headerlink" href="#local-file-system-without-database" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">fsspec</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">fsspec</span>
 
 <span class="c1"># Write a file</span>
 <span class="k">with</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;file://data/fsspec_sample.txt&quot;</span><span class="p">,</span> <span class="n">mode</span> <span class="o">=</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
@@ -535,7 +536,7 @@ Hello, World!
 <h2>Open zarr file with xarray using fsspec<a class="headerlink" href="#open-zarr-file-with-xarray-using-fsspec" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">xarray</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xr</span>
 
 <span class="n">store</span> <span class="o">=</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">get_mapper</span><span class="p">(</span><span class="s2">&quot;s3://my-bucket-2/data/zarr_data&quot;</span><span class="p">,</span>
                     <span class="n">key</span> <span class="o">=</span> <span class="s1">&#39;minioadmin&#39;</span><span class="p">,</span>
@@ -561,7 +562,7 @@ Hello, World!
 <span class="g g-Whitespace">    </span><span class="mi">216</span>     <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 
 <span class="nn">~/anaconda3/lib/python3.9/site-packages/zarr/attrs.py</span> in <span class="ni">__getitem__</span><span class="nt">(self, item)</span>
-<span class="g g-Whitespace">     </span><span class="mi">73</span>     <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+<span class="g g-Whitespace">     </span><span class="mi">73</span>     <span class="k">def</span><span class="w"> </span><span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
 <span class="ne">---&gt; </span><span class="mi">74</span>         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">asdict</span><span class="p">()[</span><span class="n">item</span><span class="p">]</span>
 <span class="g g-Whitespace">     </span><span class="mi">75</span> 
 

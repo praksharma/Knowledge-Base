@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>MAST diagnostic data &#8212; Knowledge Base</title>
+    <title>Magnetohydrodynamic (MHD) modes &#8212; Knowledge Base</title>
   
   
   
@@ -60,11 +60,13 @@
     <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'Theory/1. Disruption/2. parameters';</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Theory/3. MHD modes/1. MHD';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Access Parquet files" href="3.%20access_parquet_files.html" />
-    <link rel="prev" title="Basic concepts" href="1.%20disruptions.html" />
+    <link rel="next" title="S3 file system" href="../../Libraries/Python/1.%20s3fs.html" />
+    <link rel="prev" title="Edge-localized mode (ELM)" href="../2.%20ELMs/1.%20ELMs.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -173,21 +175,21 @@
 <li class="toctree-l1"><a class="reference internal" href="../0.%20Common/1.%20parameters.html">Parameters of interest</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Disruptions</span></p>
-<ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="1.%20disruptions.html">Basic concepts</a></li>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../1.%20Disruption/1.%20disruptions.html">Basic concepts</a></li>
 
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">MAST diagnostic data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="3.%20access_parquet_files.html">Access Parquet files</a></li>
-<li class="toctree-l1"><a class="reference internal" href="4.%20collecting_location_of_parameters.html">Location of parameters</a></li>
-<li class="toctree-l1"><a class="reference internal" href="5.%20detect.html">Detect disruptions in plasma current plot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1.%20Disruption/2.%20parameters.html">MAST diagnostic data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1.%20Disruption/3.%20access_parquet_files.html">Access Parquet files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1.%20Disruption/4.%20collecting_location_of_parameters.html">Location of parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1.%20Disruption/5.%20detect.html">Detect disruptions in plasma current plot</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Edge-localized mode</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../2.%20ELMs/1.%20ELMs.html">Edge-localized mode (ELM)</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">MHD Modes</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../3.%20MHD%20modes/1.%20MHD.html">Magnetohydrodynamic (MHD) modes</a></li>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Magnetohydrodynamic (MHD) modes</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Python Libraries</span></p>
 <ul class="nav bd-sidenav">
@@ -278,7 +280,7 @@
       
       
       
-      <li><a href="https://github.com/praksharma/Knowledge-Base/issues/new?title=Issue%20on%20page%20%2FTheory/1. Disruption/2. parameters.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/praksharma/Knowledge-Base/issues/new?title=Issue%20on%20page%20%2FTheory/3. MHD modes/1. MHD.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -308,7 +310,7 @@
       
       
       
-      <li><a href="../../_sources/Theory/1. Disruption/2. parameters.ipynb" target="_blank"
+      <li><a href="../../_sources/Theory/3. MHD modes/1. MHD.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -371,7 +373,9 @@
 <button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
 </button>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -382,11 +386,27 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>MAST diagnostic data</h1>
+    <h1>Magnetohydrodynamic (MHD) modes</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mhd-instabilities">MHD instabilities</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analogy-with-singular-value-decomposition">Analogy with singular value decomposition</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mhd-equations">MHD equations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#start-with-equilibrium">Start with Equilibrium</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#introduce-perturbations">Introduce Perturbations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linearizing-the-mhd-equations">Linearizing the MHD Equations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solve-using-fourier-analysis">Solve Using Fourier Analysis</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -396,12 +416,80 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="mast-diagnostic-data">
-<h1>MAST diagnostic data<a class="headerlink" href="#mast-diagnostic-data" title="Link to this heading">#</a></h1>
-<p>In an experimental campaign, the experiment is conducted on a set of input parameters. A single instance is called a “shot”, usually denoted by a “Shot ID”.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="magnetohydrodynamic-mhd-modes">
+<h1>Magnetohydrodynamic (MHD) modes<a class="headerlink" href="#magnetohydrodynamic-mhd-modes" title="Link to this heading">#</a></h1>
+<p>Magnetohydrodynamics (MHD) is the study of how a conducting fluid (plasma) interacts with magnetic fields.</p>
+<p>In MHD, plasma behavior is decomposed into eigenmodes, which represent different instability structures or wave patterns.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Not to be confused with <a class="reference external" href="https://en.wikipedia.org/wiki/Magnetohydrodynamics#Waves">MHD wave modes</a> are linear perturbations that propagate in a magnetized plasma. However they have a common mode called <strong>Alfvén wave</strong>.</p>
+</div>
+<section id="mhd-instabilities">
+<h2>MHD instabilities<a class="headerlink" href="#mhd-instabilities" title="Link to this heading">#</a></h2>
+<p>MHD instabilities are large-scale deformations that grows over time resulting in degraded performance or lead to disruptions. They are derived from the nonlinear MHD equations and often lead to plasma disruptions.</p>
+</section>
+<section id="analogy-with-singular-value-decomposition">
+<h2>Analogy with singular value decomposition<a class="headerlink" href="#analogy-with-singular-value-decomposition" title="Link to this heading">#</a></h2>
+<p>In SVD, a signal or dataset is decomposed into orthogonal modes ranked by singular values (importance). However, SVD is purely data-driven and does not leverage physics equations.</p>
+<p>In MHD, plasma behavior is decomposed into eigenmodes, which represent different instability structures or wave patterns. MHD modes come from solving plasma physics equations and are not data-driven.</p>
+</section>
+<section id="mhd-equations">
+<h2>MHD equations<a class="headerlink" href="#mhd-equations" title="Link to this heading">#</a></h2>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+    \frac{\partial \rho}{\partial t} + \nabla \cdot (\rho \mathbf{V}) &amp;= 0, &amp;&amp; \text{Mass Continuity Eq.} \\[8pt]
+    \frac{d}{dt} \left( \frac{P}{\rho^\gamma} \right) &amp;= 0, &amp;&amp; \text{Energy Eq.} \\[8pt]
+    \rho \frac{d \mathbf{V}}{dt} &amp;= -\nabla P - \frac{1}{\mu_0} \mathbf{B} \times (\nabla \times \mathbf{B}), &amp;&amp; \text{Euler's Eq.} \\[8pt]
+    \frac{\partial \mathbf{B}}{\partial t} &amp;= \nabla \times (\mathbf{V} \times \mathbf{B}), &amp;&amp; \text{Induction Eq.}
+\end{align}
+\end{split}\]</div>
+<p>The magnetic field.
+$<span class="math notranslate nohighlight">\(
+\begin{equation}
+    \nabla \cdot \mathbf{B} = 0.
+\end{equation}
+\)</span>$</p>
+<p>here all the symbol have their usual meaning. <span class="math notranslate nohighlight">\(B\)</span> is magnetic field, <span class="math notranslate nohighlight">\(V\)</span> is velocity, <span class="math notranslate nohighlight">\(P\)</span> is pressure, <span class="math notranslate nohighlight">\(\rho\)</span> is density, <span class="math notranslate nohighlight">\(\gamma\)</span> is adiabatic index, <span class="math notranslate nohighlight">\(\mu_0\)</span> is magnetic permeability of free space, and <span class="math notranslate nohighlight">\(d/dt\)</span> is the total derivative, <span class="math notranslate nohighlight">\(\partial/\partial t\)</span> is the partial derivative and <span class="math notranslate nohighlight">\(\nabla\)</span> is the nabla operator.</p>
+<p>Clearly the equation contains terms from Navier-Stokes equation and Maxwell’s equation. As they are highly nonlinear, akin to other PDEs we linearise them using directional derivative which involves perturbing the variables and then linearising the equations. This a set of linear equations for the perturbations.</p>
+<section id="start-with-equilibrium">
+<h3>Start with Equilibrium<a class="headerlink" href="#start-with-equilibrium" title="Link to this heading">#</a></h3>
+<p>Assume a steady-state solution where all time derivatives vanish:
+$<span class="math notranslate nohighlight">\( \rho_0, \mathbf{V}_0, P_0, \mathbf{B}_0 \)</span><span class="math notranslate nohighlight">\(
+where subscript \)</span>0$ denotes equilibrium values.</p>
+</section>
+<section id="introduce-perturbations">
+<h3>Introduce Perturbations<a class="headerlink" href="#introduce-perturbations" title="Link to this heading">#</a></h3>
+<p>We introduce small perturbations around this equilibrium:
+$<span class="math notranslate nohighlight">\(
+\rho = \rho_0 + \tilde{\rho}, \quad
+\mathbf{V} = \mathbf{V}_0 + \tilde{\mathbf{V}}, \quad
+P = P_0 + \tilde{P}, \quad
+\mathbf{B} = \mathbf{B}_0 + \tilde{\mathbf{B}}
+\)</span>$</p>
+<p>where tilde terms <span class="math notranslate nohighlight">\(\tilde{\rho}\)</span>, <span class="math notranslate nohighlight">\(\tilde{\mathbf{V}}\)</span>, <span class="math notranslate nohighlight">\(\tilde{P}\)</span>, <span class="math notranslate nohighlight">\(\tilde{\mathbf{B}}\)</span> are small fluctuations.</p>
+</section>
+<section id="linearizing-the-mhd-equations">
+<h3>Linearizing the MHD Equations<a class="headerlink" href="#linearizing-the-mhd-equations" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p>Each shot contains multiple diagnostic sources. In MAST these were split into signals and images.</p></li>
+<li><p>Substitute these perturbations into the ideal MHD equations.</p></li>
+<li><p>Ignore nonlinear terms (e.g., <span class="math notranslate nohighlight">\(\tilde{\mathbf{V}} \cdot \nabla \tilde{\mathbf{V}}\)</span>).</p></li>
+<li><p>This gives a set of linear equations for the perturbations.</p></li>
 </ul>
+</section>
+<section id="solve-using-fourier-analysis">
+<h3>Solve Using Fourier Analysis<a class="headerlink" href="#solve-using-fourier-analysis" title="Link to this heading">#</a></h3>
+<p>Assume solutions of the form:
+$<span class="math notranslate nohighlight">\(
+\tilde{f}(\mathbf{x}, t) = \hat{f} e^{i(\mathbf{k} \cdot \mathbf{x} - \omega t)}
+\)</span>$
+where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\mathbf{k}\)</span> is the wavevector (direction of perturbation),</p></li>
+<li><p><span class="math notranslate nohighlight">\(\omega \)</span> is the frequency.</p></li>
+</ul>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -417,7 +505,7 @@
         },
         kernelOptions: {
             name: "python3",
-            path: "./Theory/1. Disruption"
+            path: "./Theory/3. MHD modes"
         },
         predefinedOutput: true
     }
@@ -435,20 +523,20 @@
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="1.%20disruptions.html"
+       href="../2.%20ELMs/1.%20ELMs.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Basic concepts</p>
+        <p class="prev-next-title">Edge-localized mode (ELM)</p>
       </div>
     </a>
     <a class="right-next"
-       href="3.%20access_parquet_files.html"
+       href="../../Libraries/Python/1.%20s3fs.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Access Parquet files</p>
+        <p class="prev-next-title">S3 file system</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -458,6 +546,30 @@
             </div>
             
             
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mhd-instabilities">MHD instabilities</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analogy-with-singular-value-decomposition">Analogy with singular value decomposition</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mhd-equations">MHD equations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#start-with-equilibrium">Start with Equilibrium</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#introduce-perturbations">Introduce Perturbations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linearizing-the-mhd-equations">Linearizing the MHD Equations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solve-using-fourier-analysis">Solve Using Fourier Analysis</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
