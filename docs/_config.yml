@@ -1,5 +1,5 @@
 copyright: "2025, By Prakhar Sharma"
-logo: assets/logo.png
+logo: assets/kb_logo.png
 
 sphinx:
   config:
@@ -8,7 +8,7 @@ sphinx:
       navbar_align: content
       logo: 
         text: "Knowledge Base"
-        image_dark: "assets/logo.png"
+        image_dark: "assets/kb_logo.png"
       secondary_sidebar_items: page-toc, edit-this-page, sourcelink
       back_to_top_button: True
       use_edit_page_button: True
