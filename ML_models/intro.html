@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Recurrent Neural Networks (RNNs) &#8212; My Jupyter Book</title>
+    <title>ML Models &#8212; My Jupyter Book</title>
   
   
   
@@ -61,10 +61,11 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'ML_models/1. LSTM';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'ML_models/intro';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="prev" title="ML Models" href="intro.html" />
+    <link rel="next" title="Recurrent Neural Networks (RNNs)" href="1.%20LSTM.html" />
+    <link rel="prev" title="Filesystem spec (FSSpec)" href="../Libraries/Python/5.%20fsspec.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -187,7 +188,7 @@
 
 
 <li class="nav-item current active">
-  <a class="nav-link nav-internal" href="intro.html">
+  <a class="nav-link nav-internal" href="#">
     ML Models
   </a>
 </li>
@@ -334,7 +335,7 @@
 
 
 <li class="nav-item current active">
-  <a class="nav-link nav-internal" href="intro.html">
+  <a class="nav-link nav-internal" href="#">
     ML Models
   </a>
 </li>
@@ -389,8 +390,8 @@
 <nav class="bd-docs-nav bd-links"
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
-  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Recurrent Neural Networks (RNNs)</a></li>
+  <div class="bd-toc-item navbar-nav"><ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="1.%20LSTM.html">Recurrent Neural Networks (RNNs)</a></li>
 
 </ul>
 </div>
@@ -432,10 +433,7 @@
         <i class="fa-solid fa-home"></i>
       </a>
     </li>
-    
-    <li class="breadcrumb-item"><a href="intro.html" class="nav-link">ML Models</a></li>
-    
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Recurrent Neural Networks (RNNs)</span></li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">ML Models</span></li>
   </ul>
 </nav>
 </div>
@@ -452,64 +450,15 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="recurrent-neural-networks-rnns">
-<h1>Recurrent Neural Networks (RNNs)<a class="headerlink" href="#recurrent-neural-networks-rnns" title="Link to this heading">#</a></h1>
-<p>RNNs were a simple modification to feedforward NNs where output was fed back into the network. This is similar to skip connections in ResNet but in opposite direction.</p>
-<p><img alt="image.png" src="../_images/RNN_basic.png" /></p>
-<p>Later it was realised that adding a state can provide more context to the network. The state shares  some information from the previous time step to the current time step.</p>
-<p><img alt="image.png" src="../_images/RNN_state.png" /></p>
-<p>A simple RNN can be represented as</p>
-<p><img alt="image.png" src="../_images/RNN_arch.png" /></p>
-<p>The output is</p>
-<p><span class="math notranslate nohighlight">\(y_t = \phi(W_y h_t + c)\)</span></p>
-<p>where,
-<span class="math notranslate nohighlight">\(h_t = f(x_t, h_{t-1})\)</span></p>
-<p>Precisely,</p>
-<p><span class="math notranslate nohighlight">\(h_t = \phi(W_x x_t + W_h h_{t-1} + b)\)</span></p>
-<p>A nice paper on RNN: <a class="reference external" href="https://proceedings.neurips.cc/paper_files/paper/2014/file/a14ac55a4f27472c5d894ec1c3c743d2-Paper.pdf">https://proceedings.neurips.cc/paper_files/paper/2014/file/a14ac55a4f27472c5d894ec1c3c743d2-Paper.pdf</a></p>
-<section id="input-output-types">
-<h2>Input output types<a class="headerlink" href="#input-output-types" title="Link to this heading">#</a></h2>
-<p>The output and inputs of an RNN can be of different lengths, facilitating different tasks.</p>
-<section id="sequence-to-sequence-seq2seq-models">
-<h3>1. Sequence to Sequence (Seq2Seq) Models<a class="headerlink" href="#sequence-to-sequence-seq2seq-models" title="Link to this heading">#</a></h3>
-<p>These are mainly used for time series data and machine translation.</p>
-<p><img alt="image.png" src="../_images/seq2seq.png" /></p>
-</section>
-<section id="sequence-to-vector-models">
-<h3>2. Sequence to vector models<a class="headerlink" href="#sequence-to-vector-models" title="Link to this heading">#</a></h3>
-<p>When output is of a fixed length. Such as sentiment analysis or text classification.</p>
-<p><img alt="image.png" src="../_images/seq2vec.png" /></p>
-</section>
-<section id="vector-to-sequence-models">
-<h3>3. Vector to sequence models<a class="headerlink" href="#vector-to-sequence-models" title="Link to this heading">#</a></h3>
-<p>When input is of fixed length and output is of variable length. Such as image captioning.</p>
-<p><img alt="image.png" src="../_images/vec2seq.png" /></p>
-</section>
-<section id="encoder-decoder-models">
-<h3>4. Encoder-Decoder models<a class="headerlink" href="#encoder-decoder-models" title="Link to this heading">#</a></h3>
-<p>These are used for tasks where input and output are of different lengths. The encoder encodes the input and the decoder decodes it.</p>
-<p><img alt="image.png" src="../_images/enc_dec.png" /></p>
-<section id="further-reading">
-<h4>Further Reading<a class="headerlink" href="#further-reading" title="Link to this heading">#</a></h4>
-<ul class="simple">
-<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Recurrent_neural_network#Configurations">Different configurations of RNN</a></p></li>
-<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Recurrent_neural_network#Architectures">Different architectures of RNN</a></p></li>
+  <section class="tex2jax_ignore mathjax_ignore" id="ml-models">
+<h1>ML Models<a class="headerlink" href="#ml-models" title="Link to this heading">#</a></h1>
+<p>Welcome to the ML Models section. Choose a topic from the sidebar.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="1.%20LSTM.html">Recurrent Neural Networks (RNNs)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1.%20LSTM.html#long-short-term-memory">Long short term memory</a></li>
 </ul>
-</section>
-</section>
-</section>
-<section id="modification-to-rnns">
-<h2>Modification to RNNs<a class="headerlink" href="#modification-to-rnns" title="Link to this heading">#</a></h2>
-<p>Later, the state was modified to become more complicated. Different types of RNNs use different ways to update the state, for example, Long Short Term Memory (LSTM) and Gated Recurrent Unit (GRU).The state is a cell, with gates like input, forgot and output. The input gate decides what information to store in the cell, the forget gate decides what information to throw away from the cell and the output gate decides what information to output from the cell.</p>
-</section>
-<section id="long-short-term-memory-lstm">
-<h2>Long Short Term Memory (LSTM)<a class="headerlink" href="#long-short-term-memory-lstm" title="Link to this heading">#</a></h2>
-<p>To account for context LTSM uses gates. The cell state is used to define the long term memory and the hidden state is used to define the short term memory. Both states are updated using the forget gate, input gate and output gate.</p>
-</section>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="long-short-term-memory">
-<h1>Long short term memory<a class="headerlink" href="#long-short-term-memory" title="Link to this heading">#</a></h1>
-<p>later</p>
+</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -542,13 +491,22 @@
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="intro.html"
+       href="../Libraries/Python/5.%20fsspec.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">ML Models</p>
+        <p class="prev-next-title">Filesystem spec (FSSpec)</p>
       </div>
+    </a>
+    <a class="right-next"
+       href="1.%20LSTM.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Recurrent Neural Networks (RNNs)</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>
@@ -562,36 +520,10 @@
 
 
   <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> 
-  </div>
-  <nav class="bd-toc-nav page-toc">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Recurrent Neural Networks (RNNs)</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#input-output-types">Input output types</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sequence-to-sequence-seq2seq-models">1. Sequence to Sequence (Seq2Seq) Models</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sequence-to-vector-models">2. Sequence to vector models</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vector-to-sequence-models">3. Vector to sequence models</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#encoder-decoder-models">4. Encoder-Decoder models</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#further-reading">Further Reading</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modification-to-rnns">Modification to RNNs</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#long-short-term-memory-lstm">Long Short Term Memory (LSTM)</a></li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#long-short-term-memory">Long short term memory</a></li>
-</ul>
-
-  </nav></div>
-
-  <div class="sidebar-secondary-item">
 
   
   <div class="tocsection editthispage">
-    <a href="https://github.com/praksharma/Knowledge-Base/edit/main/docs/ML_models/1. LSTM.ipynb">
+    <a href="https://github.com/praksharma/Knowledge-Base/edit/main/docs/ML_models/intro.md">
       <i class="fa-solid fa-pencil"></i>
       
       
@@ -607,7 +539,7 @@
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="../_sources/ML_models/1. LSTM.ipynb"
+      <li><a href="../_sources/ML_models/intro.md"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div></div>

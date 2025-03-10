@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Parameters of interest &#8212; My Jupyter Book</title>
+    <title>ELMs &#8212; My Jupyter Book</title>
   
   
   
@@ -59,13 +59,11 @@
     <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'Theory/0. Common/1. parameters';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Theory/2. ELMs/intro';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Disruption" href="../1.%20Disruption/intro.html" />
-    <link rel="prev" title="Common" href="intro.html" />
+    <link rel="next" title="Edge-localized mode (ELM)" href="1.%20ELMs.html" />
+    <link rel="prev" title="Detect disruptions in plasma current plot" href="../1.%20Disruption/5.%20detect.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -152,8 +150,8 @@
 <nav>
   <ul class="bd-navbar-elements navbar-nav">
     
-<li class="nav-item current active">
-  <a class="nav-link nav-internal" href="intro.html">
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../0.%20Common/intro.html">
     Common
   </a>
 </li>
@@ -166,8 +164,8 @@
 </li>
 
 
-<li class="nav-item ">
-  <a class="nav-link nav-internal" href="../2.%20ELMs/intro.html">
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="#">
     ELMs
   </a>
 </li>
@@ -299,8 +297,8 @@
 <nav>
   <ul class="bd-navbar-elements navbar-nav">
     
-<li class="nav-item current active">
-  <a class="nav-link nav-internal" href="intro.html">
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../0.%20Common/intro.html">
     Common
   </a>
 </li>
@@ -313,8 +311,8 @@
 </li>
 
 
-<li class="nav-item ">
-  <a class="nav-link nav-internal" href="../2.%20ELMs/intro.html">
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="#">
     ELMs
   </a>
 </li>
@@ -390,8 +388,8 @@
 <nav class="bd-docs-nav bd-links"
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
-  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Parameters of interest</a></li>
+  <div class="bd-toc-item navbar-nav"><ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="1.%20ELMs.html">Edge-localized mode (ELM)</a></li>
 </ul>
 </div>
 </nav></div>
@@ -432,10 +430,7 @@
         <i class="fa-solid fa-home"></i>
       </a>
     </li>
-    
-    <li class="breadcrumb-item"><a href="intro.html" class="nav-link">Common</a></li>
-    
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Parameters of interest</span></li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">ELMs</span></li>
   </ul>
 </nav>
 </div>
@@ -452,112 +447,14 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="parameters-of-interest">
-<h1>Parameters of interest<a class="headerlink" href="#parameters-of-interest" title="Link to this heading">#</a></h1>
-<p>There are a number of parameters that are needed to characterise the plasma’s behavior, operational conditions, and evolving instabilities. These also change across various machines and detectors. Here are some of the parameters that are of interest:</p>
-<section id="plasma-parameters">
-<h2>Plasma parameters<a class="headerlink" href="#plasma-parameters" title="Link to this heading">#</a></h2>
-<ul class="simple">
-<li><p><strong>Plasma Current</strong> <span class="math notranslate nohighlight">\(I_p\)</span> : Total current flowing in the plasma.</p></li>
-<li><p><strong>Loop Voltage</strong> <span class="math notranslate nohighlight">\(V_{loop}\)</span>: Voltage driving the plasma current.</p></li>
-<li><p><strong>Plasma Density</strong> <span class="math notranslate nohighlight">\(n_e\)</span>: number of electrons are present in the plasma per unit volume.</p></li>
-<li><p><strong>Plasma Temperature</strong> : <span class="math notranslate nohighlight">\(T_e\)</span> and <span class="math notranslate nohighlight">\(T_i\)</span> are the electron and ion temperatures at core and edge respectively.</p></li>
-<li><p><strong>Plasma Pressure</strong> <span class="math notranslate nohighlight">\(p\)</span> : Total pressure in the vessel.</p></li>
-<li><p><strong>Normalized Beta</strong> <span class="math notranslate nohighlight">\(\beta_N\)</span> : Ratio of plasma pressure to the magnetic pressure.</p></li>
-<li><p><strong>Internal Inductance</strong> <span class="math notranslate nohighlight">\(l_i\)</span> : Describes the distribution of current within the plasma.</p></li>
-<li><p><strong>Safety Factor</strong> <span class="math notranslate nohighlight">\(q\)</span> : We care about edge safety factor <span class="math notranslate nohighlight">\(q_{95}\)</span> and central safety factor <span class="math notranslate nohighlight">\(q_{0}\)</span>.</p></li>
-<li><p><strong>Energy Confinement Time</strong> <span class="math notranslate nohighlight">\(\tau_E\)</span> : How long the plasma retains its energy.</p></li>
-<li><p><strong>Magnetic Shear</strong> : Describes the variation of the safety factor across the plasma radius.</p></li>
-</ul>
-</section>
-<section id="magnetic-equilibrium-and-stability">
-<h2>Magnetic equilibrium and stability<a class="headerlink" href="#magnetic-equilibrium-and-stability" title="Link to this heading">#</a></h2>
-<ul class="simple">
-<li><p><strong>Magnetic Flux Surfaces</strong> : Data from equilibrium reconstruction (EFIT)</p></li>
-<li><p><strong>Plasma Vertical Position</strong> <span class="math notranslate nohighlight">\(Z_p\)</span> : Used to detect vertical displacement events (VDEs).</p></li>
-<li><p><strong>Plasma Shape</strong> : Elongation <span class="math notranslate nohighlight">\(\kappa\)</span> and triangularity <span class="math notranslate nohighlight">\(\delta\)</span> of the plasma.</p></li>
-<li><p><strong>Radial Position</strong> <span class="math notranslate nohighlight">\(R_p\)</span> : Location of the plasma centroid.</p></li>
-<li><p><strong>Edge-Localized Modes (ELMs)</strong> : Instabilities that can cause large bursts of energy and particles to be lost from the plasma.</p></li>
-<li><p><strong>Tearing Modes</strong> : Instabilities that can cause magnetic islands to form in the plasma. Mode numbers (e.g., m/n) and amplitudes.</p></li>
-</ul>
-</section>
-<section id="operational-parameters">
-<h2>Operational parameters<a class="headerlink" href="#operational-parameters" title="Link to this heading">#</a></h2>
-<ul class="simple">
-<li><p><strong>Heating Power</strong> <span class="math notranslate nohighlight">\(P_{heat}\)</span> : Total power input from neutral beams to heat the plasma, radiofrequency heating, or ohmic heating.</p></li>
-<li><p><strong>Toroidal Magnetic Field</strong> <span class="math notranslate nohighlight">\(B_T\)</span> : The magnetic field that wraps around the torus.</p></li>
-<li><p><strong>Poloidal Magnetic Field</strong> <span class="math notranslate nohighlight">\(B_P\)</span> : Key for plasma shaping and stability.</p></li>
-<li><p><strong>Gas Puffing Rate</strong> : Rate at which gas is injected into the plasma.</p></li>
-<li><p><strong>Divertor Conditions</strong>: Heat flux, strike point position, and divertor detachment status.</p></li>
-</ul>
-</section>
-<section id="diagnostic-signals">
-<h2>Diagnostic signals<a class="headerlink" href="#diagnostic-signals" title="Link to this heading">#</a></h2>
-<p>These signals provide real-time feedback on the plasma’s behavior and are used to control the plasma and diagnose instabilities.</p>
-<ul class="simple">
-<li><p>Magnetics:</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="elms">
+<h1>ELMs<a class="headerlink" href="#elms" title="Link to this heading">#</a></h1>
+<p>Welcome to the ELMs section. Choose a topic from the sidebar.</p>
+<div class="toctree-wrapper compound">
 <ul>
-<li><p>Mirnov coil signals (detects magnetic fluctuations).</p></li>
-<li><p>Magnetic fluctuation spectrograms.</p></li>
+<li class="toctree-l1"><a class="reference internal" href="1.%20ELMs.html">Edge-localized mode (ELM)</a></li>
 </ul>
-</li>
-<li><p>Radiation:</p>
-<ul>
-<li><p>Total radiated power <span class="math notranslate nohighlight">\(P_{rad}\)</span>.</p></li>
-<li><p>Edge radiation (from impurities or disruptions).</p></li>
-</ul>
-</li>
-<li><p>Density Fluctuations:</p>
-<ul>
-<li><p>Reflectometry signals</p></li>
-<li><p>Interferometry signals</p></li>
-</ul>
-</li>
-<li><p>Soft X-ray Emission: Localized hot spots or disruptions.</p></li>
-<li><p>Electron Cyclotron Emission (ECE): Measures electron temperature profiles and instabilities.</p></li>
-</ul>
-</section>
-<section id="disruption-indicators">
-<h2>Disruption indicators<a class="headerlink" href="#disruption-indicators" title="Link to this heading">#</a></h2>
-<p>These parameters directly measure signs of instability or plasma degradation:</p>
-<ul class="simple">
-<li><p><strong>Growth of Magnetic Islands</strong>: Associated with tearing modes.</p></li>
-<li><p><strong>Vertical Displacement Velocity (VDE)</strong>: Speed of vertical motion of the plasma. <span class="math notranslate nohighlight">\(VDE = \frac{dZ_p}{dt}\)</span>.</p></li>
-<li><p><strong>Normalized Disruption Indicator (NDI)</strong>: Ratio such as <span class="math notranslate nohighlight">\(\beta_N/\beta_{limit}\)</span> or <span class="math notranslate nohighlight">\(q_{95}/q_{limit}\)</span>.</p></li>
-<li><p><strong>Runaway electron signals</strong>: Indicate the presence of runaway electrons in the plasma during disruptions.</p></li>
-<li><p><strong>Edge Safety Factor Decrease</strong>: Associated with MHD instabilities. <span class="math notranslate nohighlight">\(q_{edge}\)</span>. Need more info on this.</p></li>
-</ul>
-</section>
-<section id="machine-specific-parameters">
-<h2>Machine-specific parameters<a class="headerlink" href="#machine-specific-parameters" title="Link to this heading">#</a></h2>
-<ul class="simple">
-<li><p><strong>Wall Conditions</strong>: Temperature, impurity levels, and interaction with plasma.</p></li>
-<li><p>Divertor and Scrape-Off Layer (SOL):</p>
-<ul>
-<li><p>Heat fluxes.</p></li>
-<li><p>Impurity levels.</p></li>
-<li><p>Detachment status.</p></li>
-<li><p>SOL density and temperature profiles.</p></li>
-</ul>
-</li>
-<li><p><strong>Neutral Beam Injection (NBI)</strong>: Power, energy, and beam geometry.</p></li>
-</ul>
-</section>
-<section id="temporal-and-historical-data">
-<h2>Temporal and historical data<a class="headerlink" href="#temporal-and-historical-data" title="Link to this heading">#</a></h2>
-<ul class="simple">
-<li><p><strong>Temporal evolution</strong>: How the plasma parameters change over time.  Derivatives or rolling averages of key parameters example, <span class="math notranslate nohighlight">\(\dot{I}_p\)</span>, <span class="math notranslate nohighlight">\(\dot{n}_e\)</span>.</p></li>
-<li><p><strong>Past Disruption Data</strong>: Information from previous disruptions can be used to train models to identify patterns.</p></li>
-</ul>
-</section>
-<section id="next-steps">
-<h2>Next steps<a class="headerlink" href="#next-steps" title="Link to this heading">#</a></h2>
-<ul class="simple">
-<li><p>Feature Engineering: Include both raw values and derived features. Not sure about this.</p></li>
-<li><p>Data Sources: Use a combination of diagnostic signals, equilibrium reconstructions, and time-series data. There are some paper. Refer to OneNote annotations.</p></li>
-<li><p>Real-Time Processing: hopefully.</p></li>
-</ul>
-</section>
+</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -573,7 +470,7 @@
         },
         kernelOptions: {
             name: "python3",
-            path: "./Theory/0. Common"
+            path: "./Theory/2. ELMs"
         },
         predefinedOutput: true
     }
@@ -590,20 +487,20 @@
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="intro.html"
+       href="../1.%20Disruption/5.%20detect.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Common</p>
+        <p class="prev-next-title">Detect disruptions in plasma current plot</p>
       </div>
     </a>
     <a class="right-next"
-       href="../1.%20Disruption/intro.html"
+       href="1.%20ELMs.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Disruption</p>
+        <p class="prev-next-title">Edge-localized mode (ELM)</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -619,27 +516,10 @@
 
 
   <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> 
-  </div>
-  <nav class="bd-toc-nav page-toc">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plasma-parameters">Plasma parameters</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#magnetic-equilibrium-and-stability">Magnetic equilibrium and stability</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#operational-parameters">Operational parameters</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#diagnostic-signals">Diagnostic signals</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#disruption-indicators">Disruption indicators</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#machine-specific-parameters">Machine-specific parameters</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#temporal-and-historical-data">Temporal and historical data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#next-steps">Next steps</a></li>
-</ul>
-  </nav></div>
-
-  <div class="sidebar-secondary-item">
 
   
   <div class="tocsection editthispage">
-    <a href="https://github.com/praksharma/Knowledge-Base/edit/main/docs/Theory/0. Common/1. parameters.ipynb">
+    <a href="https://github.com/praksharma/Knowledge-Base/edit/main/docs/Theory/2. ELMs/intro.md">
       <i class="fa-solid fa-pencil"></i>
       
       
@@ -655,7 +535,7 @@
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="../../_sources/Theory/0. Common/1. parameters.ipynb"
+      <li><a href="../../_sources/Theory/2. ELMs/intro.md"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div></div>
