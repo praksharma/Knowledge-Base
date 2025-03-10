@@ -1,10 +1,29 @@
-# Book settings
-# Learn more at https://jupyterbook.org/customize/config.html
+copyright: "2025, By Prakhar Sharma"
+logo: assets/logo.png
 
-title: Knowledge Base
-author: Prakhar Sharma
-copyright: "2024" 
-logo: logo.png
+sphinx:
+  config:
+    html_theme: pydata_sphinx_theme
+    html_theme_options:
+      navbar_align: content
+      logo: 
+        text: "Knowledge Base"
+        image_dark: "assets/logo.png"
+      secondary_sidebar_items: page-toc, edit-this-page, sourcelink
+      back_to_top_button: True
+      use_edit_page_button: True
+      external_links:
+        - url: "https://github.com/praksharma"
+          name: "GitHub Profile"
+      header_links_before_dropdown: 6
+      github_url: https://github.com/praksharma/Knowledge-Base
+      footer_start: copyright
+      footer_center: sphinx-version
+    html_context:
+      github_user: "praksharma"
+      github_repo: "Knowledge-Base"
+      github_version: "main"
+      doc_path: "docs"
 
 # Force re-execution of notebooks on each build.
 # See https://jupyterbook.org/content/execute.html
@@ -15,19 +34,3 @@ execute:
 latex:
   latex_documents:
     targetname: book.tex
-
-# Add a bibtex file so that we can create citations
-bibtex_bibfiles:
-  - references.bib
-
-# Information about where the book exists on the web
-repository:
-  url: https://github.com/praksharma/Knowledge-Base # Online location of your book
-  path_to_book: docs  # Optional path to your book, relative to the repository root
-  branch: master  # Which branch of the repository should be used when creating links (optional)
-
-# Add GitHub buttons to your book
-# See https://jupyterbook.org/customize/config.html#add-a-link-to-your-repository
-html:
-  use_issues_button: true
-  use_repository_button: true
