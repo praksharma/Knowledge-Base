@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Common &#8212; My Jupyter Book</title>
+    <title>Paper 1 &#8212; My Jupyter Book</title>
   
   
   
@@ -61,11 +61,11 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'Theory/0. Common/intro';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Theory/1. Disruption/6. Paper1';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Parameters of interest" href="1.%20parameters.html" />
-    <link rel="prev" title="Knowledge Base" href="../../intro.html" />
+    <link rel="next" title="ELMs" href="../2.%20ELMs/intro.html" />
+    <link rel="prev" title="Detect disruptions in plasma current plot" href="5.%20detect.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -152,15 +152,15 @@
 <nav>
   <ul class="bd-navbar-elements navbar-nav">
     
-<li class="nav-item current active">
-  <a class="nav-link nav-internal" href="#">
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../0.%20Common/intro.html">
     Common
   </a>
 </li>
 
 
-<li class="nav-item ">
-  <a class="nav-link nav-internal" href="../1.%20Disruption/intro.html">
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="intro.html">
     Disruption
   </a>
 </li>
@@ -299,15 +299,15 @@
 <nav>
   <ul class="bd-navbar-elements navbar-nav">
     
-<li class="nav-item current active">
-  <a class="nav-link nav-internal" href="#">
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../0.%20Common/intro.html">
     Common
   </a>
 </li>
 
 
-<li class="nav-item ">
-  <a class="nav-link nav-internal" href="../1.%20Disruption/intro.html">
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="intro.html">
     Disruption
   </a>
 </li>
@@ -390,8 +390,14 @@
 <nav class="bd-docs-nav bd-links"
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
-  <div class="bd-toc-item navbar-nav"><ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="1.%20parameters.html">Parameters of interest</a></li>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="1.%20disruptions.html">Basic concepts</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="2.%20parameters.html">MAST diagnostic data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3.%20access_parquet_files.html">Access Parquet files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="4.%20collecting_location_of_parameters.html">Location of parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="5.%20detect.html">Detect disruptions in plasma current plot</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Paper 1</a></li>
 </ul>
 </div>
 </nav></div>
@@ -432,7 +438,10 @@
         <i class="fa-solid fa-home"></i>
       </a>
     </li>
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Common</span></li>
+    
+    <li class="breadcrumb-item"><a href="intro.html" class="nav-link">Disruption</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Paper 1</span></li>
   </ul>
 </nav>
 </div>
@@ -449,14 +458,61 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="common">
-<h1>Common<a class="headerlink" href="#common" title="Link to this heading">#</a></h1>
-<p>Welcome to the Common section. Choose a topic from the sidebar.</p>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="1.%20parameters.html">Parameters of interest</a></li>
-</ul>
-</div>
+  <section class="tex2jax_ignore mathjax_ignore" id="paper-1">
+<h1>Paper 1<a class="headerlink" href="#paper-1" title="Link to this heading">#</a></h1>
+<p>Paper title: Disruption prediction at JET through deep convolutional neural networks using spatiotemporal information from plasma profiles</p>
+<p>Link: <a class="reference external" href="https://iopscience.iop.org/article/10.1088/1741-4326/ac525e">https://iopscience.iop.org/article/10.1088/1741-4326/ac525e</a></p>
+<ol class="arabic simple">
+<li><p>Introduction
+This paper investigates the use of a deep convolutional neural network (CNN) to predict disruptions in the Joint European Torus (JET) tokamak. The increasing power of future fusion experiments like ITER necessitates robust early disruption detection for mitigation, avoidance, and control. The authors aim to move beyond hand-engineered feature extraction by leveraging the CNN’s ability to learn spatiotemporal information directly from 1D plasma profiles.</p></li>
+</ol>
+<p>The introduction highlights the potential for artificial intelligence in disruption prediction, referencing previous machine learning applications on various tokamaks, including JET. It emphasizes the crucial role of understanding the physical phenomena behind disruptions and identifying suitable precursor signals. Plasma profiles (temperature, density, and radiation) are identified as particularly valuable due to their connection with plasma stability and MHD mode destabilization, which often precede disruptions (e.g., tearing modes, core radiation leading to hollow temperature profiles, edge cooling).</p>
+<p>The limitations of existing 0D peaking factor signals, used to encode spatial information, are discussed. These methods are heuristic, can lose spatial information, and require adjustments based on the diagnostic systems of different devices. The authors propose that CNNs can overcome these limitations by directly processing the spatiotemporal information in 1D plasma profiles.</p>
+<p>Previous work utilizing CNNs for fusion applications, including disruption prediction on DIII-D and JET, and for bolometer tomography reconstruction at JET, is acknowledged. This paper builds upon these efforts by proposing a CNN that extracts spatiotemporal features from temperature, density, and radiation profiles and combines these with other standard diagnostic signals for disruption prediction.</p>
+<ol class="arabic simple" start="2">
+<li><p>Database
+A comprehensive database of JET discharges from 2011 to 2020 was compiled to train, validate, and test the proposed disruption predictor. The database includes 193 disrupted and 219 regularly terminated discharges, all with a flat-top plasma current &gt; 1.5 MA and a flat-top length &gt; 200 ms. Only the flat-top phase of the discharges was considered, and disruptions caused by vertical displacement events were excluded.</p></li>
+</ol>
+<p>The database is divided into three datasets corresponding to different experimental campaigns:</p>
+<p>Dataset I (2011-2013): 127 disruptions, 115 regular pulses (used for initial training and validation).
+Dataset II (2016): 29 disruptions, 41 regular pulses.
+Dataset III (2019-2020): 37 disruptions, 63 regular pulses (includes experiments for high D-T fusion power).
+The operational space covered by each dataset, in terms of plasma current, toroidal field, normalized beta, total input power, line-integrated density, and edge safety factor, shows that Datasets I and II have similar parameter ranges, while Dataset III explores higher current, density, and input power regimes.</p>
+<p>The input features for the CNN model consist of:</p>
+<p>1D profiles: Electron temperature (<span class="math notranslate nohighlight">\(T_e\)</span>), electron density (<span class="math notranslate nohighlight">\(n_e\)</span>) from High-Resolution Thompson Scattering (HRTS), and radiated power (<span class="math notranslate nohighlight">\(P_{rad}\)</span>) from horizontal bolometer lines of sight.
+0D signals: Internal inductance (<span class="math notranslate nohighlight">\(l_i\)</span>) and a mode-lock signal normalized by the plasma current (<span class="math notranslate nohighlight">\(ML_{norm}\)</span>).
+The paper emphasizes that the use of raw measures without inversion procedures is suitable for real-time implementation.</p>
+<p>2.1. Input Data Generation for CNN
+The following steps were used to generate the CNN input images:</p>
+<p>(a) Causal Resampling: The 1D and 0D signals were causally resampled to a uniform sampling time of 2 ms to ensure they operate on the same timescale.
+(b) 1D Profile to 2D Image Conversion:Outlier Removal and Pre-processing: Outliers in HRTS data were identified by comparison with diagnostic error. Corrupted measurements in both HRTS and bolometer profiles were replaced by interpolated values from neighboring lines of sight. The outer 9 lines of sight of HRTS (R &gt; 3.78 m) were discarded due to unreliability in the training dataset. Negative bolometer power values were set to zero, and unreliable positive values were saturated at 1 MW m⁻².
+Spatiotemporal Matrix Construction: The lines of sight for HRTS (inner to outer major radius) and bolometer (as labeled in Figure 3 of the paper) were ordered. A spatiotemporal matrix was created for each diagnostic, with elements representing the measurement at a specific line of sight and time sample, forming an “image” (see Figure 2(b) in the paper).
+Normalization and Stacking: The three diagnostic images were vertically stacked, and each diagnostic’s range was normalized to [-1, 1] based on the minimum and maximum values observed in the training set (Equation provided in the paper). This resulted in a final input image (Figure 2(c)).
+Segmentation with Sliding Window: The final image was segmented using an overlapping sliding window of 200 ms, creating input images of 132 x 101 pixels.
+(c) 0D Signal Processing: The <span class="math notranslate nohighlight">\(l_i\)</span> and <span class="math notranslate nohighlight">\(ML_{norm}\)</span> signals were sampled at the same times as the 1D data, resulting in two arrays of 101 samples corresponding to the 200 ms window.
+2.2. Data Labeling for Training
+For the supervised CNN training:</p>
+<p>Segments from regularly terminated discharges were labeled as ‘stable’.
+For disruptive discharges, the pre-disruptive phase was automatically identified using an algorithm based on statistical analysis of six dimensionless plasma parameters (peaking factors of temperature, density, and radiation; internal inductance; radiated power fraction), as proposed in previous work [8]. This algorithm identifies a time <span class="math notranslate nohighlight">\(T_{pre-disr}\)</span> before the disruption where the plasma parameters start to deviate significantly from those of regularly terminated discharges. Only segments belonging to these automatically identified pre-disruptive phases were labeled as ‘unstable’ and used for training.
+To address the class imbalance due to the different durations of stable and unstable phases, the sampling of the sliding window was adjusted during training: one segment every 24 ms for pre-disruptive phases and one segment every 150 ms for regularly terminated discharges. During testing, a sliding window of 200 ms with a stride of 2 ms was used for all discharges.</p>
+<p>The training, validation, and test sets comprised the number of pulses and time slices as detailed in Table 2 of the paper. The validation set was used for monitoring training performance and early stopping.</p>
+<ol class="arabic simple" start="3">
+<li><p>Disruption Predictor Architecture
+The proposed disruption predictor utilizes a deep convolutional neural network (CNN) architecture (Figure 4 and 5 in the paper). The architecture consists of convolutional units (convolutional layer, batch normalization, ReLU activation), pooling layers (max and average), a dropout layer, and fully connected layers culminating in a SoftMax classification output.</p></li>
+</ol>
+<p>The key aspects of the CNN architecture are:</p>
+<p>Input: 2D images (132 x 101 pixels) derived from the stacked and normalized 1D plasma profiles.
+Convolutional Unit 1 (CU1) + Max Pooling (Pmax): A 5x1 kernel filters the input image vertically (spatial dimension), reducing the size to 16 x 101. Max pooling (8x1) further reduces the vertical dimension.
+Integration of 0D Signals: The <span class="math notranslate nohighlight">\(l_i\)</span> and <span class="math notranslate nohighlight">\(ML_{norm}\)</span> signals (segments of 1x101) are added as input to the second convolutional unit and concatenated with the output of the max pooling layer.
+Convolutional Unit 2 (CU2) + Average Pooling (Pavg): A 1x11 kernel filters the resulting image horizontally (temporal dimension). Average pooling (1x12) reduces the horizontal dimension to 16 x 20 (or 18 x 20 after concatenation with 0D signal features).
+Flattening and Fully Connected Layer (FC): The output of the pooling layer is flattened into a 320-element vector (or 360 with 0D signals). This vector is fed into a fully connected layer.
+Dropout Layer: A dropout layer with a 20% probability is included before the FC layer to prevent overfitting.
+SoftMax Layer (S) and Classification Output (CO): The FC layer output is fed into a SoftMax layer, which produces the likelihood of the input segment belonging to a regularly terminated or disrupted discharge. A threshold (optimized to 0.89) on the disrupted likelihood determines the final classification and alarm time.
+The training process involved two steps:</p>
+<p>Training with only the 1D diagnostic-derived images.
+Freezing the first convolutional unit and max pooling layers and then training the second convolutional unit and the fully connected layer with both the 1D and 0D signals as input. This “freeze-out” technique reduces training time.
+The network architecture is designed to uncorrelate the spatial and temporal dimensions, allowing for easy concatenation of the 0D signals while preserving temporal synchronization. The kernel sizes were chosen considering the number of lines of sight of the diagnostics and their different time resolutions. The pooling types were optimized to balance performance and sensitivity to transient changes.</p>
+<p>The paper classifies the approach as “early fusion,” where unimodal signals (derived from different diagnostics) are combined into the same representation space early in the processing, allowing the CNN to learn cross-correlations between them.</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -472,7 +528,7 @@
         },
         kernelOptions: {
             name: "python3",
-            path: "./Theory/0. Common"
+            path: "./Theory/1. Disruption"
         },
         predefinedOutput: true
     }
@@ -489,20 +545,20 @@
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../../intro.html"
+       href="5.%20detect.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Knowledge Base</p>
+        <p class="prev-next-title">Detect disruptions in plasma current plot</p>
       </div>
     </a>
     <a class="right-next"
-       href="1.%20parameters.html"
+       href="../2.%20ELMs/intro.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Parameters of interest</p>
+        <p class="prev-next-title">ELMs</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -521,7 +577,7 @@
 
   
   <div class="tocsection editthispage">
-    <a href="https://github.com/praksharma/Knowledge-Base/edit/main/docs/Theory/0. Common/intro.md">
+    <a href="https://github.com/praksharma/Knowledge-Base/edit/main/docs/Theory/1. Disruption/6. Paper1.ipynb">
       <i class="fa-solid fa-pencil"></i>
       
       
@@ -537,7 +593,7 @@
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="../../_sources/Theory/0. Common/intro.md"
+      <li><a href="../../_sources/Theory/1. Disruption/6. Paper1.ipynb"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div></div>

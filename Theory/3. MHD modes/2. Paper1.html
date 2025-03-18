@@ -1,0 +1,703 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Paper 1 &#8212; My Jupyter Book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Theory/3. MHD modes/2. Paper1';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Python Libraries" href="../../Libraries/Python/intro.html" />
+    <link rel="prev" title="Magnetohydrodynamic (MHD) modes" href="1.%20MHD.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/kb_logo.png" class="logo__image only-light" alt=""/>
+    <img src="../../_static/kb_logo.png" class="logo__image only-dark pst-js-only" alt=""/>
+  
+  
+    <p class="title logo__title">Knowledge Base</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../0.%20Common/intro.html">
+    Common
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../1.%20Disruption/intro.html">
+    Disruption
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../2.%20ELMs/intro.html">
+    ELMs
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="intro.html">
+    MHD Modes
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../Libraries/Python/intro.html">
+    Python Libraries
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../ML_models/intro.html">
+    ML Models
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://github.com/praksharma">
+    GitHub Profile
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/praksharma/Knowledge-Base" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../0.%20Common/intro.html">
+    Common
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../1.%20Disruption/intro.html">
+    Disruption
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../2.%20ELMs/intro.html">
+    ELMs
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="intro.html">
+    MHD Modes
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../Libraries/Python/intro.html">
+    Python Libraries
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../ML_models/intro.html">
+    ML Models
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://github.com/praksharma">
+    GitHub Profile
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/praksharma/Knowledge-Base" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="1.%20MHD.html">Magnetohydrodynamic (MHD) modes</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Paper 1</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../intro.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="intro.html" class="nav-link">MHD Modes</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Paper 1</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="paper-1">
+<h1>Paper 1<a class="headerlink" href="#paper-1" title="Link to this heading">#</a></h1>
+<p>Paper title: Detection of Alfvén Eigenmodes on COMPASS with Generative Neural Networks</p>
+<p>Link: <a class="reference external" href="https://www.tandfonline.com/doi/full/10.1080/15361055.2020.1820805">https://www.tandfonline.com/doi/full/10.1080/15361055.2020.1820805</a></p>
+<ol class="arabic simple">
+<li><p>Introduction
+This paper addresses the challenge of automating the detection of chirping Alfvén eigenmodes (AEs) observed on the COMPASS tokamak. These modes are believed to be driven by runaway electrons (REs) and are important for studying the nonlinear interaction between REs and electromagnetic instabilities, including RE mitigation and loss. Currently, detection relies on manual analysis of spectrograms from magnetic probes, a process that is labor-intensive due to the rarity of these events. The authors explore the use of machine learning techniques, specifically generative neural networks, to automate this detection process using both a small manually labeled database and a larger unlabeled database of COMPASS experiments.</p></li>
+</ol>
+<p>Key Ideas:</p>
+<p>Problem: Manual detection of rare chirping Alfvén eigenmodes (AEs) in tokamak spectrograms is inefficient and requires significant effort.
+Significance of AEs: AEs driven by runaway electrons (REs) offer a unique opportunity to study RE physics, crucial for RE mitigation and understanding their losses in fusion reactors. AEs can also serve as a diagnostic tool for plasma equilibrium parameters.
+COMPASS Observations: Chirping AEs on COMPASS occur in the frequency range of 0.5 to 2 MHz, exhibit a bursty character, often appear after sawtooth crashes with increased RE losses, and their frequency can chirp up or down by approximately 0.1 MHz within about 1 ms.
+Proposed Solution: Employ machine learning, specifically generative neural networks (based on Variational Autoencoders - VAEs), to automate the detection of these chirping AEs in spectrograms.
+Approach: Train models using a small labeled dataset and a large unlabeled dataset to overcome the limitations of scarce labeled data.
+Quotes:</p>
+<p>“Chirping Alfvén eigenmodes were observed at the COMPASS tokamak. They are believed to be driven by runaway electrons (REs), and as such, they provide a unique opportunity to study the physics of nonlinear interaction between REs and electromagnetic instabilities, including important topics of RE mitigation and losses.”
+“So far, their detection has required much manual effort since they occur rarely.”
+“We strive to automate this process using machine learning techniques based on generative neural networks.”</p>
+<ol class="arabic simple" start="2">
+<li><p>Chirping Modes on the COMPASS Tokamak
+The paper explains that chirping modes on COMPASS are indirectly observed in spectrograms of a magnetic U-probe. Spectrograms cover a 0.3-second experiment and a frequency range of 0 to 2.5 MHz. Due to the varying lengths of experiments and the large size of full spectrograms, the data is preprocessed into fixed-size square patches (128x128 pixels) for labeling, training, and validation. These patches represent 6.54 ms in time and 0.62 MHz in frequency, a size deemed sufficient to capture most chirping modes. Patches manually labeled as containing a chirping mode are considered positively labeled data.</p></li>
+</ol>
+<p>Key Ideas:</p>
+<p>Observation Method: Chirping AEs are identified through spectrograms derived from magnetic U-probe signals on the COMPASS tokamak.
+Data Preprocessing: Spectrograms are divided into 128x128 pixel patches to create a uniform input size for the neural networks.
+Labeling: Patches are manually labeled by experts as either containing (positive label) or not containing (negative label) a chirping mode.
+Quote:</p>
+<p>“Chirping modes on the COMPASS tokamak can be observed indirectly in spectrograms of a magnetic U-probe.”
+“Therefore, for labeling, training, and validation purposes, we have split spectrograms into square patches of the same size. We have chosen the size of a single spectrogram patch to be 128� 128 pixels, which covers 6.54 ms in the time axis and 0.62 MHz in the frequency axis and which is a feasible input size for current convolutional neural network architectures. It is also enough to capture most of a typical chirping mode as can be seen in Fig. 1d.”</p>
+<ol class="arabic simple" start="3">
+<li><p>Model Structure
+The authors implemented two main approaches based on generative neural networks, specifically Variational Autoencoders (VAEs):</p></li>
+</ol>
+<p>3.1 One-Class Model:</p>
+<p>This approach treats the detection problem as anomaly or outlier detection. The model learns a representation of one class of data (either spectrogram patches with chirping modes or patches without them).
+During testing, the model computes the negative log-likelihood of a new sample under the learned generative distribution or the Mean Squared Error (MSE) of its reconstruction. High values of these metrics indicate potential out-of-class samples (i.e., chirping modes if the model was trained on non-chirping data, and vice-versa).
+Training can be done with either labeled data of the class of interest or with unlabeled data (assuming the target anomaly is rare). The latter approach leverages the large unlabeled database.
+3.2 Two-Stage Model:</p>
+<p>This model aims to utilize both labeled and unlabeled data more effectively.
+Stage 1: A convolutional generative autoencoder (VAE or its variants using different divergence measures like MMD and JSD with VampPrior) is trained on the large unlabeled dataset. This stage learns a low-dimensional representation of the general topology of the input space.
+Stage 2: A classifier (k-Nearest Neighbors - kNN or Gaussian Mixture Model - GMM) is trained on the encoded labeled data (the latent space representation learned in the first stage).
+By using MMD or JSD and VampPrior in the first stage, the authors aim to enforce separation of the encoded data into clusters, making the classification task in the second stage easier.
+Key Ideas:</p>
+<p>Generative Autoencoders (VAEs): Used as powerful estimators of high-dimensional distributions and for learning low-dimensional representations.
+One-Class Approach: Trains a model on one type of data (e.g., non-AE spectrograms) to identify the other (AE spectrograms) as anomalies based on reconstruction error or likelihood.
+Two-Stage Approach: Separates feature learning (using unlabeled data in an autoencoder) from classification (using labeled data on the learned features).
+Divergence Measures: Kullback-Leibler Divergence (KLD), Maximum Mean Discrepancy (MMD), and Jensen-Shannon Divergence (JSD) are explored within the VAE framework to optimize the latent space representation.
+VampPrior: Used as a flexible prior distribution in VAEs, allowing the model to learn the structure of the latent space more effectively.
+Quotes:</p>
+<p>On VAEs: “Generative models based on the variational autoencoder (VAE) paradigm have been used because they are powerful estimators of high-dimensional distributions, suitable for modeling image data. They do not require labels for training, which is a limiting factor for classification neural networks that overfit when not supplied with enough labeled data.”
+On One-Class Model: “A generative autoencoder can be readily used for this task if we set pθðxÞ � pðxÞ to be the distribution of the class of our interest. Then, there are two modes of training the autoencoder. In the first mode, we model the distribution of patches that contain a chirping mode… In the second mode, we can choose the class of interest to be of the patches that do not contain a chirping mode. This is closer to an anomaly detection formulation of the pro-blem…”
+On Two-Stage Model: “The second model is designed to make the most use of both labeled and unlabeled data. It exploits the ability of generative autoencoders to produce a low-dimensional uncorrelated representation of high-dimensional image data. It consists of two stages. The first stage is a convolutional generative autoencoder trained with unlabeled data. Its task is to learn the general topology of the input space and encode input data. The second stage is a classifier that is trained on encoded labeled data.”</p>
+<ol class="arabic simple" start="4">
+<li><p>Experimental Setup
+The experimental setup involved using 40 preprocessed spectrograms from which 370 non-overlapping 128x128 pixel patches were extracted and manually labeled. This formed the labeled training dataset. Additionally, a larger unlabeled database of 330,000 patches from 2000 spectrograms was created.</p></li>
+</ol>
+<p>For the one-class model, training was performed both on a subset of positively labeled spectrograms and on the large unlabeled dataset. Cross-validation was used with ten different train/test splits.</p>
+<p>For the two-stage model, the labeled data was split into 80/20 training/testing subsets, repeated ten times for cross-validation.</p>
+<p>The paper details the architectures of the encoders and decoders used in both models, involving convolutional layers, maxpooling, dense layers, transposed convolutions, and upscaling. Residual blocks (ResNets) and batch normalization were also employed. Hyperparameter optimization was performed for both models, with parameters like the dimensionality of the latent space (d), the scaling parameter of the IMQ kernel (γ), regularization weights (λ), the number of prior components (N), the number of neighbors (k) in kNN, and the number of GMM components (M) being tuned. The models were implemented in Julia and trained on an NVIDIA Titan V GPU.</p>
+<p>Key Ideas:</p>
+<p>Datasets: A small manually labeled dataset and a large unlabeled dataset of spectrogram patches were used.
+Training Strategies: Different training approaches were used for the one-class (supervised on positive/negative labels, unsupervised) and two-stage (unsupervised pre-training followed by supervised classification) models.
+Cross-Validation: A ten-fold cross-validation strategy was employed to evaluate the performance and robustness of the models.
+Network Architectures: Convolutional autoencoders with specific layer configurations, activation functions (ReLU), and optimization algorithms (RMSProp) were utilized.
+Hyperparameter Optimization: A range of hyperparameters were tuned to find the best performing models.
+Quote:</p>
+<p>“Every spectrogram was divided into patches of size 128� 128 pixels. Out of 40 preprocessed spectrograms, 370 nonoverlapping patches were extracted and labeled. This results in a labeled training data set Xl; Yf g;Xl ¼ xif gi; xi 2 R 128�128�1; Y ¼ yif g; yi 2 0; 1f g of samples Xl and labels Y , where Y ¼ 1 if a patch contains a chirping mode. Also, an unlabeled database Xu of 330 000 patches coming from 2000 spectrograms was created.”</p>
+<ol class="arabic simple" start="5">
+<li><p>Results
+The performance of the models was evaluated using the Area Under the Receiver Operating Characteristic curve (AUC) and precision&#64;k score (precision at the k-highest scoring samples), as these metrics are relevant for ranking potential chirping mode events for manual inspection.</p></li>
+</ol>
+<p>5.1 One-Class Model Optimization:</p>
+<p>Modeling the distribution of non-Alfvén (no chirping mode) spectrograms generally yielded better results than modeling Alfvén spectrograms, except for the KLD-based VAE which failed for the Alfvén target class.
+A plain autoencoder (MSE loss) achieved comparable performance to more complex VAE variants in some cases.
+Precision in the top samples was generally low for the Alfvén target class.
+5.2 Two-Stage Model:</p>
+<p>The two-stage model generally outperformed the one-class model.
+The kNN classifier in the second stage was superior to the GMM classifier.
+Using MMD regularization in the first-stage autoencoder seemed to produce the best results, possibly due to its ability to create a well-separated latent space.
+The authors demonstrated that the autoencoding step is beneficial for overcoming the curse of dimensionality and improving the performance of the subsequent classifier compared to directly applying kNN to the high-dimensional input space.
+5.3 Influence of Train/Test Splitting Methodology:</p>
+<p>The study highlighted the importance of splitting data at the spectrogram level rather than the patch level to avoid overoptimistic performance estimates. Splitting at the patch level led to higher and less realistic AUC values, indicating that patches within the same spectrogram are more similar than those from different spectrograms.
+Key Ideas:</p>
+<p>Evaluation Metrics: AUC and precision&#64;k were used to assess the model performance in identifying chirping modes.
+Model Comparison: The two-stage model generally performed better than the one-class model.
+Importance of Latent Space Learning: The autoencoder in the two-stage model helps to reduce dimensionality and learn meaningful features, improving classification performance.
+Data Splitting Bias: Splitting data at the patch level can lead to biased and overly optimistic performance evaluations due to correlations within spectrograms.
+Quotes:</p>
+<p>On Evaluation: “Because of this, we evaluate the model performance by computing the area under the receiver operating curve (AUC), which is a standard measure for binary classification problems and also by precision&#64;k score, which is the precision at the k-highest scoring samples.”
+On Two-Stage Superiority: “…it has been shown that both models are viable options in chirping mode identifica-tion, although the latter one proved to be superior.”
+On Data Splitting: “This indicates that the posi-tively labeled patches in a single spectrogram are much more similar to each other than to those in different spectrograms, as only a relatively low num-ber of neighbors are sufficient for optimal perfor-mance. Also, the variance of Fig. 5a is much higher, again indicating larger differences across spectro-grams. If we continued with the splitting on the level of patches, we would have a biased and too optimistic estimate of performance before putting the framework into production.”
+6. Conclusion
+The paper concludes that both the one-class and two-stage models based on generative autoencoders offer viable options for the automated detection of chirping Alfvén eigenmodes in tokamak spectrograms. However, the two-stage model, which combines unsupervised feature learning with supervised classification on the latent space, demonstrated superior performance.</p>
+<p>The authors also emphasize the critical importance of proper cross-validation splitting at the spectrogram level for obtaining realistic performance estimates and the need for careful evaluation using metrics relevant to the operational context (e.g., precision at the top-ranked samples).</p>
+<p>Future work includes exploring more appropriate evaluation measures, incorporating data from other magnetic diagnostics, and expanding the labeled dataset for a more thorough evaluation and improved applicability to COMPASS operation.</p>
+<p>Key Ideas:</p>
+<p>Viability of Generative Models: Generative autoencoders show promise for automating the detection of rare events like chirping AEs.
+Superiority of Two-Stage Approach: Separating feature learning and classification seems to be a more effective strategy for this task.
+Importance of Realistic Evaluation: Proper data splitting and relevant evaluation metrics are crucial for assessing the real-world utility of the models.
+Future Directions: Include more data sources, refine evaluation methods, and expand the labeled dataset for further improvement.
+Quote:</p>
+<p>“Our task was identification of anomalous phenomena, i.e., chirping AEs, in graphical representations of signals measured during the operation of a tokamak. To this end, we have proposed two models based on generative autoenco-ders. The first model learned the distribution of normal data and identified chirping modes as out-of-class samples of this distribution. The second model implemented a two-stage learning approach. A regularized convolutional VAE trained on unlabeled data was successfully combined with a classifier trained with a smaller labeled data set. It has been shown that both models are viable options in chirping mode identifica-tion, although the latter one proved to be superior.”
+“We have also shown the need for proper cross- validation splitting of data in the evaluation phase and out-lined the need for careful evaluation in order for the model to be useful in real-world application.”</p>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Theory/3. MHD modes"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="1.%20MHD.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Magnetohydrodynamic (MHD) modes</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../../Libraries/Python/intro.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Python Libraries</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+
+  
+  <div class="tocsection editthispage">
+    <a href="https://github.com/praksharma/Knowledge-Base/edit/main/docs/Theory/3. MHD modes/2. Paper1.ipynb">
+      <i class="fa-solid fa-pencil"></i>
+      
+      
+        
+          Edit on GitHub
+        
+      
+    </a>
+  </div>
+</div>
+
+  <div class="sidebar-secondary-item">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/Theory/3. MHD modes/2. Paper1.ipynb"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2025, By Prakhar Sharma.
+      <br/>
+    
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__center">
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.4.7.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
