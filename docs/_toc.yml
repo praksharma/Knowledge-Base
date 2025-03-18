@@ -21,6 +21,7 @@ parts:
       - file: Theory/1. Disruption/3. access_parquet_files.ipynb
       - file: Theory/1. Disruption/4. collecting_location_of_parameters.ipynb
       - file: Theory/1. Disruption/5. detect.ipynb
+      - file: Theory/1. Disruption/6. Paper1.ipynb
   - caption: Edge-localized mode
     maxdepth: 1
     chapters:
@@ -33,6 +34,8 @@ parts:
     - file: Theory/3. MHD modes/intro.md
       sections:
       - file: Theory/3. MHD modes/1. MHD.ipynb
+      - file: Theory/3. MHD modes/2. Paper1.ipynb
+      - file: Theory/3. MHD modes/3. Mirnov_coil.ipynb
   - caption: Python Libraries
     maxdepth: 1
     chapters:
