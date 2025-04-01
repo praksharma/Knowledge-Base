@@ -62,7 +62,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'Theory/3. MHD modes/5. Ridge detection';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Python Libraries" href="../../Libraries/Python/intro.html" />
+    <link rel="next" title="Thresholding" href="6.%20Contour%20detection.html" />
     <link rel="prev" title="Thresholding" href="4.%20Thresholding.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -396,6 +396,7 @@
 <li class="toctree-l1"><a class="reference internal" href="4.%20Thresholding.html">Thresholding</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Ridge detection</a></li>
 
+<li class="toctree-l1"><a class="reference internal" href="6.%20Contour%20detection.html">Thresholding</a></li>
 </ul>
 </div>
 </nav></div>
@@ -1173,17 +1174,22 @@ Attributes:
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">plot_stft_ridge</span><span class="p">(</span>    <span class="n">t</span><span class="p">,</span>    <span class="n">f</span><span class="p">,</span>    <span class="n">Zxx</span><span class="p">,</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">plot_stft_ridge</span><span class="p">(</span>
+    <span class="n">t</span><span class="p">,</span>
+    <span class="n">f</span><span class="p">,</span>
+    <span class="n">Zxx</span><span class="p">,</span>
     <span class="n">shot_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">threshold</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span>
     <span class="n">max_ridges</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
     <span class="n">fmax_kHz</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
     <span class="n">smooth</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="n">smooth_window</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
-    <span class="n">return_ridges</span><span class="o">=</span><span class="kc">False</span>
+    <span class="n">return_ridges</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">min_bin_distance</span><span class="o">=</span><span class="mi">2</span>
 <span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Plot ridge(s) in STFT and optionally return them.</span>
+<span class="sd">    Extract and plot top-N ridges in STFT with better control.</span>
+<span class="sd">    Prevents overlap and handles low-power regions.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">fmax</span> <span class="o">=</span> <span class="n">fmax_kHz</span> <span class="o">*</span> <span class="mi">1000</span>
     <span class="n">valid_freq_idx</span> <span class="o">=</span> <span class="n">f</span> <span class="o">&lt;=</span> <span class="n">fmax</span>
@@ -1191,24 +1197,43 @@ Attributes:
     <span class="n">Zxx</span> <span class="o">=</span> <span class="n">Zxx</span><span class="p">[</span><span class="n">valid_freq_idx</span><span class="p">,</span> <span class="p">:]</span>
 
     <span class="n">magnitude</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">Zxx</span><span class="p">)</span>
+    <span class="n">time_bins</span> <span class="o">=</span> <span class="n">magnitude</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">freq_bins</span> <span class="o">=</span> <span class="n">magnitude</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="c1"># Set low amplitudes to zero</span>
     <span class="n">magnitude</span><span class="p">[</span><span class="n">magnitude</span> <span class="o">&lt;</span> <span class="n">threshold</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
 
     <span class="n">ridge_list</span> <span class="o">=</span> <span class="p">[]</span>
 
-    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
-    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_ridges</span><span class="p">):</span>
-        <span class="n">ridge_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">magnitude</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span> <span class="o">-</span> <span class="n">n</span><span class="p">]</span>
-        <span class="n">ridge_freq</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="n">ridge_idx</span><span class="p">]</span> <span class="o">/</span> <span class="mi">1000</span>  <span class="c1"># to kHz</span>
+    <span class="n">used_mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">magnitude</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
 
-        <span class="n">mask</span> <span class="o">=</span> <span class="n">magnitude</span><span class="p">[</span><span class="n">ridge_idx</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">magnitude</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])]</span> <span class="o">==</span> <span class="mi">0</span>
-        <span class="n">ridge_freq</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+
+    <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_ridges</span><span class="p">):</span>
+        <span class="n">ridge_freq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">time_bins</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">t_idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">time_bins</span><span class="p">):</span>
+            <span class="c1"># Get amplitudes for this time bin</span>
+            <span class="n">col</span> <span class="o">=</span> <span class="n">magnitude</span><span class="p">[:,</span> <span class="n">t_idx</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+            <span class="c1"># Mask already used indices (avoid overlapping ridges)</span>
+            <span class="n">col</span><span class="p">[</span><span class="n">used_mask</span><span class="p">[:,</span> <span class="n">t_idx</span><span class="p">]]</span> <span class="o">=</span> <span class="mi">0</span>
+
+            <span class="k">if</span> <span class="n">col</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="n">threshold</span><span class="p">:</span>
+                <span class="n">i</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">col</span><span class="p">)</span>
+                <span class="n">ridge_freq</span><span class="p">[</span><span class="n">t_idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">/</span> <span class="mi">1000</span>  <span class="c1"># to kHz</span>
+
+                <span class="c1"># Mark this bin and neighboring bins as used</span>
+                <span class="n">i_start</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">i</span> <span class="o">-</span> <span class="n">min_bin_distance</span><span class="p">)</span>
+                <span class="n">i_end</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">freq_bins</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="n">min_bin_distance</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+                <span class="n">used_mask</span><span class="p">[</span><span class="n">i_start</span><span class="p">:</span><span class="n">i_end</span><span class="p">,</span> <span class="n">t_idx</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
 
         <span class="k">if</span> <span class="n">smooth</span><span class="p">:</span>
             <span class="n">filled</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan_to_num</span><span class="p">(</span><span class="n">ridge_freq</span><span class="p">,</span> <span class="n">nan</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span>
             <span class="n">smoothed</span> <span class="o">=</span> <span class="n">uniform_filter1d</span><span class="p">(</span><span class="n">filled</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">smooth_window</span><span class="p">)</span>
             <span class="n">ridge_freq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">ridge_freq</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">smoothed</span><span class="p">)</span>
 
-        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">ridge_freq</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Ridge </span><span class="si">{</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">ridge_freq</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Ridge </span><span class="si">{</span><span class="n">r</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
         <span class="n">ridge_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ridge_freq</span><span class="p">)</span>
 
     <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Time [sec]&quot;</span><span class="p">)</span>
@@ -1220,7 +1245,6 @@ Attributes:
     <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
-
 
     <span class="k">if</span> <span class="n">return_ridges</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">ridge_list</span>
@@ -1247,9 +1271,9 @@ Attributes:
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[None, None, None, None]
 </pre></div>
 </div>
-<img alt="../../_images/9bbcb1e6ac3b98d1107ea8715d6c5076a9f415e7aeeb6257a284ea59ef6e51b9.png" src="../../_images/9bbcb1e6ac3b98d1107ea8715d6c5076a9f415e7aeeb6257a284ea59ef6e51b9.png" />
+<img alt="../../_images/b77ae9c7e68f1d5a2885bb0469c6b5b3990c369cbd2fe1b7f26c77523f7047a9.png" src="../../_images/b77ae9c7e68f1d5a2885bb0469c6b5b3990c369cbd2fe1b7f26c77523f7047a9.png" />
 <img alt="../../_images/0487ef9fb88df0244b2be89d786231a0d2fb80f5c5606d736d2d31528e085db3.png" src="../../_images/0487ef9fb88df0244b2be89d786231a0d2fb80f5c5606d736d2d31528e085db3.png" />
-<img alt="../../_images/ba9b6c3a05dd512319f239f5290c8699c16b9d70028bec43bf2990fda9887d5b.png" src="../../_images/ba9b6c3a05dd512319f239f5290c8699c16b9d70028bec43bf2990fda9887d5b.png" />
+<img alt="../../_images/5c771d5c7c525d9b01e1f063a4a7e8b9d498f87ecefe3ef38c57d789d464eff2.png" src="../../_images/5c771d5c7c525d9b01e1f063a4a7e8b9d498f87ecefe3ef38c57d789d464eff2.png" />
 <img alt="../../_images/86eaa809360a079bcb4c1c9365a8371b3504f17067f956f527510c91abdf737a.png" src="../../_images/86eaa809360a079bcb4c1c9365a8371b3504f17067f956f527510c91abdf737a.png" />
 </div>
 </div>
@@ -1272,10 +1296,10 @@ Attributes:
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[None, None, None, None]
 </pre></div>
 </div>
-<img alt="../../_images/8788a2e0d82b54ae342010199b5c653559c44b56d12b94d34341410d6024172a.png" src="../../_images/8788a2e0d82b54ae342010199b5c653559c44b56d12b94d34341410d6024172a.png" />
-<img alt="../../_images/ab415b1249f277a884602e51470e9426371c72cc99372cc3a17047dc59fb009a.png" src="../../_images/ab415b1249f277a884602e51470e9426371c72cc99372cc3a17047dc59fb009a.png" />
-<img alt="../../_images/9bafbef3031498b0e393c7fb61d0f33d3e0e073497678b5df989f4fd1e6ed63e.png" src="../../_images/9bafbef3031498b0e393c7fb61d0f33d3e0e073497678b5df989f4fd1e6ed63e.png" />
-<img alt="../../_images/5d69509fa31f435a0f2393ca5de7333449028a41c2eec8e2f12419a68433fc84.png" src="../../_images/5d69509fa31f435a0f2393ca5de7333449028a41c2eec8e2f12419a68433fc84.png" />
+<img alt="../../_images/261a6dd872b58312a0b6a25f9b53c51cc94f397f27705fc4e1144f6dc81e0b38.png" src="../../_images/261a6dd872b58312a0b6a25f9b53c51cc94f397f27705fc4e1144f6dc81e0b38.png" />
+<img alt="../../_images/9a9ad1cf1ab741061667f7cc558a89e2a650bf7cb2fed95bf272bab82e36642f.png" src="../../_images/9a9ad1cf1ab741061667f7cc558a89e2a650bf7cb2fed95bf272bab82e36642f.png" />
+<img alt="../../_images/e62e63c3bc2ef2969d9c30537a2254b89f96bab8bfd8bbac9952e709991b162b.png" src="../../_images/e62e63c3bc2ef2969d9c30537a2254b89f96bab8bfd8bbac9952e709991b162b.png" />
+<img alt="../../_images/69822d5928f49e7c53e082f3439fcb408a51c689d56cb71eac8da20c28dd4a94.png" src="../../_images/69822d5928f49e7c53e082f3439fcb408a51c689d56cb71eac8da20c28dd4a94.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1294,7 +1318,7 @@ Attributes:
                         <span class="n">norm</span><span class="o">=</span><span class="n">LogNorm</span><span class="p">(</span><span class="n">vmin</span><span class="o">=</span><span class="n">vmin</span><span class="p">),</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;jet&#39;</span><span class="p">)</span>
 
     <span class="c1"># Custom color cycle</span>
-    <span class="n">ridge_colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="s1">&#39;cyan&#39;</span><span class="p">,</span> <span class="s1">&#39;magenta&#39;</span><span class="p">,</span> <span class="s1">&#39;lime&#39;</span><span class="p">,</span> <span class="s1">&#39;orange&#39;</span><span class="p">]</span>
+    <span class="n">ridge_colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;magenta&#39;</span><span class="p">,</span> <span class="s1">&#39;lime&#39;</span><span class="p">,</span> <span class="s1">&#39;orange&#39;</span><span class="p">]</span>
 
     <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">ridge</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">ridge_freqs_kHz</span><span class="p">):</span>
         <span class="n">color</span> <span class="o">=</span> <span class="n">ridge_colors</span><span class="p">[</span><span class="n">i</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="n">ridge_colors</span><span class="p">)]</span>
@@ -1336,8 +1360,12 @@ Attributes:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/8788a2e0d82b54ae342010199b5c653559c44b56d12b94d34341410d6024172a.png" src="../../_images/8788a2e0d82b54ae342010199b5c653559c44b56d12b94d34341410d6024172a.png" />
-<img alt="../../_images/b04375cabe73c6b284acd80a728428ad775a20da9ec4c1df91a519a4187a2760.png" src="../../_images/b04375cabe73c6b284acd80a728428ad775a20da9ec4c1df91a519a4187a2760.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_1087196/2863097040.py:32: UserWarning: Creating legend with loc=&quot;best&quot; can be slow with large amounts of data.
+  plt.tight_layout()
+</pre></div>
+</div>
+<img alt="../../_images/261a6dd872b58312a0b6a25f9b53c51cc94f397f27705fc4e1144f6dc81e0b38.png" src="../../_images/261a6dd872b58312a0b6a25f9b53c51cc94f397f27705fc4e1144f6dc81e0b38.png" />
+<img alt="../../_images/788339521bd66dfc75e40781e6a79281f0a6cfe05364955a4a2aa4d051d3a0b6.png" src="../../_images/788339521bd66dfc75e40781e6a79281f0a6cfe05364955a4a2aa4d051d3a0b6.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1360,8 +1388,8 @@ Attributes:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/6cac43733c82b59c296a8190c540b5f1c9c2b2802e31c3db145925325567fc45.png" src="../../_images/6cac43733c82b59c296a8190c540b5f1c9c2b2802e31c3db145925325567fc45.png" />
-<img alt="../../_images/c9411c0f8bdabd57628d384034eb0d12aca25d5ba91bef09fc6683c2f975421a.png" src="../../_images/c9411c0f8bdabd57628d384034eb0d12aca25d5ba91bef09fc6683c2f975421a.png" />
+<img alt="../../_images/d3f2158c86f4ebd55613ffa1717932b2e0fd83c4be6729e7c0e1d5c99c7417ab.png" src="../../_images/d3f2158c86f4ebd55613ffa1717932b2e0fd83c4be6729e7c0e1d5c99c7417ab.png" />
+<img alt="../../_images/64c2ee46c2564c137e896a9f0a62526450bee61faae26b9c27a4e2124ebdb8b5.png" src="../../_images/64c2ee46c2564c137e896a9f0a62526450bee61faae26b9c27a4e2124ebdb8b5.png" />
 </div>
 </div>
 </section>
@@ -1406,11 +1434,11 @@ Attributes:
       </div>
     </a>
     <a class="right-next"
-       href="../../Libraries/Python/intro.html"
+       href="6.%20Contour%20detection.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Python Libraries</p>
+        <p class="prev-next-title">Thresholding</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
