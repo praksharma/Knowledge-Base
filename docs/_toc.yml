@@ -12,7 +12,7 @@ parts:
       sections:
       - file: Theory/0. Common/1. parameters.ipynb
   - caption: Disruptions
-    maxdepth: 1
+    maxdepth: 3
     chapters:
     - file: Theory/1. Disruption/intro.md
       sections:
@@ -22,6 +22,7 @@ parts:
       - file: Theory/1. Disruption/4. collecting_location_of_parameters.ipynb
       - file: Theory/1. Disruption/5. detect.ipynb
       - file: Theory/1. Disruption/6. Paper1.ipynb
+      - file: Theory/1. Disruption/7. DisruptionBench.ipynb
   - caption: Edge-localized mode
     maxdepth: 1
     chapters:
@@ -36,6 +37,11 @@ parts:
       - file: Theory/3. MHD modes/1. MHD.ipynb
       - file: Theory/3. MHD modes/2. Paper1.ipynb
       - file: Theory/3. MHD modes/3. Mirnov_coil.ipynb
+      - file: Theory/3. MHD modes/4. Thresholding.ipynb
+      - file: Theory/3. MHD modes/5. Ridge detection.ipynb
+      - file: Theory/3. MHD modes/6. Contour detection.ipynb
+      - file: Theory/3. MHD modes/7. Denoising.ipynb
+      - file: Theory/3. MHD modes/8. MHD denoising.ipynb
   - caption: Python Libraries
     maxdepth: 1
     chapters:
@@ -46,6 +52,11 @@ parts:
       - file: Libraries/Python/3. zarr.ipynb
       - file: Libraries/Python/4. xarray_examples.ipynb
       - file: Libraries/Python/5. fsspec.ipynb
+      - file: Libraries/pytorch_lightning/1. intro.ipynb
+      - file: Libraries/pytorch_lightning/2. minimal.ipynb
+      - file: Libraries/pytorch_lightning/2. validation and checkpoint.ipynb
+      - file: Libraries/pytorch_lightning/3. datamodule.ipynb
+      - file: Libraries/pytorch_lightning/4. torchmetrics.ipynb
   - caption: ML models
     maxdepth: 1
     chapters:
