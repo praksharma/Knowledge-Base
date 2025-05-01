@@ -23,6 +23,7 @@ parts:
       - file: Theory/1. Disruption/5. detect.ipynb
       - file: Theory/1. Disruption/6. Paper1.ipynb
       - file: Theory/1. Disruption/7. DisruptionBench.ipynb
+      - file: Theory/1. Disruption/8. disruption_labels.ipynb
   - caption: Edge-localized mode
     maxdepth: 1
     chapters:
@@ -42,6 +43,9 @@ parts:
       - file: Theory/3. MHD modes/6. Contour detection.ipynb
       - file: Theory/3. MHD modes/7. Denoising.ipynb
       - file: Theory/3. MHD modes/8. MHD denoising.ipynb
+      - file: Theory/3. MHD modes/9. change point analysis.ipynb
+      - file: Theory/3. MHD modes/10. PCA analysis_kmeans.ipynb
+      - file: Theory/3. MHD modes/11. umap.ipynb
   - caption: Python Libraries
     maxdepth: 1
     chapters:
