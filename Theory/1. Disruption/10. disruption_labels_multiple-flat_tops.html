@@ -1,0 +1,1141 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Disruption flat-top labelling with multiple segments &#8212; My Jupyter Book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Theory/1. Disruption/10. disruption_labels_multiple-flat_tops';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="ELMs" href="../2.%20ELMs/intro.html" />
+    <link rel="prev" title="Disruption flat-top labelling using a standard deviation based wobbliness check" href="9.%20disruption_labels_single-flat_top.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/kb_logo.png" class="logo__image only-light" alt=""/>
+    <img src="../../_static/kb_logo.png" class="logo__image only-dark pst-js-only" alt=""/>
+  
+  
+    <p class="title logo__title">Knowledge Base</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../0.%20Common/intro.html">
+    Common
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="intro.html">
+    Disruption
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../2.%20ELMs/intro.html">
+    ELMs
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../3.%20MHD%20modes/intro.html">
+    MHD Modes
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../Libraries/Python/intro.html">
+    Python Libraries
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../ML_models/intro.html">
+    ML Models
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-external" href="https://github.com/praksharma">
+    GitHub Profile
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/praksharma/Knowledge-Base" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../0.%20Common/intro.html">
+    Common
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="intro.html">
+    Disruption
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../2.%20ELMs/intro.html">
+    ELMs
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../3.%20MHD%20modes/intro.html">
+    MHD Modes
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../Libraries/Python/intro.html">
+    Python Libraries
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../ML_models/intro.html">
+    ML Models
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://github.com/praksharma">
+    GitHub Profile
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/praksharma/Knowledge-Base" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="1.%20disruptions.html">Basic concepts</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="2.%20parameters.html">MAST diagnostic data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3.%20access_parquet_files.html">Access Parquet files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="4.%20collecting_location_of_parameters.html">Location of parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="5.%20detect.html">Detect disruptions in plasma current plot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="6.%20Paper1.html">Paper 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="7.%20DisruptionBench.html">Disruption Bench</a></li>
+<li class="toctree-l1"><a class="reference internal" href="8.%20disruption_labels.html">Disruption event labelling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="9.%20disruption_labels_single-flat_top.html">Disruption flat-top labelling using a standard deviation based wobbliness check</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Disruption flat-top labelling with multiple segments</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../intro.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="intro.html" class="nav-link">Disruption</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Disruption flat-top labelling with multiple segments</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="disruption-flat-top-labelling-with-multiple-segments">
+<h1>Disruption flat-top labelling with multiple segments<a class="headerlink" href="#disruption-flat-top-labelling-with-multiple-segments" title="Link to this heading">#</a></h1>
+<p>I realised that a single flat-top can’t capture the true flat-top. In many cases, the flat-top is not a perfect plateau, it can contain spikes. So, I switched to a divide-and-conquer strategy. Instead of forcing one flat-top, I allowed multiple flat-top segments to be detected independently using the same standard deviation
+check and an added masking rules (e.g., above a minimum Ip, before disruption).</p>
+<p>Comnbining these segments was straightforward. Please read the comments in <code class="docutils literal notranslate"><span class="pre">combine_segments</span></code> method.</p>
+<section id="download-the-data">
+<h2>Download the data<a class="headerlink" href="#download-the-data" title="Link to this heading">#</a></h2>
+<p>Code to download just the summary from CSD3.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="k">for</span><span class="w"> </span>i<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="o">{</span><span class="m">30001</span>..30472<span class="o">}</span><span class="p">;</span><span class="w"> </span><span class="k">do</span><span class="w">                                         </span>
+<span class="w">  </span>rsync<span class="w"> </span>-avz<span class="w"> </span>--progress<span class="w"> </span>CSD3:/rds/project/rds-mOlK9qn0PlQ/fairmast/upload-tmp/level2/<span class="si">${</span><span class="nv">i</span><span class="si">}</span>.zarr/summary/<span class="w"> </span>~/Downloads/level2_summary/<span class="si">${</span><span class="nv">i</span><span class="si">}</span>/
+<span class="k">done</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">xarray</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xr</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.signal</span><span class="w"> </span><span class="kn">import</span> <span class="n">savgol_filter</span><span class="p">,</span> <span class="n">find_peaks</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.interpolate</span><span class="w"> </span><span class="kn">import</span> <span class="n">interp1d</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">shot_ids_i_like</span> <span class="o">=</span> <span class="p">[</span><span class="mi">30108</span><span class="p">,</span> <span class="mi">30121</span><span class="p">,</span> <span class="mi">30178</span><span class="p">,</span> <span class="mi">30035</span><span class="p">,</span> <span class="mi">30183</span><span class="p">,</span> <span class="mi">30086</span><span class="p">,</span> <span class="mi">30112</span><span class="p">,</span> <span class="mi">30109</span><span class="p">,</span> <span class="mi">30209</span><span class="p">]</span>
+<span class="c1"># random shots ints</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">shot_ids</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">30000</span><span class="p">,</span> <span class="mi">30200</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+<span class="n">shot_ids</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">shot_ids</span><span class="p">)</span> <span class="o">+</span> <span class="n">shot_ids_i_like</span>
+<span class="n">shot_ids</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">shot_ids</span><span class="p">))</span>  <span class="c1"># remove duplicates and sort</span>
+
+<span class="n">shot_ids</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[30009,
+ 30021,
+ 30035,
+ 30036,
+ 30047,
+ 30067,
+ 30086,
+ 30103,
+ 30108,
+ 30109,
+ 30112,
+ 30117,
+ 30121,
+ 30172,
+ 30178,
+ 30183,
+ 30192,
+ 30195,
+ 30209]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">detect_change_points</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">intensity</span><span class="p">,</span> <span class="n">window_size</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">2.0</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Detects change points based on the difference in moving average intensity.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">    - time (np.array): Time array.</span>
+<span class="sd">    - intensity (np.array): Intensity array.</span>
+<span class="sd">    In level 1 data, plasma current is in kA, in level 2 data it is in Amps. So, we divide by 1000 to get kA.</span>
+<span class="sd">    Otherwise, the gradient will be too high.</span>
+<span class="sd">    - window_size (int): Size of the window for calculating moving average.</span>
+<span class="sd">    - threshold (float): Threshold for detecting significant changes.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">    - change_points (list): List of times when significant changes are detected.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">moving_avg</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">convolve</span><span class="p">(</span><span class="n">intensity</span><span class="o">/</span><span class="mi">1000</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">window_size</span><span class="p">)</span> <span class="o">/</span> <span class="n">window_size</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;valid&#39;</span><span class="p">)</span>
+    <span class="n">diff</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">moving_avg</span><span class="p">))</span>
+
+    <span class="n">change_indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">diff</span> <span class="o">&gt;</span> <span class="n">threshold</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">window_size</span>  <span class="c1"># Adjust index for valid region</span>
+    <span class="n">change_points</span> <span class="o">=</span> <span class="n">time</span><span class="p">[</span><span class="n">change_indices</span><span class="p">]</span>
+
+    <span class="c1"># If no change points detected, return None</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">change_points</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="k">return</span> <span class="n">change_points</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">DisruptionDetector</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">ip_threshold</span><span class="o">=</span><span class="mf">60.0</span><span class="p">,</span>
+        <span class="n">disruption_window</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span>
+        <span class="n">disruption_window_size</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+        <span class="n">disruption_poly_order</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+        <span class="n">disruption_prominence</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span>
+        <span class="n">flat_top_window_size</span><span class="o">=</span><span class="mi">51</span><span class="p">,</span>
+        <span class="n">flat_top_tolerance</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span>
+        <span class="n">flat_top_interp_kind</span><span class="o">=</span><span class="s2">&quot;linear&quot;</span><span class="p">,</span>
+        <span class="n">plot</span><span class="o">=</span><span class="kc">False</span>
+    <span class="p">):</span>
+        <span class="c1"># disruption detection</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ip_threshold</span> <span class="o">=</span> <span class="n">ip_threshold</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">disruption_window</span> <span class="o">=</span> <span class="n">disruption_window</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">disruption_window_size</span> <span class="o">=</span> <span class="n">disruption_window_size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">disruption_poly_order</span> <span class="o">=</span> <span class="n">disruption_poly_order</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">disruption_prominence</span> <span class="o">=</span> <span class="n">disruption_prominence</span>
+
+        <span class="c1"># flat top</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">flat_top_window_size</span> <span class="o">=</span> <span class="n">flat_top_window_size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">flat_top_tolerance</span> <span class="o">=</span> <span class="n">flat_top_tolerance</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">flat_top_interp_kind</span> <span class="o">=</span> <span class="n">flat_top_interp_kind</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">plot</span> <span class="o">=</span> <span class="n">plot</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_detect_flattop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ip</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">td</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Detects the flat-top region of the plasma current using standard deviation based wobbliness check.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># Only search before disruption (if given), to avoid false flat region after crash</span>
+            <span class="c1"># we use masking becasue standard deviation detects post disruption as a flat top.</span>
+            <span class="k">if</span> <span class="n">td</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;td is none. can&#39;t mask post disruption zone.&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">td</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">mask</span> <span class="o">=</span> <span class="n">time</span> <span class="o">&lt;</span> <span class="n">td</span>
+                <span class="n">ip</span> <span class="o">=</span> <span class="n">ip</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
+                <span class="n">time</span> <span class="o">=</span> <span class="n">time</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
+
+            <span class="c1"># Compute rolling standard deviation to find &quot;flat&quot; regions</span>
+            <span class="n">window_pts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">flat_top_window_size</span>
+            <span class="n">ip_series</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">ip</span><span class="p">)</span>
+            <span class="n">rolling_std</span> <span class="o">=</span> <span class="n">ip_series</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="n">window_pts</span><span class="p">,</span> <span class="n">center</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">std</span><span class="p">()</span> <span class="c1"># https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.rolling.html</span>
+
+            <span class="c1"># Identify indices where the std is below threshold (i.e., flat)</span>
+            <span class="n">flat_idxs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">rolling_std</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">flat_top_tolerance</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="c1">#print(f&quot;DEBUG: flat_idxs count = {len(flat_idxs)}&quot;)</span>
+
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">flat_idxs</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+
+            <span class="c1"># Split into continuous segments</span>
+            <span class="n">diffs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">flat_idxs</span><span class="p">)</span>
+            <span class="n">split_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">diffs</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">segments</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">flat_idxs</span><span class="p">,</span> <span class="n">split_idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+
+            <span class="c1"># Pick the longest continuous flat segment</span>
+            <span class="n">longest</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">segments</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="nb">len</span><span class="p">)</span>
+
+            <span class="c1"># Extract start and end times</span>
+            <span class="n">tmin</span> <span class="o">=</span> <span class="n">time</span><span class="p">[</span><span class="n">longest</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+            <span class="n">tmax</span> <span class="o">=</span> <span class="n">time</span><span class="p">[</span><span class="n">longest</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span>
+            <span class="k">return</span> <span class="n">tmin</span><span class="p">,</span> <span class="n">tmax</span>
+
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Flat-top detection failed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">detect_all_flattops</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ip</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">td</span><span class="p">,</span> <span class="n">min_duration</span><span class="o">=</span><span class="mf">0.002</span><span class="p">,</span> <span class="n">max_iters</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+        <span class="n">ip</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">ip</span><span class="p">)</span>
+        <span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">time</span><span class="p">)</span>
+        <span class="n">ip_masked</span> <span class="o">=</span> <span class="n">ip</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">ip_masked</span><span class="p">[</span><span class="n">ip</span> <span class="o">&lt;</span> <span class="mf">2e4</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>  <span class="c1"># already decided on 20k threshold</span>
+        <span class="n">ip_masked</span><span class="p">[</span><span class="n">time</span> <span class="o">&gt;=</span> <span class="n">td</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>  <span class="c1"># td cut</span>
+
+        <span class="n">segments</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_iters</span><span class="p">):</span>
+            <span class="n">ft_start</span><span class="p">,</span> <span class="n">ft_end</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_detect_flattop</span><span class="p">(</span><span class="n">ip_masked</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">td</span><span class="p">)</span> <span class="c1"># need to modify the flattop detection fucntion to not use td every single time, since it is being masked here.</span>
+
+            <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">ft_start</span><span class="p">)</span> <span class="ow">or</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">ft_end</span><span class="p">):</span>
+                <span class="k">break</span>
+
+            <span class="n">duration</span> <span class="o">=</span> <span class="n">ft_end</span> <span class="o">-</span> <span class="n">ft_start</span>
+            <span class="k">if</span> <span class="n">duration</span> <span class="o">&lt;</span> <span class="n">min_duration</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Segment too short: </span><span class="si">{</span><span class="n">duration</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">s — stopping.&quot;</span><span class="p">)</span>
+                <span class="k">break</span> <span class="c1"># stop the loop because we are finding flat-tops that are too short and meaningless, as it can be a flat line on the rampup area.</span>
+
+            <span class="n">segments</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">ft_start</span><span class="p">,</span> <span class="n">ft_end</span><span class="p">))</span>
+            <span class="n">ip_masked</span><span class="p">[(</span><span class="n">time</span> <span class="o">&gt;=</span> <span class="n">ft_start</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">time</span> <span class="o">&lt;=</span> <span class="n">ft_end</span><span class="p">)]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>  <span class="c1"># mask used part</span>
+
+        <span class="k">return</span> <span class="n">segments</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_detect_rampup</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">flat_top_start</span><span class="p">):</span>
+        <span class="k">return</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">flat_top_start</span>
+    
+    <span class="k">def</span><span class="w"> </span><span class="nf">combine_segments</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">segments</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sure I can use smart techniques to combines the segments, such as implement a distance parameter.</span>
+<span class="sd">        But based on my plots, I think we can just take the min and max of the segments. I know this is stupid, but it works.</span>
+<span class="sd">        The problem is there are huge spikes within the flattop but our iterative algo is able to find correct flat segments in the flattops irrespective of the distance.</span>
+<span class="sd">        So I think we can just take the min and max of the segments.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">segments</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+        <span class="n">starts</span><span class="p">,</span> <span class="n">ends</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">segments</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">min</span><span class="p">(</span><span class="n">starts</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">ends</span><span class="p">)</span>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shot</span><span class="p">,</span> <span class="n">ip</span><span class="p">,</span> <span class="n">time</span><span class="p">):</span>
+        <span class="c1"># remove early garbage</span>
+        <span class="n">mask</span> <span class="o">=</span> <span class="n">time</span> <span class="o">&gt;=</span> <span class="mi">0</span>
+        <span class="n">ip</span> <span class="o">=</span> <span class="n">ip</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
+        <span class="n">time</span> <span class="o">=</span> <span class="n">time</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
+
+        <span class="n">change_points</span> <span class="o">=</span> <span class="n">detect_change_points</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">ip</span><span class="p">,</span> <span class="n">window_size</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">disruption_window_size</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">disruption_prominence</span><span class="p">)</span>
+        <span class="n">td</span> <span class="o">=</span> <span class="n">change_points</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="n">change_points</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">change_points</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+
+        <span class="n">flattop_segments</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">detect_all_flattops</span><span class="p">(</span><span class="n">ip</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">td</span><span class="p">)</span>
+
+        <span class="c1"># # For now, just take the earliest segment as representative</span>
+        <span class="c1"># if flattop_segments:</span>
+        <span class="c1">#     ft_start, ft_end = flattop_segments[0]</span>
+        <span class="c1"># else:</span>
+        <span class="c1">#     ft_start, ft_end = np.nan, np.nan</span>
+        <span class="n">ft_start</span><span class="p">,</span> <span class="n">ft_end</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">combine_segments</span><span class="p">(</span><span class="n">flattop_segments</span><span class="p">)</span> <span class="c1"># combine all segments and calc start and end of flattop</span>
+
+        <span class="n">ru_start</span><span class="p">,</span> <span class="n">ru_end</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_detect_rampup</span><span class="p">(</span><span class="n">ft_start</span><span class="p">)</span>  <span class="c1"># can stay as-is for now</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">plot</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_plot_with_segments</span><span class="p">(</span><span class="n">shot</span><span class="p">,</span> <span class="n">ip</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">flattop_segments</span><span class="p">,</span> <span class="n">td</span><span class="p">,</span> <span class="n">ru_start</span><span class="p">,</span> <span class="n">ru_end</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s2">&quot;shot&quot;</span><span class="p">:</span> <span class="n">shot</span><span class="p">,</span>
+            <span class="s2">&quot;td&quot;</span><span class="p">:</span> <span class="n">td</span><span class="p">,</span>
+            <span class="s2">&quot;flattop_start&quot;</span><span class="p">:</span> <span class="n">ft_start</span><span class="p">,</span>
+            <span class="s2">&quot;flattop_end&quot;</span><span class="p">:</span> <span class="n">ft_end</span><span class="p">,</span>
+            <span class="s2">&quot;rampup_start&quot;</span><span class="p">:</span> <span class="n">ru_start</span><span class="p">,</span>
+            <span class="s2">&quot;rampup_end&quot;</span><span class="p">:</span> <span class="n">ru_end</span><span class="p">,</span>
+            <span class="s2">&quot;flattop_segments&quot;</span><span class="p">:</span> <span class="n">flattop_segments</span><span class="p">,</span>  <span class="c1"># all segments so we can plot and see what is going on</span>
+        <span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># larger window and threshold for standard deviation based flatness check</span>
+<span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;ip_threshold&quot;</span><span class="p">:</span> <span class="mf">60.0</span><span class="p">,</span>
+    <span class="s2">&quot;disruption_window&quot;</span><span class="p">:</span> <span class="mf">0.05</span><span class="p">,</span>
+    <span class="s2">&quot;disruption_window_size&quot;</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+    <span class="s2">&quot;disruption_poly_order&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="s2">&quot;disruption_prominence&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="s2">&quot;flat_top_window_size&quot;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+    <span class="s2">&quot;flat_top_tolerance&quot;</span><span class="p">:</span> <span class="mi">10000</span><span class="p">,</span>
+    <span class="s2">&quot;flat_top_interp_kind&quot;</span><span class="p">:</span> <span class="s2">&quot;linear&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">shot</span> <span class="ow">in</span> <span class="n">shot_ids</span><span class="p">:</span>
+    <span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_zarr</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;./level2_copy/</span><span class="si">{</span><span class="n">shot</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">consolidated</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">ip</span> <span class="o">=</span> <span class="n">ds</span><span class="p">[</span><span class="s2">&quot;ip&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+    <span class="n">time</span> <span class="o">=</span> <span class="n">ds</span><span class="p">[</span><span class="s2">&quot;time&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+
+    <span class="n">detector</span> <span class="o">=</span> <span class="n">DisruptionDetector</span><span class="p">(</span><span class="o">**</span><span class="n">params</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">detector</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">shot</span><span class="p">,</span> <span class="n">ip</span><span class="p">,</span> <span class="n">time</span><span class="p">)</span>
+    <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+    
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Segment too short: 0.0005s — stopping.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>shot</th>
+      <th>td</th>
+      <th>flattop_start</th>
+      <th>flattop_end</th>
+      <th>rampup_start</th>
+      <th>rampup_end</th>
+      <th>flattop_segments</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>30009</td>
+      <td>0.18440</td>
+      <td>0.13240</td>
+      <td>0.15915</td>
+      <td>0.0</td>
+      <td>0.13240</td>
+      <td>[(0.1323997106552126, 0.15914971065521266)]</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>30021</td>
+      <td>0.48880</td>
+      <td>0.12755</td>
+      <td>0.44855</td>
+      <td>0.0</td>
+      <td>0.12755</td>
+      <td>[(0.12754970932006857, 0.4485497093200689)]</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>30035</td>
+      <td>0.21515</td>
+      <td>0.13165</td>
+      <td>0.19465</td>
+      <td>0.0</td>
+      <td>0.13165</td>
+      <td>[(0.1316497573852541, 0.14564975738525412), (0...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>30036</td>
+      <td>0.35580</td>
+      <td>0.13730</td>
+      <td>0.33380</td>
+      <td>0.0</td>
+      <td>0.13730</td>
+      <td>[(0.21904973506927516, 0.3337997350692753), (0...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>30047</td>
+      <td>0.62805</td>
+      <td>0.09480</td>
+      <td>0.60505</td>
+      <td>0.0</td>
+      <td>0.09480</td>
+      <td>[(0.09479966259002703, 0.6050496625900275)]</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">plot_single_shot</span><span class="p">(</span><span class="n">shot_id</span><span class="p">,</span> <span class="n">ip</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">labels_dict</span><span class="p">):</span>
+    <span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="s1">&#39;purple&#39;</span><span class="p">]</span>
+    <span class="c1">#label_names = [&#39;rampup_start&#39;, &#39;rampup_end&#39;, &#39;flattop_start&#39;, &#39;flattop_end&#39;, &#39;td&#39;]</span>
+    <span class="n">label_names</span> <span class="o">=</span> <span class="p">[</span> <span class="s1">&#39;td&#39;</span><span class="p">]</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">ip</span><span class="p">)</span><span class="c1">#, label=&quot;ip(t)&quot;)</span>
+
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">label_names</span><span class="p">):</span>
+        <span class="n">val</span> <span class="o">=</span> <span class="n">labels_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">val</span><span class="p">):</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">val</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">label</span><span class="si">}</span><span class="s2">=</span><span class="si">{</span><span class="n">val</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">time</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">label</span><span class="si">}</span><span class="s2">=nan&quot;</span><span class="p">)</span>
+    <span class="c1"># plot individual flat tops</span>
+    <span class="n">segments</span> <span class="o">=</span> <span class="n">labels_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;flattop_segments&quot;</span><span class="p">,</span> <span class="p">[])</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">segments</span><span class="p">):</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">end</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">((</span><span class="n">start</span> <span class="o">+</span> <span class="n">end</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">ip</span><span class="p">)</span><span class="o">*</span><span class="mf">0.5</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;FT</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s2">&quot;bottom&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">segments</span><span class="p">):</span>
+        <span class="c1"># Get points within the segment for horizontal line level</span>
+        <span class="n">segment_mask</span> <span class="o">=</span> <span class="p">(</span><span class="n">time</span> <span class="o">&gt;=</span> <span class="n">start</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">time</span> <span class="o">&lt;=</span> <span class="n">end</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">segment_mask</span><span class="p">):</span>
+            <span class="k">continue</span>
+        <span class="n">segment_ip</span> <span class="o">=</span> <span class="n">ip</span><span class="p">[</span><span class="n">segment_mask</span><span class="p">]</span>
+        <span class="n">level</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">segment_ip</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
+
+        <span class="c1"># Draw horizontal line and label</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="n">level</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+           
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Time (s)&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Plasma Current&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Shot </span><span class="si">{</span><span class="n">shot_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;center left&quot;</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">results</span><span class="p">:</span>
+    <span class="n">shot_id</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;shot&quot;</span><span class="p">]</span>
+    <span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_zarr</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;./level2_copy/</span><span class="si">{</span><span class="n">shot_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">consolidated</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">ip</span> <span class="o">=</span> <span class="n">ds</span><span class="p">[</span><span class="s2">&quot;ip&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+    <span class="n">time</span> <span class="o">=</span> <span class="n">ds</span><span class="p">[</span><span class="s2">&quot;time&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+
+    <span class="n">plot_single_shot</span><span class="p">(</span><span class="n">shot_id</span><span class="p">,</span> <span class="n">ip</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/f57cc05cf46786ece39e369a52d1a4dbec45ddb24a9397374e67ab811f9f8274.png" src="../../_images/f57cc05cf46786ece39e369a52d1a4dbec45ddb24a9397374e67ab811f9f8274.png" />
+<img alt="../../_images/c6fd1ade9b3e79f6877181080ce332c1f59e28dae3fbcc8c68f994bb38150421.png" src="../../_images/c6fd1ade9b3e79f6877181080ce332c1f59e28dae3fbcc8c68f994bb38150421.png" />
+<img alt="../../_images/9bb9d72ff03b39bb5d6cff34d5dcf98846e9d106356d09469eb8931defc76cad.png" src="../../_images/9bb9d72ff03b39bb5d6cff34d5dcf98846e9d106356d09469eb8931defc76cad.png" />
+<img alt="../../_images/6144f3e7bc589dad7b92ef057dda205f239f6201c753f4b284fc206e366b3139.png" src="../../_images/6144f3e7bc589dad7b92ef057dda205f239f6201c753f4b284fc206e366b3139.png" />
+<img alt="../../_images/5352c5398603ba27333a2de6613c5ed01cec0b2b5ce40c48dd28e479b3ed862d.png" src="../../_images/5352c5398603ba27333a2de6613c5ed01cec0b2b5ce40c48dd28e479b3ed862d.png" />
+<img alt="../../_images/f6eaaec04e0f39a8fedf3bd13479d65c644b7696c920643a3aa12936c28e5f62.png" src="../../_images/f6eaaec04e0f39a8fedf3bd13479d65c644b7696c920643a3aa12936c28e5f62.png" />
+<img alt="../../_images/0e7a45c01c5c299e967f671c2241f211d65351024ee4f22e135eef7841d0bd4c.png" src="../../_images/0e7a45c01c5c299e967f671c2241f211d65351024ee4f22e135eef7841d0bd4c.png" />
+<img alt="../../_images/f0949759ce83a4cda8a67769a52b4c36a80c15e0c512aab15a1cec179f4ae93e.png" src="../../_images/f0949759ce83a4cda8a67769a52b4c36a80c15e0c512aab15a1cec179f4ae93e.png" />
+<img alt="../../_images/edafb89c5d23926304e526df11abf0b1f844f45e02d846e9c4ae62c229514d93.png" src="../../_images/edafb89c5d23926304e526df11abf0b1f844f45e02d846e9c4ae62c229514d93.png" />
+<img alt="../../_images/e5254d2f47891a737508c15012e49f954d81394e5be7e1866d2c89ea4992b53c.png" src="../../_images/e5254d2f47891a737508c15012e49f954d81394e5be7e1866d2c89ea4992b53c.png" />
+<img alt="../../_images/dff05db4a0eef6741a5149ccb9c2975d7ffe78436ff818fc5278790e156faceb.png" src="../../_images/dff05db4a0eef6741a5149ccb9c2975d7ffe78436ff818fc5278790e156faceb.png" />
+<img alt="../../_images/dc91463410600bc21638eebb1fdca88776af43a7d832302526737e80f497a0b4.png" src="../../_images/dc91463410600bc21638eebb1fdca88776af43a7d832302526737e80f497a0b4.png" />
+<img alt="../../_images/103af7d0b8607c6b53d2ae63a179af2fc65bd57c45a773da4e4fdfdaf98c390d.png" src="../../_images/103af7d0b8607c6b53d2ae63a179af2fc65bd57c45a773da4e4fdfdaf98c390d.png" />
+<img alt="../../_images/7e7fcdfabe4d0f3cfb608127e8d4e948c7a8e949ea3b54f21086f1711b6692a2.png" src="../../_images/7e7fcdfabe4d0f3cfb608127e8d4e948c7a8e949ea3b54f21086f1711b6692a2.png" />
+<img alt="../../_images/b3d01ee17d9b361e2e7759b101d158b6db7bd60f9302c49e7fc31cd94aadeed4.png" src="../../_images/b3d01ee17d9b361e2e7759b101d158b6db7bd60f9302c49e7fc31cd94aadeed4.png" />
+<img alt="../../_images/9f091b353da3981c7cd4c507f9a5badbe61a791fdaa33003b37c1852e7c9661a.png" src="../../_images/9f091b353da3981c7cd4c507f9a5badbe61a791fdaa33003b37c1852e7c9661a.png" />
+<img alt="../../_images/4d4ea76c5579e73d902efa217179f9c8668d40f82621405e633911c583e72ca8.png" src="../../_images/4d4ea76c5579e73d902efa217179f9c8668d40f82621405e633911c583e72ca8.png" />
+<img alt="../../_images/3cad5f7d4ad4077e9635b2ec9a3d4182b1e380f37ddf2c5fcb9e608623892809.png" src="../../_images/3cad5f7d4ad4077e9635b2ec9a3d4182b1e380f37ddf2c5fcb9e608623892809.png" />
+<img alt="../../_images/56e9cea2757f84af978c70cc966e39bff70565781ff98edef144930d0b508d3a.png" src="../../_images/56e9cea2757f84af978c70cc966e39bff70565781ff98edef144930d0b508d3a.png" />
+</div>
+</div>
+</section>
+<section id="plot-the-important-bits">
+<h2>Plot the important bits<a class="headerlink" href="#plot-the-important-bits" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">plot_single_shot</span><span class="p">(</span><span class="n">shot_id</span><span class="p">,</span> <span class="n">ip</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">labels_dict</span><span class="p">):</span>
+    <span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="s1">&#39;purple&#39;</span><span class="p">]</span>
+    <span class="n">label_names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;rampup_start&#39;</span><span class="p">,</span> <span class="s1">&#39;rampup_end&#39;</span><span class="p">,</span> <span class="s1">&#39;flattop_start&#39;</span><span class="p">,</span> <span class="s1">&#39;flattop_end&#39;</span><span class="p">,</span> <span class="s1">&#39;td&#39;</span><span class="p">]</span>
+    <span class="c1">#label_names = [ &#39;td&#39;]</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">ip</span><span class="p">)</span><span class="c1">#, label=&quot;ip(t)&quot;)</span>
+
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">label_names</span><span class="p">):</span>
+        <span class="n">val</span> <span class="o">=</span> <span class="n">labels_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">val</span><span class="p">):</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">val</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">label</span><span class="si">}</span><span class="s2">=</span><span class="si">{</span><span class="n">val</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">time</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">label</span><span class="si">}</span><span class="s2">=nan&quot;</span><span class="p">)</span>
+    <span class="c1"># horizontal flat-top bar</span>
+    <span class="n">ft_start</span> <span class="o">=</span> <span class="n">labels_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;flattop_start&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
+    <span class="n">ft_end</span> <span class="o">=</span> <span class="n">labels_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;flattop_end&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">ft_start</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">ft_end</span><span class="p">):</span>
+        <span class="n">mask</span> <span class="o">=</span> <span class="p">(</span><span class="n">time</span> <span class="o">&gt;=</span> <span class="n">ft_start</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">time</span> <span class="o">&lt;=</span> <span class="n">ft_end</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">mask</span><span class="p">):</span>
+            <span class="n">ft_level</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">ip</span><span class="p">[</span><span class="n">mask</span><span class="p">])</span><span class="o">*</span><span class="mf">0.5</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="n">ft_level</span><span class="p">,</span> <span class="n">ft_start</span><span class="p">,</span> <span class="n">ft_end</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">((</span><span class="n">ft_start</span> <span class="o">+</span> <span class="n">ft_end</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">ip</span><span class="p">)</span><span class="o">*</span><span class="mf">0.5</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;FT&quot;</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s2">&quot;bottom&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Time (s)&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Plasma Current&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Shot </span><span class="si">{</span><span class="n">shot_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;center left&quot;</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">results</span><span class="p">:</span>
+    <span class="n">shot_id</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;shot&quot;</span><span class="p">]</span>
+    <span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_zarr</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;./level2_copy/</span><span class="si">{</span><span class="n">shot_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">consolidated</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">ip</span> <span class="o">=</span> <span class="n">ds</span><span class="p">[</span><span class="s2">&quot;ip&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+    <span class="n">time</span> <span class="o">=</span> <span class="n">ds</span><span class="p">[</span><span class="s2">&quot;time&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+
+    <span class="n">plot_single_shot</span><span class="p">(</span><span class="n">shot_id</span><span class="p">,</span> <span class="n">ip</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/7aa58aa229bfd052358cfc65abc89f1cc1bf0f722720968470be33cdc87b21e5.png" src="../../_images/7aa58aa229bfd052358cfc65abc89f1cc1bf0f722720968470be33cdc87b21e5.png" />
+<img alt="../../_images/90a36e8f21144078d5325af207b1b4ee92661aa8d7888d1a5339b6e9d6c73406.png" src="../../_images/90a36e8f21144078d5325af207b1b4ee92661aa8d7888d1a5339b6e9d6c73406.png" />
+<img alt="../../_images/2fec08458ed8c4f7b161e14bfb198f87c085ab0dab37cc537a8630e0f8a2894e.png" src="../../_images/2fec08458ed8c4f7b161e14bfb198f87c085ab0dab37cc537a8630e0f8a2894e.png" />
+<img alt="../../_images/8aec96a8b4bbc866ab9161e6133a8269576c3a9b9dd8609c28e0f5c5c2041df6.png" src="../../_images/8aec96a8b4bbc866ab9161e6133a8269576c3a9b9dd8609c28e0f5c5c2041df6.png" />
+<img alt="../../_images/440d3a61db2f2dd713fe2d5dafa53070a84e222032a8e6e49f0256c5634a3443.png" src="../../_images/440d3a61db2f2dd713fe2d5dafa53070a84e222032a8e6e49f0256c5634a3443.png" />
+<img alt="../../_images/9a9ecd222cd8e45dfe7ed8a9e75b06ea2f4a8b7a8fcc041456f3d4a1feb92340.png" src="../../_images/9a9ecd222cd8e45dfe7ed8a9e75b06ea2f4a8b7a8fcc041456f3d4a1feb92340.png" />
+<img alt="../../_images/d3850d5b640daa01fee2f06642f3bc2f554410a3ba74939291befd020bb568b5.png" src="../../_images/d3850d5b640daa01fee2f06642f3bc2f554410a3ba74939291befd020bb568b5.png" />
+<img alt="../../_images/a9546418f9378aac949bfc11bec1130029d4f4159331aae098b71f9ea16fe7d4.png" src="../../_images/a9546418f9378aac949bfc11bec1130029d4f4159331aae098b71f9ea16fe7d4.png" />
+<img alt="../../_images/a35064b8f6724e61846f726b5dc095d54a4de49893a02e0e5ed5bef1d0032c61.png" src="../../_images/a35064b8f6724e61846f726b5dc095d54a4de49893a02e0e5ed5bef1d0032c61.png" />
+<img alt="../../_images/f4e96f41714304a62cbed9c7b6b49662715d6cd3ad91b6b9c2895600c551e97c.png" src="../../_images/f4e96f41714304a62cbed9c7b6b49662715d6cd3ad91b6b9c2895600c551e97c.png" />
+<img alt="../../_images/f353bfe90b1701ecf73089ae9cee6f5b9a831fbb1839cd4cb8eb45f3c9d09dd7.png" src="../../_images/f353bfe90b1701ecf73089ae9cee6f5b9a831fbb1839cd4cb8eb45f3c9d09dd7.png" />
+<img alt="../../_images/4f080e3261242e1898483b57a93781f98a614af6f02a631280d881aace52da57.png" src="../../_images/4f080e3261242e1898483b57a93781f98a614af6f02a631280d881aace52da57.png" />
+<img alt="../../_images/67172c11b48e3fd2bf2de7939aaa358f6d0fd83d132eae812cbc33752ab355d3.png" src="../../_images/67172c11b48e3fd2bf2de7939aaa358f6d0fd83d132eae812cbc33752ab355d3.png" />
+<img alt="../../_images/360a201b0cdd14757682be39e8574850683dea88212989fb003c7cdd10863b57.png" src="../../_images/360a201b0cdd14757682be39e8574850683dea88212989fb003c7cdd10863b57.png" />
+<img alt="../../_images/4c590241089e9811f4a181973b7c3ae4fa54277f5ea0b30ade86d226d9046cff.png" src="../../_images/4c590241089e9811f4a181973b7c3ae4fa54277f5ea0b30ade86d226d9046cff.png" />
+<img alt="../../_images/9c7990116031335d8c66e958988283679f959d3470cb88519d6953077128b2f8.png" src="../../_images/9c7990116031335d8c66e958988283679f959d3470cb88519d6953077128b2f8.png" />
+<img alt="../../_images/453b5691c936990ce4d3003b9a3df42dfd11714783167b7a0033c54e4d740e86.png" src="../../_images/453b5691c936990ce4d3003b9a3df42dfd11714783167b7a0033c54e4d740e86.png" />
+<img alt="../../_images/efc8ec5ce2cc01f7244bf34ba4381da146298f93727b76f26b1dec34dbb75ec7.png" src="../../_images/efc8ec5ce2cc01f7244bf34ba4381da146298f93727b76f26b1dec34dbb75ec7.png" />
+<img alt="../../_images/c2b091d571a69f5533ced92b07c55be233625a8e8e641db3e8b2d45b7a25d18a.png" src="../../_images/c2b091d571a69f5533ced92b07c55be233625a8e8e641db3e8b2d45b7a25d18a.png" />
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Theory/1. Disruption"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="9.%20disruption_labels_single-flat_top.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Disruption flat-top labelling using a standard deviation based wobbliness check</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../2.%20ELMs/intro.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">ELMs</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> 
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#download-the-data">Download the data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-the-important-bits">Plot the important bits</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  
+  <div class="tocsection editthispage">
+    <a href="https://github.com/praksharma/Knowledge-Base/edit/main/docs/Theory/1. Disruption/10. disruption_labels_multiple-flat_tops.ipynb">
+      <i class="fa-solid fa-pencil"></i>
+      
+      
+        
+          Edit on GitHub
+        
+      
+    </a>
+  </div>
+</div>
+
+  <div class="sidebar-secondary-item">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/Theory/1. Disruption/10. disruption_labels_multiple-flat_tops.ipynb"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2025, By Prakhar Sharma.
+      <br/>
+    
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__center">
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.4.7.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
