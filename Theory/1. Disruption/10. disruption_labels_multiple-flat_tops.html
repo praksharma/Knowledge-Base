@@ -653,9 +653,50 @@ check and an added masking rules (e.g., above a minimum Ip, before disruption).<
 
         <span class="k">return</span> <span class="n">segments</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">_detect_rampup</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">flat_top_start</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_detect_rampup_simple</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">flat_top_start</span><span class="p">):</span>
         <span class="k">return</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">flat_top_start</span>
-    
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_detect_rampup</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ip</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">flat_top_start</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">flat_top_start</span><span class="p">):</span>
+                <span class="k">return</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>  <span class="c1"># can&#39;t proceed if flattop start is NaN, sure there is a better way to do this.</span>
+
+            <span class="c1"># Use data before flat-top only</span>
+            <span class="n">mask</span> <span class="o">=</span> <span class="n">time</span> <span class="o">&lt;=</span> <span class="n">flat_top_start</span>
+            <span class="n">ip</span> <span class="o">=</span> <span class="n">ip</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
+            <span class="n">time</span> <span class="o">=</span> <span class="n">time</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
+
+            <span class="c1"># Enforce minimum ramp-up duration</span>
+            <span class="n">time_mask</span> <span class="o">=</span> <span class="n">time</span> <span class="o">&gt;</span> <span class="mf">0.05</span>
+            <span class="n">ip</span> <span class="o">=</span> <span class="n">ip</span><span class="p">[</span><span class="n">time_mask</span><span class="p">]</span>
+            <span class="n">time</span> <span class="o">=</span> <span class="n">time</span><span class="p">[</span><span class="n">time_mask</span><span class="p">]</span>
+
+            <span class="c1"># Compute rolling gradient</span>
+            <span class="n">ip_smooth</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">ip</span><span class="p">)</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="n">window</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">flat_top_window_size</span><span class="p">,</span> <span class="n">center</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+            <span class="n">grad</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">ip_smooth</span><span class="p">)</span>
+            <span class="n">grad</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan_to_num</span><span class="p">(</span><span class="n">grad</span><span class="p">)</span>
+
+            <span class="c1"># Ramp-up ends when gradient drops below a small threshold</span>
+            <span class="n">grad_thresh</span> <span class="o">=</span> <span class="mf">0.7</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmax</span><span class="p">(</span><span class="n">grad</span><span class="p">)</span>
+            <span class="c1"># candidate_idxs = np.where(grad &lt; grad_thresh)[0]</span>
+
+            <span class="c1"># if len(candidate_idxs) == 0:</span>
+            <span class="c1">#     return 0.0, flat_top_start</span>
+
+            <span class="c1"># # Find first place where gradient becomes low (end of strong ramp)</span>
+            <span class="c1"># t_ramp_end = time[candidate_idxs[-2]]</span>
+
+            <span class="n">high_grad_idxs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">grad</span> <span class="o">&gt;</span> <span class="n">grad_thresh</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">high_grad_idxs</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">t_ramp_end</span> <span class="o">=</span> <span class="n">flat_top_start</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">t_ramp_end</span> <span class="o">=</span> <span class="n">time</span><span class="p">[</span><span class="n">high_grad_idxs</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span>
+            <span class="k">return</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">t_ramp_end</span>
+
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Ramp-up detection failed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">flat_top_start</span>
+
     <span class="k">def</span><span class="w"> </span><span class="nf">combine_segments</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">segments</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Sure I can use smart techniques to combines the segments, such as implement a distance parameter.</span>
@@ -687,7 +728,8 @@ check and an added masking rules (e.g., above a minimum Ip, before disruption).<
         <span class="c1">#     ft_start, ft_end = np.nan, np.nan</span>
         <span class="n">ft_start</span><span class="p">,</span> <span class="n">ft_end</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">combine_segments</span><span class="p">(</span><span class="n">flattop_segments</span><span class="p">)</span> <span class="c1"># combine all segments and calc start and end of flattop</span>
 
-        <span class="n">ru_start</span><span class="p">,</span> <span class="n">ru_end</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_detect_rampup</span><span class="p">(</span><span class="n">ft_start</span><span class="p">)</span>  <span class="c1"># can stay as-is for now</span>
+        <span class="c1">#ru_start, ru_end = self._detect_rampup(ft_start)  # can stay as-is for now</span>
+        <span class="n">ru_start</span><span class="p">,</span> <span class="n">ru_end</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_detect_rampup</span><span class="p">(</span><span class="n">ip</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">ft_start</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">plot</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_plot_with_segments</span><span class="p">(</span><span class="n">shot</span><span class="p">,</span> <span class="n">ip</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">flattop_segments</span><span class="p">,</span> <span class="n">td</span><span class="p">,</span> <span class="n">ru_start</span><span class="p">,</span> <span class="n">ru_end</span><span class="p">)</span>
@@ -788,7 +830,7 @@ check and an added masking rules (e.g., above a minimum Ip, before disruption).<
       <td>0.13240</td>
       <td>0.15915</td>
       <td>0.0</td>
-      <td>0.13240</td>
+      <td>0.11990</td>
       <td>[(0.1323997106552126, 0.15914971065521266)]</td>
     </tr>
     <tr>
@@ -798,7 +840,7 @@ check and an added masking rules (e.g., above a minimum Ip, before disruption).<
       <td>0.12755</td>
       <td>0.44855</td>
       <td>0.0</td>
-      <td>0.12755</td>
+      <td>0.11505</td>
       <td>[(0.12754970932006857, 0.4485497093200689)]</td>
     </tr>
     <tr>
@@ -808,7 +850,7 @@ check and an added masking rules (e.g., above a minimum Ip, before disruption).<
       <td>0.13165</td>
       <td>0.19465</td>
       <td>0.0</td>
-      <td>0.13165</td>
+      <td>0.11490</td>
       <td>[(0.1316497573852541, 0.14564975738525412), (0...</td>
     </tr>
     <tr>
@@ -818,7 +860,7 @@ check and an added masking rules (e.g., above a minimum Ip, before disruption).<
       <td>0.13730</td>
       <td>0.33380</td>
       <td>0.0</td>
-      <td>0.13730</td>
+      <td>0.10680</td>
       <td>[(0.21904973506927516, 0.3337997350692753), (0...</td>
     </tr>
     <tr>
@@ -828,7 +870,7 @@ check and an added masking rules (e.g., above a minimum Ip, before disruption).<
       <td>0.09480</td>
       <td>0.60505</td>
       <td>0.0</td>
-      <td>0.09480</td>
+      <td>0.08205</td>
       <td>[(0.09479966259002703, 0.6050496625900275)]</td>
     </tr>
   </tbody>
@@ -889,25 +931,25 @@ check and an added masking rules (e.g., above a minimum Ip, before disruption).<
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/f57cc05cf46786ece39e369a52d1a4dbec45ddb24a9397374e67ab811f9f8274.png" src="../../_images/f57cc05cf46786ece39e369a52d1a4dbec45ddb24a9397374e67ab811f9f8274.png" />
-<img alt="../../_images/c6fd1ade9b3e79f6877181080ce332c1f59e28dae3fbcc8c68f994bb38150421.png" src="../../_images/c6fd1ade9b3e79f6877181080ce332c1f59e28dae3fbcc8c68f994bb38150421.png" />
-<img alt="../../_images/9bb9d72ff03b39bb5d6cff34d5dcf98846e9d106356d09469eb8931defc76cad.png" src="../../_images/9bb9d72ff03b39bb5d6cff34d5dcf98846e9d106356d09469eb8931defc76cad.png" />
-<img alt="../../_images/6144f3e7bc589dad7b92ef057dda205f239f6201c753f4b284fc206e366b3139.png" src="../../_images/6144f3e7bc589dad7b92ef057dda205f239f6201c753f4b284fc206e366b3139.png" />
-<img alt="../../_images/5352c5398603ba27333a2de6613c5ed01cec0b2b5ce40c48dd28e479b3ed862d.png" src="../../_images/5352c5398603ba27333a2de6613c5ed01cec0b2b5ce40c48dd28e479b3ed862d.png" />
-<img alt="../../_images/f6eaaec04e0f39a8fedf3bd13479d65c644b7696c920643a3aa12936c28e5f62.png" src="../../_images/f6eaaec04e0f39a8fedf3bd13479d65c644b7696c920643a3aa12936c28e5f62.png" />
-<img alt="../../_images/0e7a45c01c5c299e967f671c2241f211d65351024ee4f22e135eef7841d0bd4c.png" src="../../_images/0e7a45c01c5c299e967f671c2241f211d65351024ee4f22e135eef7841d0bd4c.png" />
-<img alt="../../_images/f0949759ce83a4cda8a67769a52b4c36a80c15e0c512aab15a1cec179f4ae93e.png" src="../../_images/f0949759ce83a4cda8a67769a52b4c36a80c15e0c512aab15a1cec179f4ae93e.png" />
-<img alt="../../_images/edafb89c5d23926304e526df11abf0b1f844f45e02d846e9c4ae62c229514d93.png" src="../../_images/edafb89c5d23926304e526df11abf0b1f844f45e02d846e9c4ae62c229514d93.png" />
-<img alt="../../_images/e5254d2f47891a737508c15012e49f954d81394e5be7e1866d2c89ea4992b53c.png" src="../../_images/e5254d2f47891a737508c15012e49f954d81394e5be7e1866d2c89ea4992b53c.png" />
-<img alt="../../_images/dff05db4a0eef6741a5149ccb9c2975d7ffe78436ff818fc5278790e156faceb.png" src="../../_images/dff05db4a0eef6741a5149ccb9c2975d7ffe78436ff818fc5278790e156faceb.png" />
-<img alt="../../_images/dc91463410600bc21638eebb1fdca88776af43a7d832302526737e80f497a0b4.png" src="../../_images/dc91463410600bc21638eebb1fdca88776af43a7d832302526737e80f497a0b4.png" />
-<img alt="../../_images/103af7d0b8607c6b53d2ae63a179af2fc65bd57c45a773da4e4fdfdaf98c390d.png" src="../../_images/103af7d0b8607c6b53d2ae63a179af2fc65bd57c45a773da4e4fdfdaf98c390d.png" />
-<img alt="../../_images/7e7fcdfabe4d0f3cfb608127e8d4e948c7a8e949ea3b54f21086f1711b6692a2.png" src="../../_images/7e7fcdfabe4d0f3cfb608127e8d4e948c7a8e949ea3b54f21086f1711b6692a2.png" />
-<img alt="../../_images/b3d01ee17d9b361e2e7759b101d158b6db7bd60f9302c49e7fc31cd94aadeed4.png" src="../../_images/b3d01ee17d9b361e2e7759b101d158b6db7bd60f9302c49e7fc31cd94aadeed4.png" />
-<img alt="../../_images/9f091b353da3981c7cd4c507f9a5badbe61a791fdaa33003b37c1852e7c9661a.png" src="../../_images/9f091b353da3981c7cd4c507f9a5badbe61a791fdaa33003b37c1852e7c9661a.png" />
-<img alt="../../_images/4d4ea76c5579e73d902efa217179f9c8668d40f82621405e633911c583e72ca8.png" src="../../_images/4d4ea76c5579e73d902efa217179f9c8668d40f82621405e633911c583e72ca8.png" />
-<img alt="../../_images/3cad5f7d4ad4077e9635b2ec9a3d4182b1e380f37ddf2c5fcb9e608623892809.png" src="../../_images/3cad5f7d4ad4077e9635b2ec9a3d4182b1e380f37ddf2c5fcb9e608623892809.png" />
-<img alt="../../_images/56e9cea2757f84af978c70cc966e39bff70565781ff98edef144930d0b508d3a.png" src="../../_images/56e9cea2757f84af978c70cc966e39bff70565781ff98edef144930d0b508d3a.png" />
+<img alt="../../_images/edfc53ded4623d89d3b2e98843e6f42bb298b41cb081c285dbc148e27f485fec.png" src="../../_images/edfc53ded4623d89d3b2e98843e6f42bb298b41cb081c285dbc148e27f485fec.png" />
+<img alt="../../_images/c2274d7682353575e41c0ecb34eda20c6abbfb7bfc7333ff89d09b03d1b19906.png" src="../../_images/c2274d7682353575e41c0ecb34eda20c6abbfb7bfc7333ff89d09b03d1b19906.png" />
+<img alt="../../_images/6d394838462be5b9a5b755381f0ffbe23b5003fe239c5e2b7ce78239ed72e419.png" src="../../_images/6d394838462be5b9a5b755381f0ffbe23b5003fe239c5e2b7ce78239ed72e419.png" />
+<img alt="../../_images/7dc628aabf73030cf98effd52a1ddae8ef1c21e986c333f7d6dccc941b2c4253.png" src="../../_images/7dc628aabf73030cf98effd52a1ddae8ef1c21e986c333f7d6dccc941b2c4253.png" />
+<img alt="../../_images/00d83e13e9add99c0681b8a92cb784ea40aa960b63d75406a38008ed1af9f6b6.png" src="../../_images/00d83e13e9add99c0681b8a92cb784ea40aa960b63d75406a38008ed1af9f6b6.png" />
+<img alt="../../_images/cf20c13ec9e4a27f7c6db90912ecd577b97e8df0194d634e0231f89d6c56a82d.png" src="../../_images/cf20c13ec9e4a27f7c6db90912ecd577b97e8df0194d634e0231f89d6c56a82d.png" />
+<img alt="../../_images/2c12cb1a88ba58990e6bc984b6d44e5a3eee8ff26b650b5f7ee485593a025349.png" src="../../_images/2c12cb1a88ba58990e6bc984b6d44e5a3eee8ff26b650b5f7ee485593a025349.png" />
+<img alt="../../_images/8addcbd67001d86d856c2a7b0696457e2660e816a3956ca66d92e2e861dd5037.png" src="../../_images/8addcbd67001d86d856c2a7b0696457e2660e816a3956ca66d92e2e861dd5037.png" />
+<img alt="../../_images/c60b9ded18ab239c33f411eb90c8f2372c2c4c396708a65ec08a109fc9a5853e.png" src="../../_images/c60b9ded18ab239c33f411eb90c8f2372c2c4c396708a65ec08a109fc9a5853e.png" />
+<img alt="../../_images/09afe2dd73d3ab2c5d275e5e8ed60681c52c520a6953604acf7046679f361d75.png" src="../../_images/09afe2dd73d3ab2c5d275e5e8ed60681c52c520a6953604acf7046679f361d75.png" />
+<img alt="../../_images/a934e150e653279d22ea09af0eb6ddcf924b4739fd669eba62aa85184f30da28.png" src="../../_images/a934e150e653279d22ea09af0eb6ddcf924b4739fd669eba62aa85184f30da28.png" />
+<img alt="../../_images/da20db901c1ea40250cbd34f0d31fbfa1d877536c7cc305ec56adf873846d61b.png" src="../../_images/da20db901c1ea40250cbd34f0d31fbfa1d877536c7cc305ec56adf873846d61b.png" />
+<img alt="../../_images/24e52781933d2eb4829825dd09dd713dc4c716f7a1b620d8fbfdd9534c07a6b7.png" src="../../_images/24e52781933d2eb4829825dd09dd713dc4c716f7a1b620d8fbfdd9534c07a6b7.png" />
+<img alt="../../_images/5fc250c61f0efc1a7cb84ca2ae8b5409c6505283b6e059a7bd3437724c7f2c92.png" src="../../_images/5fc250c61f0efc1a7cb84ca2ae8b5409c6505283b6e059a7bd3437724c7f2c92.png" />
+<img alt="../../_images/90fc7e82ca3258776ce04761d37c6f99e806086a45a61300fab1922613e7efbe.png" src="../../_images/90fc7e82ca3258776ce04761d37c6f99e806086a45a61300fab1922613e7efbe.png" />
+<img alt="../../_images/ac73135e28a92dfa3176f0e1df6efe55718a7a24b40ad47cb5d10af9b830a23c.png" src="../../_images/ac73135e28a92dfa3176f0e1df6efe55718a7a24b40ad47cb5d10af9b830a23c.png" />
+<img alt="../../_images/91b2c0b5eaa25317ee6eb36cbfec64d6403278f8bd03b77152761368fca15fa2.png" src="../../_images/91b2c0b5eaa25317ee6eb36cbfec64d6403278f8bd03b77152761368fca15fa2.png" />
+<img alt="../../_images/d91a64fd1cb022d47af88ce82d080dc76fcaa9b5d03ea0f73b2e61cd752cc53e.png" src="../../_images/d91a64fd1cb022d47af88ce82d080dc76fcaa9b5d03ea0f73b2e61cd752cc53e.png" />
+<img alt="../../_images/da51324741f26cca4115137d6e548e1344f257f31056771ae9c7df94f8b1654c.png" src="../../_images/da51324741f26cca4115137d6e548e1344f257f31056771ae9c7df94f8b1654c.png" />
 </div>
 </div>
 </section>
@@ -959,25 +1001,25 @@ check and an added masking rules (e.g., above a minimum Ip, before disruption).<
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/7aa58aa229bfd052358cfc65abc89f1cc1bf0f722720968470be33cdc87b21e5.png" src="../../_images/7aa58aa229bfd052358cfc65abc89f1cc1bf0f722720968470be33cdc87b21e5.png" />
-<img alt="../../_images/90a36e8f21144078d5325af207b1b4ee92661aa8d7888d1a5339b6e9d6c73406.png" src="../../_images/90a36e8f21144078d5325af207b1b4ee92661aa8d7888d1a5339b6e9d6c73406.png" />
-<img alt="../../_images/2fec08458ed8c4f7b161e14bfb198f87c085ab0dab37cc537a8630e0f8a2894e.png" src="../../_images/2fec08458ed8c4f7b161e14bfb198f87c085ab0dab37cc537a8630e0f8a2894e.png" />
-<img alt="../../_images/8aec96a8b4bbc866ab9161e6133a8269576c3a9b9dd8609c28e0f5c5c2041df6.png" src="../../_images/8aec96a8b4bbc866ab9161e6133a8269576c3a9b9dd8609c28e0f5c5c2041df6.png" />
-<img alt="../../_images/440d3a61db2f2dd713fe2d5dafa53070a84e222032a8e6e49f0256c5634a3443.png" src="../../_images/440d3a61db2f2dd713fe2d5dafa53070a84e222032a8e6e49f0256c5634a3443.png" />
-<img alt="../../_images/9a9ecd222cd8e45dfe7ed8a9e75b06ea2f4a8b7a8fcc041456f3d4a1feb92340.png" src="../../_images/9a9ecd222cd8e45dfe7ed8a9e75b06ea2f4a8b7a8fcc041456f3d4a1feb92340.png" />
-<img alt="../../_images/d3850d5b640daa01fee2f06642f3bc2f554410a3ba74939291befd020bb568b5.png" src="../../_images/d3850d5b640daa01fee2f06642f3bc2f554410a3ba74939291befd020bb568b5.png" />
-<img alt="../../_images/a9546418f9378aac949bfc11bec1130029d4f4159331aae098b71f9ea16fe7d4.png" src="../../_images/a9546418f9378aac949bfc11bec1130029d4f4159331aae098b71f9ea16fe7d4.png" />
-<img alt="../../_images/a35064b8f6724e61846f726b5dc095d54a4de49893a02e0e5ed5bef1d0032c61.png" src="../../_images/a35064b8f6724e61846f726b5dc095d54a4de49893a02e0e5ed5bef1d0032c61.png" />
-<img alt="../../_images/f4e96f41714304a62cbed9c7b6b49662715d6cd3ad91b6b9c2895600c551e97c.png" src="../../_images/f4e96f41714304a62cbed9c7b6b49662715d6cd3ad91b6b9c2895600c551e97c.png" />
-<img alt="../../_images/f353bfe90b1701ecf73089ae9cee6f5b9a831fbb1839cd4cb8eb45f3c9d09dd7.png" src="../../_images/f353bfe90b1701ecf73089ae9cee6f5b9a831fbb1839cd4cb8eb45f3c9d09dd7.png" />
-<img alt="../../_images/4f080e3261242e1898483b57a93781f98a614af6f02a631280d881aace52da57.png" src="../../_images/4f080e3261242e1898483b57a93781f98a614af6f02a631280d881aace52da57.png" />
-<img alt="../../_images/67172c11b48e3fd2bf2de7939aaa358f6d0fd83d132eae812cbc33752ab355d3.png" src="../../_images/67172c11b48e3fd2bf2de7939aaa358f6d0fd83d132eae812cbc33752ab355d3.png" />
-<img alt="../../_images/360a201b0cdd14757682be39e8574850683dea88212989fb003c7cdd10863b57.png" src="../../_images/360a201b0cdd14757682be39e8574850683dea88212989fb003c7cdd10863b57.png" />
-<img alt="../../_images/4c590241089e9811f4a181973b7c3ae4fa54277f5ea0b30ade86d226d9046cff.png" src="../../_images/4c590241089e9811f4a181973b7c3ae4fa54277f5ea0b30ade86d226d9046cff.png" />
-<img alt="../../_images/9c7990116031335d8c66e958988283679f959d3470cb88519d6953077128b2f8.png" src="../../_images/9c7990116031335d8c66e958988283679f959d3470cb88519d6953077128b2f8.png" />
-<img alt="../../_images/453b5691c936990ce4d3003b9a3df42dfd11714783167b7a0033c54e4d740e86.png" src="../../_images/453b5691c936990ce4d3003b9a3df42dfd11714783167b7a0033c54e4d740e86.png" />
-<img alt="../../_images/efc8ec5ce2cc01f7244bf34ba4381da146298f93727b76f26b1dec34dbb75ec7.png" src="../../_images/efc8ec5ce2cc01f7244bf34ba4381da146298f93727b76f26b1dec34dbb75ec7.png" />
-<img alt="../../_images/c2b091d571a69f5533ced92b07c55be233625a8e8e641db3e8b2d45b7a25d18a.png" src="../../_images/c2b091d571a69f5533ced92b07c55be233625a8e8e641db3e8b2d45b7a25d18a.png" />
+<img alt="../../_images/27cf3aa8fc624a526ccd425afe259d1f8b75cf88a515181c9e56d3e0e3a8f604.png" src="../../_images/27cf3aa8fc624a526ccd425afe259d1f8b75cf88a515181c9e56d3e0e3a8f604.png" />
+<img alt="../../_images/a7d9ab1ce48fef6ef5ca9216b167df5ae1d6e65395020c8b10a58af2d29fe57c.png" src="../../_images/a7d9ab1ce48fef6ef5ca9216b167df5ae1d6e65395020c8b10a58af2d29fe57c.png" />
+<img alt="../../_images/3a2eead5319d2898e9c1cc26ec1aabbd5bb02a0caeee36c1c26b2eab1db39fc4.png" src="../../_images/3a2eead5319d2898e9c1cc26ec1aabbd5bb02a0caeee36c1c26b2eab1db39fc4.png" />
+<img alt="../../_images/5ed87c7d21a00e4b2bef7a1829abe68a8f47e648a9e66c9247a95129210a4a55.png" src="../../_images/5ed87c7d21a00e4b2bef7a1829abe68a8f47e648a9e66c9247a95129210a4a55.png" />
+<img alt="../../_images/3f2fb74c8534f0bd870f694f2764f86280c5396eaf27dae7911a9294747d0e0a.png" src="../../_images/3f2fb74c8534f0bd870f694f2764f86280c5396eaf27dae7911a9294747d0e0a.png" />
+<img alt="../../_images/21f210d0519891b18596f702cd44a655898e716720a4df13bb94d17ea50201d4.png" src="../../_images/21f210d0519891b18596f702cd44a655898e716720a4df13bb94d17ea50201d4.png" />
+<img alt="../../_images/08283d412b9d31c8a8904c1b1390b50e97984c18576f7a290071112813f78f1f.png" src="../../_images/08283d412b9d31c8a8904c1b1390b50e97984c18576f7a290071112813f78f1f.png" />
+<img alt="../../_images/1a7ce6bf66d70641191809bb4ca4a2314ac0c1bf1f16a5ffbf696bee26027466.png" src="../../_images/1a7ce6bf66d70641191809bb4ca4a2314ac0c1bf1f16a5ffbf696bee26027466.png" />
+<img alt="../../_images/0bbe8e2d027c76cea3c574545b3459329911d5a27563a958c2597b6104f7f9d7.png" src="../../_images/0bbe8e2d027c76cea3c574545b3459329911d5a27563a958c2597b6104f7f9d7.png" />
+<img alt="../../_images/cdad31308eacec6e686a320b703a73222063e3f1d7a3a4fad473d1fb501ae205.png" src="../../_images/cdad31308eacec6e686a320b703a73222063e3f1d7a3a4fad473d1fb501ae205.png" />
+<img alt="../../_images/853c2f850fb3151f60885a56d5c0cd488dfd1b50f481eecc3bd2c1d0c46df86e.png" src="../../_images/853c2f850fb3151f60885a56d5c0cd488dfd1b50f481eecc3bd2c1d0c46df86e.png" />
+<img alt="../../_images/9e65766ee9578dc3360eb4a009888a1c1589abcbdc86dd80bcc0dee5dbc5a58c.png" src="../../_images/9e65766ee9578dc3360eb4a009888a1c1589abcbdc86dd80bcc0dee5dbc5a58c.png" />
+<img alt="../../_images/9026248f0625c5cb6ce9f5f46254ecd6fc4343e80bd4640c4763707346089081.png" src="../../_images/9026248f0625c5cb6ce9f5f46254ecd6fc4343e80bd4640c4763707346089081.png" />
+<img alt="../../_images/426d927073db7228b53c085c8267ed804ce3c27669ff4dc096443b683e13098f.png" src="../../_images/426d927073db7228b53c085c8267ed804ce3c27669ff4dc096443b683e13098f.png" />
+<img alt="../../_images/5bce10badb44ed081816433662896b7f87afa74a3470f412a7eb370043052b06.png" src="../../_images/5bce10badb44ed081816433662896b7f87afa74a3470f412a7eb370043052b06.png" />
+<img alt="../../_images/be3b85c296a0a6da482121dd96ff2ad88d99f4cd95183a8f7778d0b2c7450fe0.png" src="../../_images/be3b85c296a0a6da482121dd96ff2ad88d99f4cd95183a8f7778d0b2c7450fe0.png" />
+<img alt="../../_images/f1f08e73d8df483af82bbcf74065e4871a8dbd06fc12eb2b9f2cdd4adab1a079.png" src="../../_images/f1f08e73d8df483af82bbcf74065e4871a8dbd06fc12eb2b9f2cdd4adab1a079.png" />
+<img alt="../../_images/8dfdc1ca08cdc6a35e8b1ab53823a93ffa6b19b5f0ea86610c9b8bae86bdd568.png" src="../../_images/8dfdc1ca08cdc6a35e8b1ab53823a93ffa6b19b5f0ea86610c9b8bae86bdd568.png" />
+<img alt="../../_images/263f2624b751a41bdcfae01384300f63872bf69191b111130a6013d9298dd8b5.png" src="../../_images/263f2624b751a41bdcfae01384300f63872bf69191b111130a6013d9298dd8b5.png" />
 </div>
 </div>
 </section>
