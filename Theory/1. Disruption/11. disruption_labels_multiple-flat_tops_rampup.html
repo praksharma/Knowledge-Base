@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Disruption flat-top labelling with multiple segments &#8212; My Jupyter Book</title>
+    <title>Flat-top and ramp-up labelling with multiple segments (improved) &#8212; My Jupyter Book</title>
   
   
   
@@ -59,11 +59,11 @@
     <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'Theory/1. Disruption/10. disruption_labels_multiple-flat_tops';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Theory/1. Disruption/11. disruption_labels_multiple-flat_tops_rampup';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Flat-top and ramp-up labelling with multiple segments (improved)" href="11.%20disruption_labels_multiple-flat_tops_rampup.html" />
-    <link rel="prev" title="Disruption flat-top labelling using a standard deviation based wobbliness check" href="9.%20disruption_labels_single-flat_top.html" />
+    <link rel="next" title="ELMs" href="../2.%20ELMs/intro.html" />
+    <link rel="prev" title="Disruption flat-top labelling with multiple segments" href="10.%20disruption_labels_multiple-flat_tops.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -400,8 +400,8 @@
 <li class="toctree-l1"><a class="reference internal" href="7.%20DisruptionBench.html">Disruption Bench</a></li>
 <li class="toctree-l1"><a class="reference internal" href="8.%20disruption_labels.html">Disruption event labelling</a></li>
 <li class="toctree-l1"><a class="reference internal" href="9.%20disruption_labels_single-flat_top.html">Disruption flat-top labelling using a standard deviation based wobbliness check</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Disruption flat-top labelling with multiple segments</a></li>
-<li class="toctree-l1"><a class="reference internal" href="11.%20disruption_labels_multiple-flat_tops_rampup.html">Flat-top and ramp-up labelling with multiple segments (improved)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10.%20disruption_labels_multiple-flat_tops.html">Disruption flat-top labelling with multiple segments</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Flat-top and ramp-up labelling with multiple segments (improved)</a></li>
 </ul>
 </div>
 </nav></div>
@@ -445,7 +445,7 @@
     
     <li class="breadcrumb-item"><a href="intro.html" class="nav-link">Disruption</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Disruption flat-top labelling with multiple segments</span></li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Flat-top and ramp-up labelling with multiple segments (improved)</span></li>
   </ul>
 </nav>
 </div>
@@ -462,8 +462,8 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="disruption-flat-top-labelling-with-multiple-segments">
-<h1>Disruption flat-top labelling with multiple segments<a class="headerlink" href="#disruption-flat-top-labelling-with-multiple-segments" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="flat-top-and-ramp-up-labelling-with-multiple-segments-improved">
+<h1>Flat-top and ramp-up labelling with multiple segments (improved)<a class="headerlink" href="#flat-top-and-ramp-up-labelling-with-multiple-segments-improved" title="Link to this heading">#</a></h1>
 <p>I realised that a single flat-top can’t capture the true flat-top. In many cases, the flat-top is not a perfect plateau, it can contain spikes. So, I switched to a divide-and-conquer strategy. Instead of forcing one flat-top, I allowed multiple flat-top segments to be detected independently using the same standard deviation
 check and an added masking rules (e.g., above a minimum Ip, before disruption).</p>
 <p>Comnbining these segments was straightforward. Please read the comments in <code class="docutils literal notranslate"><span class="pre">combine_segments</span></code> method.</p>
@@ -493,7 +493,7 @@ check and an added masking rules (e.g., above a minimum Ip, before disruption).<
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">shot_ids_i_like</span> <span class="o">=</span> <span class="p">[</span><span class="mi">30108</span><span class="p">,</span> <span class="mi">30121</span><span class="p">,</span> <span class="mi">30178</span><span class="p">,</span> <span class="mi">30035</span><span class="p">,</span> <span class="mi">30183</span><span class="p">,</span> <span class="mi">30086</span><span class="p">,</span> <span class="mi">30112</span><span class="p">,</span> <span class="mi">30109</span><span class="p">,</span> <span class="mi">30209</span><span class="p">]</span>
 <span class="c1"># random shots ints</span>
 <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">shot_ids</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">30000</span><span class="p">,</span> <span class="mi">30200</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+<span class="n">shot_ids</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">30000</span><span class="p">,</span> <span class="mi">30200</span><span class="p">,</span> <span class="mi">40</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
 <span class="n">shot_ids</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">shot_ids</span><span class="p">)</span> <span class="o">+</span> <span class="n">shot_ids_i_like</span>
 <span class="n">shot_ids</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">shot_ids</span><span class="p">))</span>  <span class="c1"># remove duplicates and sort</span>
 
@@ -504,22 +504,47 @@ check and an added masking rules (e.g., above a minimum Ip, before disruption).<
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[30009,
  30021,
+ 30025,
+ 30029,
  30035,
  30036,
+ 30039,
  30047,
+ 30058,
  30067,
+ 30070,
+ 30072,
+ 30077,
+ 30079,
+ 30081,
+ 30082,
  30086,
+ 30087,
+ 30088,
+ 30099,
  30103,
  30108,
  30109,
  30112,
+ 30115,
  30117,
  30121,
+ 30140,
+ 30142,
+ 30147,
+ 30148,
+ 30165,
+ 30167,
  30172,
+ 30174,
+ 30175,
+ 30177,
  30178,
  30183,
  30192,
+ 30193,
  30195,
+ 30197,
  30209]
 </pre></div>
 </div>
@@ -564,12 +589,14 @@ check and an added masking rules (e.g., above a minimum Ip, before disruption).<
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">ip_threshold</span><span class="o">=</span><span class="mf">60.0</span><span class="p">,</span>
         <span class="n">disruption_window</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span>
-        <span class="n">disruption_window_size</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+        <span class="n">disruption_window_size</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
         <span class="n">disruption_poly_order</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
         <span class="n">disruption_prominence</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span>
         <span class="n">flat_top_window_size</span><span class="o">=</span><span class="mi">51</span><span class="p">,</span>
         <span class="n">flat_top_tolerance</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span>
         <span class="n">flat_top_interp_kind</span><span class="o">=</span><span class="s2">&quot;linear&quot;</span><span class="p">,</span>
+        <span class="n">rampup_window_size</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span>
+        <span class="n">min_duration</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span>
         <span class="n">plot</span><span class="o">=</span><span class="kc">False</span>
     <span class="p">):</span>
         <span class="c1"># disruption detection</span>
@@ -583,7 +610,8 @@ check and an added masking rules (e.g., above a minimum Ip, before disruption).<
         <span class="bp">self</span><span class="o">.</span><span class="n">flat_top_window_size</span> <span class="o">=</span> <span class="n">flat_top_window_size</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">flat_top_tolerance</span> <span class="o">=</span> <span class="n">flat_top_tolerance</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">flat_top_interp_kind</span> <span class="o">=</span> <span class="n">flat_top_interp_kind</span>
-
+        <span class="bp">self</span><span class="o">.</span><span class="n">rampup_window_size</span> <span class="o">=</span> <span class="n">rampup_window_size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">min_duration</span> <span class="o">=</span> <span class="n">min_duration</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">plot</span> <span class="o">=</span> <span class="n">plot</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_detect_flattop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ip</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">td</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -672,13 +700,18 @@ check and an added masking rules (e.g., above a minimum Ip, before disruption).<
             <span class="n">ip</span> <span class="o">=</span> <span class="n">ip</span><span class="p">[</span><span class="n">time_mask</span><span class="p">]</span>
             <span class="n">time</span> <span class="o">=</span> <span class="n">time</span><span class="p">[</span><span class="n">time_mask</span><span class="p">]</span>
 
+            <span class="c1"># mast anything before flat top start -0.1</span>
+            <span class="n">time_mask</span> <span class="o">=</span> <span class="n">time</span> <span class="o">&gt;</span> <span class="n">flat_top_start</span> <span class="o">-</span> <span class="mf">0.2</span>
+            <span class="n">ip</span> <span class="o">=</span> <span class="n">ip</span><span class="p">[</span><span class="n">time_mask</span><span class="p">]</span>
+            <span class="n">time</span> <span class="o">=</span> <span class="n">time</span><span class="p">[</span><span class="n">time_mask</span><span class="p">]</span>
+
             <span class="c1"># Compute rolling gradient</span>
-            <span class="n">ip_smooth</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">ip</span><span class="p">)</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="n">window</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">flat_top_window_size</span><span class="p">,</span> <span class="n">center</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+            <span class="n">ip_smooth</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">ip</span><span class="p">)</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="n">window</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">rampup_window_size</span><span class="p">,</span> <span class="n">center</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
             <span class="n">grad</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">ip_smooth</span><span class="p">)</span>
             <span class="n">grad</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan_to_num</span><span class="p">(</span><span class="n">grad</span><span class="p">)</span>
 
             <span class="c1"># Ramp-up ends when gradient drops below a small threshold</span>
-            <span class="n">grad_thresh</span> <span class="o">=</span> <span class="mf">0.7</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmax</span><span class="p">(</span><span class="n">grad</span><span class="p">)</span>
+            <span class="n">grad_thresh</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmax</span><span class="p">(</span><span class="n">grad</span><span class="p">)</span>
             <span class="c1"># candidate_idxs = np.where(grad &lt; grad_thresh)[0]</span>
 
             <span class="c1"># if len(candidate_idxs) == 0:</span>
@@ -687,8 +720,9 @@ check and an added masking rules (e.g., above a minimum Ip, before disruption).<
             <span class="c1"># # Find first place where gradient becomes low (end of strong ramp)</span>
             <span class="c1"># t_ramp_end = time[candidate_idxs[-2]]</span>
 
-            <span class="n">high_grad_idxs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">grad</span> <span class="o">&gt;</span> <span class="n">grad_thresh</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">high_grad_idxs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">grad</span> <span class="o">&gt;</span> <span class="n">grad_thresh</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
             <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">high_grad_idxs</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+
                 <span class="n">t_ramp_end</span> <span class="o">=</span> <span class="n">flat_top_start</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">t_ramp_end</span> <span class="o">=</span> <span class="n">time</span><span class="p">[</span><span class="n">high_grad_idxs</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span>
@@ -720,7 +754,7 @@ check and an added masking rules (e.g., above a minimum Ip, before disruption).<
         <span class="n">change_points</span> <span class="o">=</span> <span class="n">detect_change_points</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">ip</span><span class="p">,</span> <span class="n">window_size</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">disruption_window_size</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">disruption_prominence</span><span class="p">)</span>
         <span class="n">td</span> <span class="o">=</span> <span class="n">change_points</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="n">change_points</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">change_points</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
 
-        <span class="n">flattop_segments</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">detect_all_flattops</span><span class="p">(</span><span class="n">ip</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">td</span><span class="p">)</span>
+        <span class="n">flattop_segments</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">detect_all_flattops</span><span class="p">(</span><span class="n">ip</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">td</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">min_duration</span><span class="p">)</span>
 
         <span class="c1"># # For now, just take the earliest segment as representative</span>
         <span class="c1"># if flattop_segments:</span>
@@ -760,6 +794,8 @@ check and an added masking rules (e.g., above a minimum Ip, before disruption).<
     <span class="s2">&quot;flat_top_window_size&quot;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
     <span class="s2">&quot;flat_top_tolerance&quot;</span><span class="p">:</span> <span class="mi">10000</span><span class="p">,</span>
     <span class="s2">&quot;flat_top_interp_kind&quot;</span><span class="p">:</span> <span class="s2">&quot;linear&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;rampup_window_size&quot;</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span>
+    <span class="s2">&quot;min_duration&quot;</span> <span class="p">:</span> <span class="mf">0.02</span><span class="p">,</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -770,21 +806,36 @@ check and an added masking rules (e.g., above a minimum Ip, before disruption).<
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
 
 <span class="k">for</span> <span class="n">shot</span> <span class="ow">in</span> <span class="n">shot_ids</span><span class="p">:</span>
-    <span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_zarr</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;./level2_copy/</span><span class="si">{</span><span class="n">shot</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">consolidated</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_zarr</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;./level2_copy/</span><span class="si">{</span><span class="n">shot</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">consolidated</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="k">except</span> <span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;File not found for shot </span><span class="si">{</span><span class="n">shot</span><span class="si">}</span><span class="s2">. Skipping.&quot;</span><span class="p">)</span>
+        <span class="k">continue</span>
     <span class="n">ip</span> <span class="o">=</span> <span class="n">ds</span><span class="p">[</span><span class="s2">&quot;ip&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
     <span class="n">time</span> <span class="o">=</span> <span class="n">ds</span><span class="p">[</span><span class="s2">&quot;time&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
 
     <span class="n">detector</span> <span class="o">=</span> <span class="n">DisruptionDetector</span><span class="p">(</span><span class="o">**</span><span class="n">params</span><span class="p">)</span>
     <span class="n">result</span> <span class="o">=</span> <span class="n">detector</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">shot</span><span class="p">,</span> <span class="n">ip</span><span class="p">,</span> <span class="n">time</span><span class="p">)</span>
     <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
-    
+  
 
 <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Segment too short: 0.0005s — stopping.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>File not found for shot 30025. Skipping.
+Segment too short: 0.0163s — stopping.
+Segment too short: 0.0140s — stopping.
+Segment too short: 0.0185s — stopping.
+File not found for shot 30070. Skipping.
+File not found for shot 30072. Skipping.
+File not found for shot 30079. Skipping.
+File not found for shot 30082. Skipping.
+Segment too short: 0.0145s — stopping.
+Segment too short: 0.0005s — stopping.
+Segment too short: 0.0078s — stopping.
+Segment too short: 0.0117s — stopping.
 </pre></div>
 </div>
 </div>
@@ -831,7 +882,7 @@ check and an added masking rules (e.g., above a minimum Ip, before disruption).<
       <td>0.13240</td>
       <td>0.15915</td>
       <td>0.0</td>
-      <td>0.11990</td>
+      <td>0.12590</td>
       <td>[(0.1323997106552126, 0.15914971065521266)]</td>
     </tr>
     <tr>
@@ -841,42 +892,62 @@ check and an added masking rules (e.g., above a minimum Ip, before disruption).<
       <td>0.12755</td>
       <td>0.44855</td>
       <td>0.0</td>
-      <td>0.11505</td>
+      <td>0.12005</td>
       <td>[(0.12754970932006857, 0.4485497093200689)]</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>30035</td>
-      <td>0.21515</td>
-      <td>0.13165</td>
-      <td>0.19465</td>
+      <td>30029</td>
+      <td>0.17915</td>
+      <td>NaN</td>
+      <td>NaN</td>
       <td>0.0</td>
-      <td>0.11490</td>
-      <td>[(0.1316497573852541, 0.14564975738525412), (0...</td>
+      <td>NaN</td>
+      <td>[]</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>30036</td>
-      <td>0.35580</td>
-      <td>0.13730</td>
-      <td>0.33380</td>
+      <td>30035</td>
+      <td>0.21515</td>
+      <td>NaN</td>
+      <td>NaN</td>
       <td>0.0</td>
-      <td>0.10680</td>
-      <td>[(0.21904973506927516, 0.3337997350692753), (0...</td>
+      <td>NaN</td>
+      <td>[]</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>30047</td>
-      <td>0.62805</td>
-      <td>0.09480</td>
-      <td>0.60505</td>
+      <td>30036</td>
+      <td>0.35580</td>
+      <td>0.21905</td>
+      <td>0.33380</td>
       <td>0.0</td>
-      <td>0.08205</td>
-      <td>[(0.09479966259002703, 0.6050496625900275)]</td>
+      <td>0.17230</td>
+      <td>[(0.21904973506927516, 0.3337997350692753)]</td>
     </tr>
   </tbody>
 </table>
 </div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">df</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(39,
+ shot                0
+ td                  3
+ flattop_start       5
+ flattop_end         5
+ rampup_start        0
+ rampup_end          5
+ flattop_segments    0
+ dtype: int64)
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -927,30 +998,9 @@ check and an added masking rules (e.g., above a minimum Ip, before disruption).<
     <span class="n">ip</span> <span class="o">=</span> <span class="n">ds</span><span class="p">[</span><span class="s2">&quot;ip&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
     <span class="n">time</span> <span class="o">=</span> <span class="n">ds</span><span class="p">[</span><span class="s2">&quot;time&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
 
-    <span class="n">plot_single_shot</span><span class="p">(</span><span class="n">shot_id</span><span class="p">,</span> <span class="n">ip</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
+    <span class="c1">#plot_single_shot(shot_id, ip, time, result)</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../../_images/edfc53ded4623d89d3b2e98843e6f42bb298b41cb081c285dbc148e27f485fec.png" src="../../_images/edfc53ded4623d89d3b2e98843e6f42bb298b41cb081c285dbc148e27f485fec.png" />
-<img alt="../../_images/c2274d7682353575e41c0ecb34eda20c6abbfb7bfc7333ff89d09b03d1b19906.png" src="../../_images/c2274d7682353575e41c0ecb34eda20c6abbfb7bfc7333ff89d09b03d1b19906.png" />
-<img alt="../../_images/6d394838462be5b9a5b755381f0ffbe23b5003fe239c5e2b7ce78239ed72e419.png" src="../../_images/6d394838462be5b9a5b755381f0ffbe23b5003fe239c5e2b7ce78239ed72e419.png" />
-<img alt="../../_images/7dc628aabf73030cf98effd52a1ddae8ef1c21e986c333f7d6dccc941b2c4253.png" src="../../_images/7dc628aabf73030cf98effd52a1ddae8ef1c21e986c333f7d6dccc941b2c4253.png" />
-<img alt="../../_images/00d83e13e9add99c0681b8a92cb784ea40aa960b63d75406a38008ed1af9f6b6.png" src="../../_images/00d83e13e9add99c0681b8a92cb784ea40aa960b63d75406a38008ed1af9f6b6.png" />
-<img alt="../../_images/cf20c13ec9e4a27f7c6db90912ecd577b97e8df0194d634e0231f89d6c56a82d.png" src="../../_images/cf20c13ec9e4a27f7c6db90912ecd577b97e8df0194d634e0231f89d6c56a82d.png" />
-<img alt="../../_images/2c12cb1a88ba58990e6bc984b6d44e5a3eee8ff26b650b5f7ee485593a025349.png" src="../../_images/2c12cb1a88ba58990e6bc984b6d44e5a3eee8ff26b650b5f7ee485593a025349.png" />
-<img alt="../../_images/8addcbd67001d86d856c2a7b0696457e2660e816a3956ca66d92e2e861dd5037.png" src="../../_images/8addcbd67001d86d856c2a7b0696457e2660e816a3956ca66d92e2e861dd5037.png" />
-<img alt="../../_images/c60b9ded18ab239c33f411eb90c8f2372c2c4c396708a65ec08a109fc9a5853e.png" src="../../_images/c60b9ded18ab239c33f411eb90c8f2372c2c4c396708a65ec08a109fc9a5853e.png" />
-<img alt="../../_images/09afe2dd73d3ab2c5d275e5e8ed60681c52c520a6953604acf7046679f361d75.png" src="../../_images/09afe2dd73d3ab2c5d275e5e8ed60681c52c520a6953604acf7046679f361d75.png" />
-<img alt="../../_images/a934e150e653279d22ea09af0eb6ddcf924b4739fd669eba62aa85184f30da28.png" src="../../_images/a934e150e653279d22ea09af0eb6ddcf924b4739fd669eba62aa85184f30da28.png" />
-<img alt="../../_images/da20db901c1ea40250cbd34f0d31fbfa1d877536c7cc305ec56adf873846d61b.png" src="../../_images/da20db901c1ea40250cbd34f0d31fbfa1d877536c7cc305ec56adf873846d61b.png" />
-<img alt="../../_images/24e52781933d2eb4829825dd09dd713dc4c716f7a1b620d8fbfdd9534c07a6b7.png" src="../../_images/24e52781933d2eb4829825dd09dd713dc4c716f7a1b620d8fbfdd9534c07a6b7.png" />
-<img alt="../../_images/5fc250c61f0efc1a7cb84ca2ae8b5409c6505283b6e059a7bd3437724c7f2c92.png" src="../../_images/5fc250c61f0efc1a7cb84ca2ae8b5409c6505283b6e059a7bd3437724c7f2c92.png" />
-<img alt="../../_images/90fc7e82ca3258776ce04761d37c6f99e806086a45a61300fab1922613e7efbe.png" src="../../_images/90fc7e82ca3258776ce04761d37c6f99e806086a45a61300fab1922613e7efbe.png" />
-<img alt="../../_images/ac73135e28a92dfa3176f0e1df6efe55718a7a24b40ad47cb5d10af9b830a23c.png" src="../../_images/ac73135e28a92dfa3176f0e1df6efe55718a7a24b40ad47cb5d10af9b830a23c.png" />
-<img alt="../../_images/91b2c0b5eaa25317ee6eb36cbfec64d6403278f8bd03b77152761368fca15fa2.png" src="../../_images/91b2c0b5eaa25317ee6eb36cbfec64d6403278f8bd03b77152761368fca15fa2.png" />
-<img alt="../../_images/d91a64fd1cb022d47af88ce82d080dc76fcaa9b5d03ea0f73b2e61cd752cc53e.png" src="../../_images/d91a64fd1cb022d47af88ce82d080dc76fcaa9b5d03ea0f73b2e61cd752cc53e.png" />
-<img alt="../../_images/da51324741f26cca4115137d6e548e1344f257f31056771ae9c7df94f8b1654c.png" src="../../_images/da51324741f26cca4115137d6e548e1344f257f31056771ae9c7df94f8b1654c.png" />
 </div>
 </div>
 </section>
@@ -1002,25 +1052,49 @@ check and an added masking rules (e.g., above a minimum Ip, before disruption).<
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/27cf3aa8fc624a526ccd425afe259d1f8b75cf88a515181c9e56d3e0e3a8f604.png" src="../../_images/27cf3aa8fc624a526ccd425afe259d1f8b75cf88a515181c9e56d3e0e3a8f604.png" />
-<img alt="../../_images/a7d9ab1ce48fef6ef5ca9216b167df5ae1d6e65395020c8b10a58af2d29fe57c.png" src="../../_images/a7d9ab1ce48fef6ef5ca9216b167df5ae1d6e65395020c8b10a58af2d29fe57c.png" />
-<img alt="../../_images/3a2eead5319d2898e9c1cc26ec1aabbd5bb02a0caeee36c1c26b2eab1db39fc4.png" src="../../_images/3a2eead5319d2898e9c1cc26ec1aabbd5bb02a0caeee36c1c26b2eab1db39fc4.png" />
-<img alt="../../_images/5ed87c7d21a00e4b2bef7a1829abe68a8f47e648a9e66c9247a95129210a4a55.png" src="../../_images/5ed87c7d21a00e4b2bef7a1829abe68a8f47e648a9e66c9247a95129210a4a55.png" />
-<img alt="../../_images/3f2fb74c8534f0bd870f694f2764f86280c5396eaf27dae7911a9294747d0e0a.png" src="../../_images/3f2fb74c8534f0bd870f694f2764f86280c5396eaf27dae7911a9294747d0e0a.png" />
-<img alt="../../_images/21f210d0519891b18596f702cd44a655898e716720a4df13bb94d17ea50201d4.png" src="../../_images/21f210d0519891b18596f702cd44a655898e716720a4df13bb94d17ea50201d4.png" />
-<img alt="../../_images/08283d412b9d31c8a8904c1b1390b50e97984c18576f7a290071112813f78f1f.png" src="../../_images/08283d412b9d31c8a8904c1b1390b50e97984c18576f7a290071112813f78f1f.png" />
-<img alt="../../_images/1a7ce6bf66d70641191809bb4ca4a2314ac0c1bf1f16a5ffbf696bee26027466.png" src="../../_images/1a7ce6bf66d70641191809bb4ca4a2314ac0c1bf1f16a5ffbf696bee26027466.png" />
-<img alt="../../_images/0bbe8e2d027c76cea3c574545b3459329911d5a27563a958c2597b6104f7f9d7.png" src="../../_images/0bbe8e2d027c76cea3c574545b3459329911d5a27563a958c2597b6104f7f9d7.png" />
-<img alt="../../_images/cdad31308eacec6e686a320b703a73222063e3f1d7a3a4fad473d1fb501ae205.png" src="../../_images/cdad31308eacec6e686a320b703a73222063e3f1d7a3a4fad473d1fb501ae205.png" />
-<img alt="../../_images/853c2f850fb3151f60885a56d5c0cd488dfd1b50f481eecc3bd2c1d0c46df86e.png" src="../../_images/853c2f850fb3151f60885a56d5c0cd488dfd1b50f481eecc3bd2c1d0c46df86e.png" />
-<img alt="../../_images/9e65766ee9578dc3360eb4a009888a1c1589abcbdc86dd80bcc0dee5dbc5a58c.png" src="../../_images/9e65766ee9578dc3360eb4a009888a1c1589abcbdc86dd80bcc0dee5dbc5a58c.png" />
-<img alt="../../_images/9026248f0625c5cb6ce9f5f46254ecd6fc4343e80bd4640c4763707346089081.png" src="../../_images/9026248f0625c5cb6ce9f5f46254ecd6fc4343e80bd4640c4763707346089081.png" />
-<img alt="../../_images/426d927073db7228b53c085c8267ed804ce3c27669ff4dc096443b683e13098f.png" src="../../_images/426d927073db7228b53c085c8267ed804ce3c27669ff4dc096443b683e13098f.png" />
-<img alt="../../_images/5bce10badb44ed081816433662896b7f87afa74a3470f412a7eb370043052b06.png" src="../../_images/5bce10badb44ed081816433662896b7f87afa74a3470f412a7eb370043052b06.png" />
-<img alt="../../_images/be3b85c296a0a6da482121dd96ff2ad88d99f4cd95183a8f7778d0b2c7450fe0.png" src="../../_images/be3b85c296a0a6da482121dd96ff2ad88d99f4cd95183a8f7778d0b2c7450fe0.png" />
-<img alt="../../_images/f1f08e73d8df483af82bbcf74065e4871a8dbd06fc12eb2b9f2cdd4adab1a079.png" src="../../_images/f1f08e73d8df483af82bbcf74065e4871a8dbd06fc12eb2b9f2cdd4adab1a079.png" />
-<img alt="../../_images/8dfdc1ca08cdc6a35e8b1ab53823a93ffa6b19b5f0ea86610c9b8bae86bdd568.png" src="../../_images/8dfdc1ca08cdc6a35e8b1ab53823a93ffa6b19b5f0ea86610c9b8bae86bdd568.png" />
-<img alt="../../_images/263f2624b751a41bdcfae01384300f63872bf69191b111130a6013d9298dd8b5.png" src="../../_images/263f2624b751a41bdcfae01384300f63872bf69191b111130a6013d9298dd8b5.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_5014/2365406546.py:5: RuntimeWarning: More than 20 figures have been opened. Figures created through the pyplot interface (`matplotlib.pyplot.figure`) are retained until explicitly closed and may consume too much memory. (To control this warning, see the rcParam `figure.max_open_warning`). Consider using `matplotlib.pyplot.close()`.
+  plt.figure(figsize=(10, 4))
+</pre></div>
+</div>
+<img alt="../../_images/9e994e2559b9623824b5e7b82d2227d140e09dc45242b38c921090038d3cd567.png" src="../../_images/9e994e2559b9623824b5e7b82d2227d140e09dc45242b38c921090038d3cd567.png" />
+<img alt="../../_images/93711f1cc6be983b5b6dc2d57cb1370b90a66e6b50a710451cdaca8abde0c3e0.png" src="../../_images/93711f1cc6be983b5b6dc2d57cb1370b90a66e6b50a710451cdaca8abde0c3e0.png" />
+<img alt="../../_images/8f32e85bbcdbaf721193bdc9e2b22fd4a96fadb282ce841e9eb74eaa7b263ed6.png" src="../../_images/8f32e85bbcdbaf721193bdc9e2b22fd4a96fadb282ce841e9eb74eaa7b263ed6.png" />
+<img alt="../../_images/e508aea86b49ca1c8073e7e933b3c781d4b8b977140f2c4d4923cfda4c8e6798.png" src="../../_images/e508aea86b49ca1c8073e7e933b3c781d4b8b977140f2c4d4923cfda4c8e6798.png" />
+<img alt="../../_images/a7d577ec169e75c46ec69b29e6c1ba5b11eadc23ec3bae8a05f465b844e87cfa.png" src="../../_images/a7d577ec169e75c46ec69b29e6c1ba5b11eadc23ec3bae8a05f465b844e87cfa.png" />
+<img alt="../../_images/b5e479d270553438c4d70964a017489bd31e8d76f135a49c54a6988cec4cc158.png" src="../../_images/b5e479d270553438c4d70964a017489bd31e8d76f135a49c54a6988cec4cc158.png" />
+<img alt="../../_images/19b2ae0c51f357ba1fa7e5081241752e29a6d04ccc88bdc82ceacf6d88c5e26a.png" src="../../_images/19b2ae0c51f357ba1fa7e5081241752e29a6d04ccc88bdc82ceacf6d88c5e26a.png" />
+<img alt="../../_images/ba5c435f14650b243d8cf51c8e4a9320c6182a75d474fb5dc42ec852d889d2a0.png" src="../../_images/ba5c435f14650b243d8cf51c8e4a9320c6182a75d474fb5dc42ec852d889d2a0.png" />
+<img alt="../../_images/31ee066333b0f959afd048d3721ab4ff19b62beb64855928d84b2e61761c392c.png" src="../../_images/31ee066333b0f959afd048d3721ab4ff19b62beb64855928d84b2e61761c392c.png" />
+<img alt="../../_images/706797bb11005f56c08e9f13bb6f088d76312b42fa315f0c219f4a797d850e01.png" src="../../_images/706797bb11005f56c08e9f13bb6f088d76312b42fa315f0c219f4a797d850e01.png" />
+<img alt="../../_images/a6ec34b164bdd14da927dfb8e4151fc570548842c94c04a81bbc516c10be0b97.png" src="../../_images/a6ec34b164bdd14da927dfb8e4151fc570548842c94c04a81bbc516c10be0b97.png" />
+<img alt="../../_images/8b107ab49f713dd65e5c915ea7608a2a846513b13fadafdf661f4e31f298f0ac.png" src="../../_images/8b107ab49f713dd65e5c915ea7608a2a846513b13fadafdf661f4e31f298f0ac.png" />
+<img alt="../../_images/c3b586286fabc56e6e54d18e8ea7d5fac39c63971a5daeb71673d35cf81554d0.png" src="../../_images/c3b586286fabc56e6e54d18e8ea7d5fac39c63971a5daeb71673d35cf81554d0.png" />
+<img alt="../../_images/b409d710314962f62f6a259d5e86ce72da12772f84eead7fe8966b39c7c6ed38.png" src="../../_images/b409d710314962f62f6a259d5e86ce72da12772f84eead7fe8966b39c7c6ed38.png" />
+<img alt="../../_images/35857874197b2ac0568190afb6dd14cfb74193168146268ba2b11f05711b5602.png" src="../../_images/35857874197b2ac0568190afb6dd14cfb74193168146268ba2b11f05711b5602.png" />
+<img alt="../../_images/61a266686ef5b9ee5056c29733fa9cc1aa2e99cb32bdca0aa114e00984d325f6.png" src="../../_images/61a266686ef5b9ee5056c29733fa9cc1aa2e99cb32bdca0aa114e00984d325f6.png" />
+<img alt="../../_images/e4b6fc4779ed14b8eaf1265f4e2cf452bf441b58543676fa032b2a940b04d1dd.png" src="../../_images/e4b6fc4779ed14b8eaf1265f4e2cf452bf441b58543676fa032b2a940b04d1dd.png" />
+<img alt="../../_images/0c8be576de2fb66c567e0d6dd592b1aab0a0f0e02c0e30716e4a4cda830081aa.png" src="../../_images/0c8be576de2fb66c567e0d6dd592b1aab0a0f0e02c0e30716e4a4cda830081aa.png" />
+<img alt="../../_images/6cc3165dc911e473071caaa9b7b5b581d79083e60c43c543418f33a7118d99a6.png" src="../../_images/6cc3165dc911e473071caaa9b7b5b581d79083e60c43c543418f33a7118d99a6.png" />
+<img alt="../../_images/81ade9b5b1e20abac46d98232c58baa90b4956a0e862408d8d6cd18adc3c34a9.png" src="../../_images/81ade9b5b1e20abac46d98232c58baa90b4956a0e862408d8d6cd18adc3c34a9.png" />
+<img alt="../../_images/0b359d6250bbb4d3a340255ed5f0f72451fa6d215152cb5b256256b6fe27ffb0.png" src="../../_images/0b359d6250bbb4d3a340255ed5f0f72451fa6d215152cb5b256256b6fe27ffb0.png" />
+<img alt="../../_images/d65a1dc29b3bbd65dc4b4df6231a16b30134b34ee152308176e2512b2071fd7f.png" src="../../_images/d65a1dc29b3bbd65dc4b4df6231a16b30134b34ee152308176e2512b2071fd7f.png" />
+<img alt="../../_images/9349cc4e5c49b7a498b7cf0cc707c93a13a0558555275bc3533c2fd6ace36a9c.png" src="../../_images/9349cc4e5c49b7a498b7cf0cc707c93a13a0558555275bc3533c2fd6ace36a9c.png" />
+<img alt="../../_images/b332d5a4382cc8bc65597729963b08e1acf4d54a1ea2cc97b46f9c3c8c9ebe63.png" src="../../_images/b332d5a4382cc8bc65597729963b08e1acf4d54a1ea2cc97b46f9c3c8c9ebe63.png" />
+<img alt="../../_images/1e91fd8e827a9d4a83986d9b8d1000e359a90a11ba125ef65330f35eb1c71745.png" src="../../_images/1e91fd8e827a9d4a83986d9b8d1000e359a90a11ba125ef65330f35eb1c71745.png" />
+<img alt="../../_images/ed7f7a7d27a512c9c8c322e1ef04f97946f48fd898665758d326d4d3a9294afb.png" src="../../_images/ed7f7a7d27a512c9c8c322e1ef04f97946f48fd898665758d326d4d3a9294afb.png" />
+<img alt="../../_images/8f5eb188d378bccff76f7d94d5949cd15670d7ffe2ca0cae72069bb1ee1d1691.png" src="../../_images/8f5eb188d378bccff76f7d94d5949cd15670d7ffe2ca0cae72069bb1ee1d1691.png" />
+<img alt="../../_images/ab1a3d8f66b5b77d46dbf5eb854eb97db51f54e0833a0aba98c51deb38c35d80.png" src="../../_images/ab1a3d8f66b5b77d46dbf5eb854eb97db51f54e0833a0aba98c51deb38c35d80.png" />
+<img alt="../../_images/7d89d542fb875875a3ea12f5b26226edf87888b1641182bafb21155aab267526.png" src="../../_images/7d89d542fb875875a3ea12f5b26226edf87888b1641182bafb21155aab267526.png" />
+<img alt="../../_images/ef21da861fde26f1c1d5af9860533e4fd4b0f35201e2687f42bc4d3965218f3b.png" src="../../_images/ef21da861fde26f1c1d5af9860533e4fd4b0f35201e2687f42bc4d3965218f3b.png" />
+<img alt="../../_images/863e8b6d22794dffe5d5571b7778aca5a71a9e18229f56ff27928bdcbd08c82a.png" src="../../_images/863e8b6d22794dffe5d5571b7778aca5a71a9e18229f56ff27928bdcbd08c82a.png" />
+<img alt="../../_images/e5f0a74a3393b9f1058ff9a92c674ffe32bfd800843dbf4de92175787ca73e35.png" src="../../_images/e5f0a74a3393b9f1058ff9a92c674ffe32bfd800843dbf4de92175787ca73e35.png" />
+<img alt="../../_images/683e67347cb6d2c1ba7196e5447284bb8950dbe27edb61e74f1be0ae5050bfd1.png" src="../../_images/683e67347cb6d2c1ba7196e5447284bb8950dbe27edb61e74f1be0ae5050bfd1.png" />
+<img alt="../../_images/75c4d23026d3a963070be17baf5fb03fd46caec664b93cad2339f5c0887a14c1.png" src="../../_images/75c4d23026d3a963070be17baf5fb03fd46caec664b93cad2339f5c0887a14c1.png" />
+<img alt="../../_images/828476437d95a27d4afbb49a158ef40da51a33e399bb685cd359e682d44d006c.png" src="../../_images/828476437d95a27d4afbb49a158ef40da51a33e399bb685cd359e682d44d006c.png" />
+<img alt="../../_images/f61d03cb3f4474dcb0502ff740386a0afbab55fb798366796a7ba6fa86725a1f.png" src="../../_images/f61d03cb3f4474dcb0502ff740386a0afbab55fb798366796a7ba6fa86725a1f.png" />
+<img alt="../../_images/c971e7903d2514f330ec567977cc9af5e3a6346b3308411f16f8c51081e24424.png" src="../../_images/c971e7903d2514f330ec567977cc9af5e3a6346b3308411f16f8c51081e24424.png" />
+<img alt="../../_images/b35c0dd0bc508d924d7e06b9757bee9083ba0297b2121632d3142a18baa57cac.png" src="../../_images/b35c0dd0bc508d924d7e06b9757bee9083ba0297b2121632d3142a18baa57cac.png" />
+<img alt="../../_images/c6a46532f99d0eeb8f681b4d5e72f630c59452c10aba0140edbb0980a056c52c.png" src="../../_images/c6a46532f99d0eeb8f681b4d5e72f630c59452c10aba0140edbb0980a056c52c.png" />
 </div>
 </div>
 </section>
@@ -1056,20 +1130,20 @@ check and an added masking rules (e.g., above a minimum Ip, before disruption).<
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="9.%20disruption_labels_single-flat_top.html"
+       href="10.%20disruption_labels_multiple-flat_tops.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Disruption flat-top labelling using a standard deviation based wobbliness check</p>
+        <p class="prev-next-title">Disruption flat-top labelling with multiple segments</p>
       </div>
     </a>
     <a class="right-next"
-       href="11.%20disruption_labels_multiple-flat_tops_rampup.html"
+       href="../2.%20ELMs/intro.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Flat-top and ramp-up labelling with multiple segments (improved)</p>
+        <p class="prev-next-title">ELMs</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1099,7 +1173,7 @@ check and an added masking rules (e.g., above a minimum Ip, before disruption).<
 
   
   <div class="tocsection editthispage">
-    <a href="https://github.com/praksharma/Knowledge-Base/edit/main/docs/Theory/1. Disruption/10. disruption_labels_multiple-flat_tops.ipynb">
+    <a href="https://github.com/praksharma/Knowledge-Base/edit/main/docs/Theory/1. Disruption/11. disruption_labels_multiple-flat_tops_rampup.ipynb">
       <i class="fa-solid fa-pencil"></i>
       
       
@@ -1115,7 +1189,7 @@ check and an added masking rules (e.g., above a minimum Ip, before disruption).<
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="../../_sources/Theory/1. Disruption/10. disruption_labels_multiple-flat_tops.ipynb"
+      <li><a href="../../_sources/Theory/1. Disruption/11. disruption_labels_multiple-flat_tops_rampup.ipynb"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div></div>
