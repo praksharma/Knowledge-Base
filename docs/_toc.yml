@@ -26,6 +26,7 @@ parts:
       - file: Theory/1. Disruption/8. disruption_labels.ipynb
       - file: Theory/1. Disruption/9. disruption_labels_single-flat_top.ipynb
       - file: Theory/1. Disruption/10. disruption_labels_multiple-flat_tops.ipynb
+      - file: Theory/1. Disruption/11. disruption_labels_multiple-flat_tops_rampup.ipynb
   - caption: Edge-localized mode
     maxdepth: 1
     chapters:
